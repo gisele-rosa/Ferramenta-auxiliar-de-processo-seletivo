@@ -16,8 +16,14 @@ namespace Faps
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "AccountController", action = "Login", id = UrlParameter.Optional }
+                defaults: new { controller = "Home_VagasController", action = "Home_Vagas", id = UrlParameter.Optional }
             );
+
+            /*routes.MapRoute(
+                name: "Default",
+                url: "{controller}/{action}/{id}",
+                defaults: new { controller = "AccountController", action = "Login", id = UrlParameter.Optional }
+            );*/
         }
     }
 }

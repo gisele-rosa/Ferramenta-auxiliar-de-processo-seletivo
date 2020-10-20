@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Faps.Models.Vagas>
+
+@{
+    ViewBag.Title = "Home_Vagas";
+    Layout = "";
+}
+
+<h2>Home_Vagas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Vaga)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vaga_descricao)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaga)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaga_descricao)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Codigo_vaga }) |
+                @Html.ActionLink("Details", "Details", new { id = item.Codigo_vaga }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Codigo_vaga })
+            </td>
+        </tr>
+    }
+</table>
+
+<br>
+Gosto de alguma vaga?
+<a href="#" class="w3-button w3-black">Faça seu login agora!</a>
+
+<br>
+Não tem uma conta?
+<a href="#" class="w3-button w3-black">Cadastre seu perfil agora!</a>

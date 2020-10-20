@@ -21,6 +21,7 @@ namespace Faps.Controllers
         {
             return View();
         }
+
         void connectionString()
         {
             con.ConnectionString = "Data Source=NBGV00116;Initial Catalog=FAPS;User ID=sa;Password=root";
