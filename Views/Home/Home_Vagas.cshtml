@@ -27,19 +27,14 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Vaga_descricao)
             </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Codigo_vaga }) |
-                @Html.ActionLink("Details", "Details", new { id = item.Codigo_vaga }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Codigo_vaga })
-            </td>
         </tr>
     }
 </table>
 
 <br>
 Gosto de alguma vaga?
-<a href="#" class="w3-button w3-black">Faça seu login agora!</a>
+<a href="@Url.Action("Login", "Account")" class="btn btn-default">Faça seu login agora!</a>
 
 <br>
 Não tem uma conta?
-<a href="#" class="w3-button w3-black">Cadastre seu perfil agora!</a>
+<a href="#" class="btn btn-default">Cadastre seu perfil agora!</a>
