@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Faps.Models.Vagas>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Admin_home</title>
+</head>
+<body>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Vaga)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Vaga_descricao)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vaga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vaga_descricao)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Codigo_vaga }) |
+                    @Html.ActionLink("Details", "Details", new { id = item.Codigo_vaga }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Codigo_vaga })
+                </td>
+            </tr>
+        }
+
+    </table>
+</body>
+</html>

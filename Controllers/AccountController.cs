@@ -7,6 +7,7 @@ using Faps.Controllers;
 using Faps.Models;
 using System.Data.SqlClient;
 
+
 namespace Faps.Controllers
 {
     public class AccountController : Controller
@@ -36,15 +37,18 @@ namespace Faps.Controllers
             dr = com.ExecuteReader();
             if (dr.Read())
             {
-                //return View("Create");
+
                 if (dr.GetValue(2).Equals("admin"))
                 {
                     con.Close();
-                    return View("../Admin/Admin");
+                    return RedirectToAction("Admin_home", "Admin");
                 }
                 else {
+
                     con.Close();
-                    return View("../User/User");
+
+                    return RedirectToAction("User_home", "User");
+
                 }
             }
             else
@@ -52,9 +56,8 @@ namespace Faps.Controllers
                 con.Close();
                 return View("Error");
             }
-            
 
-            
+
         }
     }
 }
