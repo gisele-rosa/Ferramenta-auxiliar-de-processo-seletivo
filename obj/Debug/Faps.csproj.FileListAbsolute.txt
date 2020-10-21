@@ -73,6 +73,13 @@ C:\Users\userguiche\source\repos\Faps\bin\EntityFramework.dll
 C:\Users\userguiche\source\repos\Faps\bin\EntityFramework.SqlServer.dll
 C:\Users\userguiche\source\repos\Faps\bin\EntityFramework.xml
 C:\Users\userguiche\source\repos\Faps\bin\EntityFramework.SqlServer.xml
+C:\Users\userguiche\source\repos\Faps\bin\Antlr3.Runtime.dll
+C:\Users\userguiche\source\repos\Faps\bin\Newtonsoft.Json.dll
+C:\Users\userguiche\source\repos\Faps\bin\System.Web.Optimization.dll
+C:\Users\userguiche\source\repos\Faps\bin\WebGrease.dll
+C:\Users\userguiche\source\repos\Faps\bin\Antlr3.Runtime.pdb
+C:\Users\userguiche\source\repos\Faps\bin\Newtonsoft.Json.xml
+C:\Users\userguiche\source\repos\Faps\bin\System.Web.Optimization.xml
 C:\Users\userguiche\source\repos\Faps\obj\Debug\Faps.csprojAssemblyReference.cache
 C:\Users\Gi\Desktop\projeto\Ferramenta-auxiliar-de-processo-seletivo\bin\Faps.dll.config
 C:\Users\Gi\Desktop\projeto\Ferramenta-auxiliar-de-processo-seletivo\bin\Faps.dll

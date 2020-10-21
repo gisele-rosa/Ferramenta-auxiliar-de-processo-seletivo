@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<Faps.Models.Vagas>
 
 @{
-    Layout = null;
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
 }
 
 <!DOCTYPE html>
@@ -12,6 +12,9 @@
     <title>Admin_home</title>
 </head>
 <body>
+    <p>
+        <a href="@Url.Action("Cadastrar_vaga", "Admin")" class="btn btn-default">Cadastrar uma vaga</a>
+    </p>
     <table class="table">
         <tr>
             <th>
@@ -33,9 +36,9 @@
                     @Html.DisplayFor(modelItem => item.Vaga_descricao)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Codigo_vaga }) |
-                    @Html.ActionLink("Details", "Details", new { id = item.Codigo_vaga }) |
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Codigo_vaga })
+                    @Html.ActionLink("Ver Candidaturas", "Edit", new { id = item.Codigo_vaga }) |
+                    @Html.ActionLink("Alterar vaga", "Details", new { id = item.Codigo_vaga }) |
+                    @Html.ActionLink("Deletar Vaga", "Delete", new { id = item.Codigo_vaga })
                 </td>
             </tr>
         }

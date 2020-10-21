@@ -16,5 +16,16 @@ namespace Faps.Controllers
             var getVagasLista = vagas_Entity.Vagas.ToList();
             return View(getVagasLista);
         }
+
+        public ActionResult Cadastrar_vaga()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult Confirmar_vaga()
+        {
+            return View();
+        }
     }
 }
