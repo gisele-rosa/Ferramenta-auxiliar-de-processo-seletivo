@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="FAPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Candidaturas">
+          <Key>
+            <PropertyRef Name="Codigo_candidatura" />
+          </Key>
+          <Property Name="Codigo_candidatura" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_usuario" Type="int" Nullable="false" />
+          <Property Name="Status_candidatura" Type="int" Nullable="false" />
+          <Property Name="Codigo_vaga" Type="int" Nullable="false" />
+        </EntityType>
         <EntityType Name="Curriculo">
           <Key>
             <PropertyRef Name="codigo_curriculo" />
@@ -31,6 +40,18 @@
           <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Vaga_descricao" Type="varchar" MaxLength="50" />
         </EntityType>
+        <Association Name="FK_Candidaturas_Vagas">
+          <End Role="Vagas" Type="Self.Vagas" Multiplicity="1" />
+          <End Role="Candidaturas" Type="Self.Candidaturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vagas">
+              <PropertyRef Name="Codigo_vaga" />
+            </Principal>
+            <Dependent Role="Candidaturas">
+              <PropertyRef Name="Codigo_vaga" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Curriculos_Usuarios">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
           <End Role="Curriculo" Type="Self.Curriculo" Multiplicity="*" />
@@ -44,9 +65,14 @@
           </ReferentialConstraint>
         </Association>
         <EntityContainer Name="FAPSModelStoreContainer">
+          <EntitySet Name="Candidaturas" EntityType="Self.Candidaturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Curriculo" EntityType="Self.Curriculo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vagas" EntityType="Self.Vagas" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Candidaturas_Vagas" Association="Self.FK_Candidaturas_Vagas">
+            <End Role="Vagas" EntitySet="Vagas" />
+            <End Role="Candidaturas" EntitySet="Candidaturas" />
+          </AssociationSet>
           <AssociationSet Name="FK_Curriculos_Usuarios" Association="Self.FK_Curriculos_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Curriculo" EntitySet="Curriculo" />
@@ -64,7 +90,6 @@
           <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <NavigationProperty Name="Curriculo" Relationship="FAPSModel.FK_Curriculos_Usuarios" FromRole="Usuarios" ToRole="Curriculo" />
         </EntityType>
         <EntityType Name="Vagas">
           <Key>
@@ -82,6 +107,11 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Curriculo" EntitySet="Curriculo" />
           </AssociationSet>
+          <EntitySet Name="Candidaturas" EntityType="FAPSModel.Candidaturas" />
+          <AssociationSet Name="FK_Candidaturas_Vagas" Association="FAPSModel.FK_Candidaturas_Vagas">
+            <End Role="Vagas" EntitySet="Vagas" />
+            <End Role="Candidaturas" EntitySet="Candidaturas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Curriculo">
           <Key>
@@ -91,7 +121,6 @@
           <Property Name="campo_a" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="campo_b" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="codigo_user" Type="Int32" Nullable="false" />
-          <NavigationProperty Name="Usuarios" Relationship="FAPSModel.FK_Curriculos_Usuarios" FromRole="Curriculo" ToRole="Usuarios" />
         </EntityType>
         <Association Name="FK_Curriculos_Usuarios">
           <End Type="FAPSModel.Usuarios" Role="Usuarios" Multiplicity="1" />
@@ -102,6 +131,27 @@
             </Principal>
             <Dependent Role="Curriculo">
               <PropertyRef Name="codigo_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Candidaturas">
+          <Key>
+            <PropertyRef Name="Codigo_candidatura" />
+          </Key>
+          <Property Name="Codigo_candidatura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_usuario" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_vaga" Type="Int32" Nullable="false" />
+          <Property Name="Status_candidatura" Type="Int32" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Candidaturas_Vagas">
+          <End Type="FAPSModel.Vagas" Role="Vagas" Multiplicity="1" />
+          <End Type="FAPSModel.Candidaturas" Role="Candidaturas" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Vagas">
+              <PropertyRef Name="Codigo_vaga" />
+            </Principal>
+            <Dependent Role="Candidaturas">
+              <PropertyRef Name="Codigo_vaga" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -137,6 +187,16 @@
                 <ScalarProperty Name="campo_b" ColumnName="campo_b" />
                 <ScalarProperty Name="campo_a" ColumnName="campo_a" />
                 <ScalarProperty Name="codigo_curriculo" ColumnName="codigo_curriculo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Candidaturas">
+            <EntityTypeMapping TypeName="FAPSModel.Candidaturas">
+              <MappingFragment StoreEntitySet="Candidaturas">
+                <ScalarProperty Name="Status_candidatura" ColumnName="Status_candidatura" />
+                <ScalarProperty Name="Codigo_vaga" ColumnName="Codigo_vaga" />
+                <ScalarProperty Name="Codigo_usuario" ColumnName="Codigo_usuario" />
+                <ScalarProperty Name="Codigo_candidatura" ColumnName="Codigo_candidatura" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

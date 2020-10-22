@@ -30,5 +30,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Candidaturas">
+      <EntityTypeMapping TypeName="FAPSModel.Candidaturas">
+        <MappingFragment StoreEntitySet="Candidaturas">
+          <ScalarProperty Name="Status_candidatura" ColumnName="Status_candidatura" />
+          <ScalarProperty Name="Codigo_vaga" ColumnName="Codigo_vaga" />
+          <ScalarProperty Name="Codigo_usuario" ColumnName="Codigo_usuario" />
+          <ScalarProperty Name="Codigo_candidatura" ColumnName="Codigo_candidatura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>
