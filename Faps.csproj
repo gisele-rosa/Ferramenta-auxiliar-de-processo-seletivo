@@ -180,6 +180,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BancoDados.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Models\Candidaturas.cs">
+      <DependentUpon>BancoDados.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Curriculo.cs">
       <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
