@@ -9,7 +9,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>User_home</title>
+    <title>home</title>
 </head>
 <body>
     <table class="table">
@@ -22,23 +22,22 @@
             </th>
             <th></th>
         </tr>
-    
-    @foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vaga)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vaga_descricao)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { id=item.Codigo_vaga }) |
-                @Html.ActionLink("Details", "Details", new { id=item.Codigo_vaga }) |
-                @Html.ActionLink("Delete", "Delete", new { id=item.Codigo_vaga })
-            </td>
-        </tr>
-    }
-    
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vaga)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Vaga_descricao)
+                </td>
+                <td>
+                    @Html.ActionLink("Candidatar-se", "Apply", new { id_vaga = item.Codigo_vaga, id_applyer = ViewBag.id_applyer },null)
+                </td>
+            </tr>
+        }
+
     </table>
 </body>
 </html>

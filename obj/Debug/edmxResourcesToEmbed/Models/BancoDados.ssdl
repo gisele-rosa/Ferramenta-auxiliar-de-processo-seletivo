@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FAPSModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Curriculo">
+    <Key>
+      <PropertyRef Name="codigo_curriculo" />
+    </Key>
+    <Property Name="codigo_curriculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="campo_a" Type="nchar" MaxLength="10" />
+    <Property Name="campo_b" Type="nchar" MaxLength="10" />
+    <Property Name="codigo_user" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Codigo_user" />
+    </Key>
+    <Property Name="Codigo_user" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Usuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Senha" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="role" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Vagas">
+    <Key>
+      <PropertyRef Name="Codigo_vaga" />
+    </Key>
+    <Property Name="Codigo_vaga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Vaga_descricao" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <Association Name="FK_Curriculos_Usuarios">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Curriculo" Type="Self.Curriculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Codigo_user" />
+      </Principal>
+      <Dependent Role="Curriculo">
+        <PropertyRef Name="codigo_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="FAPSModelStoreContainer">
+    <EntitySet Name="Curriculo" EntityType="Self.Curriculo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Vagas" EntityType="Self.Vagas" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Curriculos_Usuarios" Association="Self.FK_Curriculos_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Curriculo" EntitySet="Curriculo" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
