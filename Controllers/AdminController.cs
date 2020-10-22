@@ -12,7 +12,7 @@ namespace Faps.Controllers
         // GET: Admin
         public ActionResult Admin_home()
         {
-            FAPSEntities2 vagas_Entity = new FAPSEntities2();
+            EntitiesFAPS vagas_Entity = new EntitiesFAPS();
             var getVagasLista = vagas_Entity.Vagas.ToList();
 
 
@@ -35,7 +35,7 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Confirmar_vaga(Vagas vagas)
         {
-            FAPSEntities2 vagas_Entity = new FAPSEntities2();
+            EntitiesFAPS vagas_Entity = new EntitiesFAPS();
             vagas_Entity.Vagas.Add(vagas);
             vagas_Entity.SaveChanges();
 
@@ -46,7 +46,7 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Deletar_vaga(int id)
         {
-            FAPSEntities2 vagas_Entity = new FAPSEntities2();
+            EntitiesFAPS vagas_Entity = new EntitiesFAPS();
 
             Vagas v = vagas_Entity.Vagas.Find(id);
             vagas_Entity.Vagas.Remove(v);

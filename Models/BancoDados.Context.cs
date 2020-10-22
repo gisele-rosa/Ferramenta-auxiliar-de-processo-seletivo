@@ -13,10 +13,10 @@ namespace Faps.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class FAPSEntities2 : DbContext
+    public partial class EntitiesFAPS : DbContext
     {
-        public FAPSEntities2()
-            : base("name=FAPSEntities2")
+        public EntitiesFAPS()
+            : base("name=EntitiesFAPS")
         {
         }
     
@@ -25,6 +25,8 @@ namespace Faps.Models
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Vagas> Vagas { get; set; }
+        public virtual DbSet<Curriculo> Curriculo { get; set; }
     }
 }

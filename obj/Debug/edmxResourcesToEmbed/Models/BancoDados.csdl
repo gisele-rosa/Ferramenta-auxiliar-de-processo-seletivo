@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="FAPSModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Usuarios">
+    <Key>
+      <PropertyRef Name="Codigo_user" />
+    </Key>
+    <Property Name="Codigo_user" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Senha" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="Curriculo" Relationship="FAPSModel.FK_Curriculos_Usuarios" FromRole="Usuarios" ToRole="Curriculo" />
+  </EntityType>
+  <EntityType Name="Vagas">
+    <Key>
+      <PropertyRef Name="Codigo_vaga" />
+    </Key>
+    <Property Name="Codigo_vaga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Vaga" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="Vaga_descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="EntitiesFAPS" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Usuarios" EntityType="Self.Usuarios" />
+    <EntitySet Name="Vagas" EntityType="Self.Vagas" />
+    <EntitySet Name="Curriculo" EntityType="FAPSModel.Curriculo" />
+    <AssociationSet Name="FK_Curriculos_Usuarios" Association="FAPSModel.FK_Curriculos_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Curriculo" EntitySet="Curriculo" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Curriculo">
+    <Key>
+      <PropertyRef Name="codigo_curriculo" />
+    </Key>
+    <Property Name="codigo_curriculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="campo_a" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="campo_b" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="codigo_user" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Usuarios" Relationship="FAPSModel.FK_Curriculos_Usuarios" FromRole="Curriculo" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="FK_Curriculos_Usuarios">
+    <End Type="FAPSModel.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="FAPSModel.Curriculo" Role="Curriculo" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Codigo_user" />
+      </Principal>
+      <Dependent Role="Curriculo">
+        <PropertyRef Name="codigo_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

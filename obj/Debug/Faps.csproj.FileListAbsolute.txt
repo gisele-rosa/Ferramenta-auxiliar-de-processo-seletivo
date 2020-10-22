@@ -80,3 +80,4 @@ C:\Users\userguiche\source\repos\Faps\obj\Debug\Faps.csproj.CoreCompileInputs.ca
 C:\Users\userguiche\source\repos\Faps\obj\Debug\Faps.csproj.CopyComplete
 C:\Users\userguiche\source\repos\Faps\obj\Debug\Faps.dll
 C:\Users\userguiche\source\repos\Faps\obj\Debug\Faps.pdb
+C:\Users\userguiche\source\repos\Faps\obj\Debug\Faps.csprojAssemblyReference.cache
