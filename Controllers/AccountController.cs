@@ -41,28 +41,36 @@ namespace Faps.Controllers
             com.Connection = con;
             com.CommandText = "select * from dbo.Usuarios where Usuario='"+acc.Name+ "' and Senha='"+acc.Password+"'";
             dr = com.ExecuteReader();
+
+
             if (dr.Read())
             {
+                /*int teste0 = (int)dr.GetValue(0);
+                string teste1 = (string)dr.GetValue(1);
+                string teste2 = (string)dr.GetValue(2);
+                string teste3 = (string)dr.GetValue(3);*/
 
-                if (dr.GetValue(2).Equals("admin"))
+                if (dr.GetValue(3).Equals("admin"))
                 {
                     con.Close();
                     return RedirectToAction("Admin_home", "Admin");
                 }
-                else {
-
+                else if (dr.GetValue(3).Equals("user"))
+                {
+                    int codigo = (int)dr.GetValue(0);
                     con.Close();
-
-                    return RedirectToAction("User_home", "User");
-
+                    return RedirectToAction("User_home", "User", new { id = codigo });
                 }
-            }
-            else
-            {
-                con.Close();
-                return View("Error");
-            }
+                else {
+                    con.Close();
+                    return View("Error");
+                }
 
+            }else
+            {
+               con.Close();
+               return View("Login");
+            }
 
         }
     }

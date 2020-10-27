@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3302f5cd7f09492c90e1b40427c0e7bb" Name="Diagram1">
+        <EntityTypeShape EntityType="FAPSModel.Usuarios" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="FAPSModel.Vagas" Width="1.5" PointX="3.375" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="FAPSModel.Curriculo" Width="1.5" PointX="3" PointY="3.75" />
+        <AssociationConnector Association="FAPSModel.FK_Curriculos_Usuarios" />
+        <EntityTypeShape EntityType="FAPSModel.Candidaturas" Width="1.5" PointX="6" PointY="0.875" />
+        <AssociationConnector Association="FAPSModel.FK_Candidaturas_Vagas" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

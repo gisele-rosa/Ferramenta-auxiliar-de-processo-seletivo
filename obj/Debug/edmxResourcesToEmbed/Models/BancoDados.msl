@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="FAPSModelStoreContainer" CdmEntityContainer="EntitiesFAPS">
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="FAPSModel.Usuarios">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="Codigo_user" ColumnName="Codigo_user" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Senha" ColumnName="Senha" />
+          <ScalarProperty Name="role" ColumnName="role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Vagas">
+      <EntityTypeMapping TypeName="FAPSModel.Vagas">
+        <MappingFragment StoreEntitySet="Vagas">
+          <ScalarProperty Name="Codigo_vaga" ColumnName="Codigo_vaga" />
+          <ScalarProperty Name="Vaga" ColumnName="Vaga" />
+          <ScalarProperty Name="Vaga_descricao" ColumnName="Vaga_descricao" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Curriculo">
+      <EntityTypeMapping TypeName="FAPSModel.Curriculo">
+        <MappingFragment StoreEntitySet="Curriculo">
+          <ScalarProperty Name="codigo_user" ColumnName="codigo_user" />
+          <ScalarProperty Name="campo_b" ColumnName="campo_b" />
+          <ScalarProperty Name="campo_a" ColumnName="campo_a" />
+          <ScalarProperty Name="codigo_curriculo" ColumnName="codigo_curriculo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Candidaturas">
+      <EntityTypeMapping TypeName="FAPSModel.Candidaturas">
+        <MappingFragment StoreEntitySet="Candidaturas">
+          <ScalarProperty Name="Status_candidatura" ColumnName="Status_candidatura" />
+          <ScalarProperty Name="Codigo_vaga" ColumnName="Codigo_vaga" />
+          <ScalarProperty Name="Codigo_usuario" ColumnName="Codigo_usuario" />
+          <ScalarProperty Name="Codigo_candidatura" ColumnName="Codigo_candidatura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

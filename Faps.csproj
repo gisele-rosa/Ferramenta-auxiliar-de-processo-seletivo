@@ -114,48 +114,43 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Site.css" />
-    <Content Include="fonts\fontello.svg" />
     <Content Include="Global.asax" />
-    <Content Include="images\b3.jpg" />
     <Content Include="images\bg.jpg" />
-    <Content Include="images\cal.png" />
-    <Content Include="images\cal1.png" />
-    <Content Include="images\icon.png" />
-    <Content Include="Models\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Vagas.edmx</DependentUpon>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Vagas.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap.min.css.map" />
-    <Content Include="fonts\fontello.eot" />
-    <Content Include="fonts\fontello.ttf" />
-    <Content Include="fonts\fontello.woff" />
+    <EntityDeploy Include="Models\BancoDados.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>BancoDados.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <Content Include="Models\BancoDados.edmx.diagram">
+      <DependentUpon>BancoDados.edmx</DependentUpon>
+    </Content>
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
+    <Content Include="Models\BancoDados.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BancoDados.edmx</DependentUpon>
+      <LastGenOutput>BancoDados.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\BancoDados.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>BancoDados.edmx</DependentUpon>
+      <LastGenOutput>BancoDados.cs</LastGenOutput>
+    </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Scripts\jquery-2.2.3.min.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.js" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
-    <Content Include="Scripts\jquery-ui.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="styles\font-awesome.css" />
-    <Content Include="styles\Register\jquery-ui.css" />
-    <Content Include="styles\Register\style.css" />
     <Content Include="styles\style.css" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -170,24 +165,32 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\Account.cs" />
-    <Compile Include="Models\Model1.Context.cs">
+    <Compile Include="Models\BancoDados.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>BancoDados.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Model1.cs">
+    <Compile Include="Models\BancoDados.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\Register.cs" />
-    <Compile Include="Models\Vagas.Designer.cs">
+    <Compile Include="Models\BancoDados.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Vagas.edmx</DependentUpon>
+      <DependentUpon>BancoDados.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Candidaturas.cs">
+      <DependentUpon>BancoDados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Curriculo.cs">
+      <DependentUpon>BancoDados.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuarios.cs">
+      <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Vagas.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -198,13 +201,6 @@
     <Content Include="fonts\fontawesome-webfont.woff" />
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
-    <EntityDeploy Include="Models\Vagas.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Vagas.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <Content Include="Models\Vagas.edmx.diagram">
-      <DependentUpon>Vagas.edmx</DependentUpon>
-    </Content>
     <None Include="packages.config" />
     <Content Include="Views\_FapsPage.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
@@ -218,8 +214,7 @@
     <Content Include="Views\Shared\_Layout_admin.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout_user.cshtml" />
-    <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\_RegisterPage.cshtml" />
+    <Content Include="Views\Admin\Ver_candidaturas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
