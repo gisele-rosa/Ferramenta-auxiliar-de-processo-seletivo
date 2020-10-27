@@ -12,7 +12,7 @@ namespace Faps.Controllers
         // GET: Home_Vagas
         public ActionResult Home_Vagas()
         {
-            EntitiesFAPS vagas_Entity = new EntitiesFAPS();
+            FAPSEntities vagas_Entity = new FAPSEntities();
             var getVagasLista = vagas_Entity.Vagas.ToList();
 
             return View(getVagasLista);

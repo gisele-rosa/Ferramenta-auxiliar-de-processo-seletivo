@@ -14,8 +14,17 @@ namespace Faps.Models
     
     public partial class Vagas
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Vagas()
+        {
+            this.Candidaturas = new HashSet<Candidaturas>();
+        }
+    
         public int Codigo_vaga { get; set; }
         public string Vaga { get; set; }
         public string Vaga_descricao { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Candidaturas> Candidaturas { get; set; }
     }
 }
