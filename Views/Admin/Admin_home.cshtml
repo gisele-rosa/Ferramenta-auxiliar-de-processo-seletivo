@@ -36,7 +36,7 @@
                     @Html.DisplayFor(modelItem => item.Vaga_descricao)
                 </td>
                 <td>
-                    @Html.ActionLink("Ver Candidaturas", "Edit", new { id = item.Codigo_vaga }) |
+                    @Html.ActionLink("Ver Candidaturas", "Ver_candidaturas", new { id = item.Codigo_vaga }) |
                     @Html.ActionLink("Alterar vaga", "Details", new { id = item.Codigo_vaga }) |
                     @Html.ActionLink("Deletar Vaga", "Deletar_vaga", new { id = item.Codigo_vaga })
                 </td>
