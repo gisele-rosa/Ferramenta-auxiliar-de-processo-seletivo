@@ -1,0 +1,154 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/_RegisterPage.cshtml";
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Register</title>
+</head>
+<body>
+    <h1 class="header-w3ls">
+        Cadastre-se
+    </h1>
+    <div class="appointment-w3">
+        <form action="#" method="post">
+            <div class="personal">
+                <h2>Detalhes Pessoais</h2>
+                <div class="form-left-w3l">
+                    <p>Nome</p>
+                    <input type="text" name="name" required="">
+                </div>
+                <div class="form-right-w3ls ">
+                    <p>Sobrenome</p>
+                    <input type="text" name="lastName" required="">
+                    <div class="clear"></div>
+                </div>
+                <div class="form-left-w3l">
+                    <p>Email</p>
+                    <input type="email" name="email" placeholder="Mail@example.com" required="">
+                </div>
+                <div class="form-right-w3ls ">
+                    <p>Telefone</p>
+                    <input class="buttom" type="text" name="phone" required="">
+                </div>
+                <div class="form-left-w3l">
+                    <p>Gênero</p>
+                    <select class="form-control" name="genero">
+                        <option value="">Selecione</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="feminino">Feminino</option>
+                    </select>
+                </div>
+                <div class="form-right-w3ls">
+                    <p>Data de Nascimento</p>
+                    <input id="dateBorn" name="dateBorn" type="text" placeholder="dd/mm/aaaa" required="">
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="information">
+                <h3> Endereço</h3>
+                <div class="form-add-w3ls">
+                    <p>Endereço</p>
+                    <input type="text" name="endereco" required="">
+                </div>
+                <div class="form-left-w3l">
+                    <p>Cidade</p>
+                    <input type="text" name="city" required="">
+                </div>
+                <div class="form-right-w3ls ">
+                    <p>Estado</p>
+                    <input type="text" name="state" required="">
+                </div>
+                <div class="clear"></div>
+                <div class="form-left-w3l">
+                    <p>CEP</p>
+                    <input type="text" name="cep" placeholder="00000-000" required="">
+                </div>
+                <div class="form-right-w3ls">
+                    <p>País</p>
+                    <select class="form-control buttom" name="country">
+                        <option value="">
+                            Selecione
+                        </option>
+                        <option value="Ale">Alemanha</option>
+                        <option value="Br">Brasil</option>
+                        <option value="Can">Canadá</option>
+                        <option value="Eua">EUA</option>
+                        <option value="Pt">Portugal</option>
+                    </select>
+
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="education">
+                <h3>Formação Acadêmica</h3>
+
+                <div class="clearfix"></div>
+                <div class="form-left-w3l ">
+                    <p>Curso</p>
+                    <input type="text" name="curso"  required="">
+                </div>
+                <div class="form-right-w3ls">
+                    <p>Estado</p>
+                    <select class="form-control" name="estadoCurso">
+                        <option value="">Selecione</option>
+                        <option value="concluido">Concluído </option>
+                        <option value="cursando">Cursando </option>
+                        <option value="trancado">Trancado</option>
+                    </select>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="education">
+                <h3>Experiência Profissional</h3>
+
+                <div class="clearfix"></div>
+                <div class="form-left-w3l ">
+                    <p>Título do Cargo</p>
+                    <input type="text" name="cargo" required="">
+                </div>
+                <div class="form-right-w3ls ">
+                    <p>Empresa</p>
+                    <input type="text" name="empresa" required="">
+                </div>
+                <div class="form-left-w3l ">
+                    <p>Data Início</p>
+                    <input id="dateInicio" name="text" type="text" placeholder="dd/mm/aaaa" required="">
+                </div>
+                <div class="form-right-w3ls ">
+                    <p>Data Término</p>
+                    <input id="dateFim" name="text" type="text" placeholder="dd/mm/aaaa" required="">
+                </div>
+                <div class="form-control-w3l">
+                    <p>Descrição das atividades</p>
+                    <textarea name="description"></textarea>
+                </div>
+
+                <div class="clear"></div>
+
+            </div>
+            <input type="submit" value="Salvar">
+        </form>
+    </div>
+
+    <div class="copy">
+        <p>&copy;2020 FAPS. All Rights Reserved | Design by FAPS</p>
+    </div>
+    <!-- js -->
+    <script type='text/javascript' src='js/jquery-2.2.3.min.js'></script>
+    <!-- //js -->
+    <!-- Calendar -->
+    <link rel="stylesheet" href="css/jquery-ui.css" />
+    <script src="js/jquery-ui.js"></script>
+    <script>
+        $(function () {
+            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker();
+        });
+    </script>
+    <!-- //Calendar -->
+</body>
+</html>
