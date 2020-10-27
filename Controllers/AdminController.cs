@@ -9,29 +9,23 @@ namespace Faps.Controllers
 {
     public class AdminController : Controller
     {
-        // GET: Admin
+        // Home admin
         public ActionResult Admin_home()
         {
             EntitiesFAPS vagas_Entity = new EntitiesFAPS();
             var getVagasLista = vagas_Entity.Vagas.ToList();
 
-
-            /*Vagas vaga_teste = new Vagas();
-            vaga_teste.Vaga = "Teste1";
-            vaga_teste.Vaga_descricao = "Teste1";
-            vagas_Entity.Vagas.Add(vaga_teste);
-            vagas_Entity.SaveChanges();*/
-
-
             return View(getVagasLista);
 
         }
 
+        //Carrega a view do cadastrar vagas
         public ActionResult Cadastrar_vaga()
         {
             return View();
         }
 
+        //BackEnd do cadastrar vagas (salvar)
         [HttpPost]
         public ActionResult Confirmar_vaga(Vagas vagas)
         {
@@ -42,7 +36,19 @@ namespace Faps.Controllers
             return RedirectToAction("Admin_home", "Admin");
         }
 
+        //Chama a view ver candidaturas da vaga
+        [HttpGet]
+        public ActionResult Ver_candidaturas(int id)
+        {
+            EntitiesFAPS db = new EntitiesFAPS();
 
+            var getCandidaturasLista = db.Candidaturas.Where(f => f.Codigo_vaga == id).ToList();
+            return View(getCandidaturasLista);
+
+        }
+
+
+        //Deletar vagas
         [HttpGet]
         public ActionResult Deletar_vaga(int id)
         {
