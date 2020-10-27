@@ -14,9 +14,12 @@ namespace Faps.Models
     
     public partial class Candidaturas
     {
-        public int Codigo_candidatura { get; set; }
-        public int Codigo_usuario { get; set; }
-        public int Codigo_vaga { get; set; }
+        public int Codigo_Candidatura { get; set; }
+        public int Codigo_user { get; set; }
         public int Status_candidatura { get; set; }
+        public int Codigo_Vaga { get; set; }
+    
+        public virtual Usuarios Usuarios { get; set; }
+        public virtual Vagas Vagas { get; set; }
     }
 }

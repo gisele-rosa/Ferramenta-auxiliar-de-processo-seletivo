@@ -12,7 +12,7 @@ namespace Faps.Controllers
         // GET: User
         public ActionResult User_home(int id)
         {
-            EntitiesFAPS db = new EntitiesFAPS();
+            FAPSEntities db = new FAPSEntities();
 
 
             //Responsavel por colocar o nome do usuario nas views User e copular as view bags dessas telas
@@ -22,7 +22,7 @@ namespace Faps.Controllers
 
 
             //veririca se o usuario esta candidatado em alguma vaga---------------------------------------------------
-            var Applyed_Status = db.Candidaturas.Where(f => f.Codigo_usuario == id).FirstOrDefault()?.Status_candidatura;
+            var Applyed_Status = db.Candidaturas.Where(f => f.Codigo_user == id).FirstOrDefault()?.Status_candidatura;
             if (Applyed_Status != null) {
                 if (Applyed_Status == 1)
                 {
@@ -58,13 +58,13 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Apply(int id_vaga, int id_applyer)
         {
-            EntitiesFAPS db = new EntitiesFAPS();
+            FAPSEntities db = new FAPSEntities();
 
             Candidaturas cd = new Candidaturas();
 
-            cd.Codigo_usuario = id_applyer;
+            cd.Codigo_user = id_applyer;
             cd.Status_candidatura = 1;
-            cd.Codigo_vaga = id_vaga;
+            cd.Codigo_Vaga = id_vaga;
 
 
             db.Candidaturas.Add(cd);

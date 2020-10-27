@@ -12,7 +12,7 @@ namespace Faps.Controllers
         // Home admin
         public ActionResult Admin_home()
         {
-            EntitiesFAPS vagas_Entity = new EntitiesFAPS();
+            FAPSEntities vagas_Entity = new FAPSEntities();
             var getVagasLista = vagas_Entity.Vagas.ToList();
 
             return View(getVagasLista);
@@ -29,7 +29,7 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Confirmar_vaga(Vagas vagas)
         {
-            EntitiesFAPS vagas_Entity = new EntitiesFAPS();
+            FAPSEntities vagas_Entity = new FAPSEntities();
             vagas_Entity.Vagas.Add(vagas);
             vagas_Entity.SaveChanges();
 
@@ -40,9 +40,17 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Ver_candidaturas(int id)
         {
-            EntitiesFAPS db = new EntitiesFAPS();
+            FAPSEntities db = new FAPSEntities();
 
-            var getCandidaturasLista = db.Candidaturas.Where(f => f.Codigo_vaga == id).ToList();
+            var getCandidaturasLista = db.Candidaturas.Where(f => f.Codigo_Vaga == id).ToList();
+
+            /*var Lista = from a in db.Usuarios.Where(f => f. == id)
+                        from b in numbersB
+                        from c in numbersC
+                        where a == b && c == b
+                        select new { a, b ,c};*/
+
+
             return View(getCandidaturasLista);
 
         }
@@ -52,7 +60,7 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Deletar_vaga(int id)
         {
-            EntitiesFAPS vagas_Entity = new EntitiesFAPS();
+            FAPSEntities vagas_Entity = new FAPSEntities();
 
             Vagas v = vagas_Entity.Vagas.Find(id);
             vagas_Entity.Vagas.Remove(v);

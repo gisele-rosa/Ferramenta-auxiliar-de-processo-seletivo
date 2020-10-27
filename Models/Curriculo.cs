@@ -18,5 +18,7 @@ namespace Faps.Models
         public string campo_a { get; set; }
         public string campo_b { get; set; }
         public int codigo_user { get; set; }
+    
+        public virtual Usuarios Usuarios { get; set; }
     }
 }

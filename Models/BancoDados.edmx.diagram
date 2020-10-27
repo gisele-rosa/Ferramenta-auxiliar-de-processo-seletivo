@@ -4,13 +4,14 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="3302f5cd7f09492c90e1b40427c0e7bb" Name="Diagram1">
-        <EntityTypeShape EntityType="FAPSModel.Usuarios" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="FAPSModel.Vagas" Width="1.5" PointX="3.375" PointY="0.875" IsExpanded="true" />
-        <EntityTypeShape EntityType="FAPSModel.Curriculo" Width="1.5" PointX="3" PointY="3.75" />
-        <AssociationConnector Association="FAPSModel.FK_Curriculos_Usuarios" />
-        <EntityTypeShape EntityType="FAPSModel.Candidaturas" Width="1.5" PointX="6" PointY="0.875" />
-        <AssociationConnector Association="FAPSModel.FK_Candidaturas_Vagas" />
+      <Diagram DiagramId="32a03ae5740744fe9c660c31148be158" Name="Diagram1">
+        <EntityTypeShape EntityType="BancoDados.Candidaturas" Width="1.5" PointX="5.875" PointY="0.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancoDados.Curriculo" Width="1.5" PointX="1.625" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancoDados.Usuarios" Width="1.5" PointX="1.75" PointY="0.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="BancoDados.Vagas" Width="1.5" PointX="10.125" PointY="0.875" IsExpanded="true" />
+        <AssociationConnector Association="BancoDados.FK_Candidaturas_Usuarios" ManuallyRouted="false" />
+        <AssociationConnector Association="BancoDados.FK_Candidaturas_vaga" ManuallyRouted="false" />
+        <AssociationConnector Association="BancoDados.FK_Curriculos_Usuarios" ManuallyRouted="false" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
