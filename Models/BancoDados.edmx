@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="BancoDados.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="BancoDados.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Candidaturas">
           <Key>
             <PropertyRef Name="Codigo_Candidatura" />
@@ -19,9 +19,25 @@
             <PropertyRef Name="codigo_curriculo" />
           </Key>
           <Property Name="codigo_curriculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="campo_a" Type="nchar" MaxLength="10" />
-          <Property Name="campo_b" Type="nchar" MaxLength="10" />
           <Property Name="codigo_user" Type="int" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="SobreNome" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Telefone" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Genero" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataNascimento" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Endereco" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Cidade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="CEP" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Pais" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Curso" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Curso_status" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TituloCargo" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Empresa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Data_inicio" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DataTermino" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DescricaoAtividades" Type="varchar" MaxLength="500" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -94,8 +110,7 @@
             <End Role="Curriculo" EntitySet="Curriculo" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="BancoDados" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -115,10 +130,26 @@
             <PropertyRef Name="codigo_curriculo" />
           </Key>
           <Property Name="codigo_curriculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="campo_a" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
-          <Property Name="campo_b" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="codigo_user" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_Curriculos_Usuarios" FromRole="Curriculo" ToRole="Usuarios" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SobreNome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Telefone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Genero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataNascimento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Endereco" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Cidade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="CEP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Curso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Curso_status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TituloCargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Empresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Data_inicio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DataTermino" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DescricaoAtividades" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -213,9 +244,25 @@
           <EntitySetMapping Name="Curriculo">
             <EntityTypeMapping TypeName="BancoDados.Curriculo">
               <MappingFragment StoreEntitySet="Curriculo">
+                <ScalarProperty Name="DescricaoAtividades" ColumnName="DescricaoAtividades" />
+                <ScalarProperty Name="DataTermino" ColumnName="DataTermino" />
+                <ScalarProperty Name="Data_inicio" ColumnName="Data_inicio" />
+                <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+                <ScalarProperty Name="TituloCargo" ColumnName="TituloCargo" />
+                <ScalarProperty Name="Curso_status" ColumnName="Curso_status" />
+                <ScalarProperty Name="Curso" ColumnName="Curso" />
+                <ScalarProperty Name="Pais" ColumnName="Pais" />
+                <ScalarProperty Name="CEP" ColumnName="CEP" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+                <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+                <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+                <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+                <ScalarProperty Name="Genero" ColumnName="Genero" />
+                <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="SobreNome" ColumnName="SobreNome" />
+                <ScalarProperty Name="Nome" ColumnName="Nome" />
                 <ScalarProperty Name="codigo_curriculo" ColumnName="codigo_curriculo" />
-                <ScalarProperty Name="campo_a" ColumnName="campo_a" />
-                <ScalarProperty Name="campo_b" ColumnName="campo_b" />
                 <ScalarProperty Name="codigo_user" ColumnName="codigo_user" />
               </MappingFragment>
             </EntityTypeMapping>

@@ -214,6 +214,8 @@
     <Content Include="Views\Shared\_Layout_admin.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout_user.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\_RegisterPage.cshtml" />
     <Content Include="Views\Admin\Ver_candidaturas.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

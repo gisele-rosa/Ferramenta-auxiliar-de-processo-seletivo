@@ -14,9 +14,25 @@
       <PropertyRef Name="codigo_curriculo" />
     </Key>
     <Property Name="codigo_curriculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="campo_a" Type="nchar" MaxLength="10" />
-    <Property Name="campo_b" Type="nchar" MaxLength="10" />
     <Property Name="codigo_user" Type="int" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SobreNome" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Telefone" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Genero" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DataNascimento" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Endereco" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Cidade" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="CEP" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Pais" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Curso" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Curso_status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TituloCargo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Empresa" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Data_inicio" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DataTermino" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DescricaoAtividades" Type="varchar" MaxLength="500" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>

@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'C:\Users\userguiche\source\repos\Faps\Models\BancoDados.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\userguiche\Desktop\Ferramenta-auxiliar-de-processo-seletivo\Models\BancoDados.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

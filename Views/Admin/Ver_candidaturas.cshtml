@@ -5,19 +5,16 @@
     Layout = "~/Views/Shared/_Layout_admin.cshtml";
 }
 
-<h2>Ver_candidaturas</h2>
-
+<h2>Ver candidaturas para a vaga de @ViewBag.NomeVaga</h2>
 
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Codigo_usuario)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Codigo_vaga)
-        </th>
-        <th>
             @Html.DisplayNameFor(model => model.Status_candidatura)
+        </th>
+        <th>
+            @Html.DisplayName("Nome do Candidato")
+
         </th>
         <th></th>
     </tr>
@@ -25,18 +22,14 @@
 @foreach (var item in Model) {
     <tr>
         <td>
-            @Html.DisplayFor(modelItem => item.Codigo_usuario)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Codigo_vaga)
-        </td>
-        <td>
             @Html.DisplayFor(modelItem => item.Status_candidatura)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Codigo_candidatura }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Codigo_candidatura }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Codigo_candidatura })
+            @Html.DisplayFor(modelItem => item.Usuarios.Usuario)
+        </td>
+        <td>
+            @Html.ActionLink("Analisar Curriculo", "Details", new { id=item.Codigo_Candidatura }) |
+            @Html.ActionLink("Descartar Candidatura", "Delete", new { id=item.Codigo_Candidatura })
         </td>
     </tr>
 }

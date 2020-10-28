@@ -44,11 +44,9 @@ namespace Faps.Controllers
 
             var getCandidaturasLista = db.Candidaturas.Where(f => f.Codigo_Vaga == id).ToList();
 
-            /*var Lista = from a in db.Usuarios.Where(f => f. == id)
-                        from b in numbersB
-                        from c in numbersC
-                        where a == b && c == b
-                        select new { a, b ,c};*/
+
+            //Cogido_vaga da tabela vagas é com o "v" minusculo
+            ViewBag.NomeVaga = db.Vagas.Where(f => f.Codigo_vaga == id).FirstOrDefault().Vaga;
 
 
             return View(getCandidaturasLista);

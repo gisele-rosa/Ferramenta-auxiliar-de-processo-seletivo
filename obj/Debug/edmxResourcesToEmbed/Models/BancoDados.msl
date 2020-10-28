@@ -14,9 +14,25 @@
     <EntitySetMapping Name="Curriculo">
       <EntityTypeMapping TypeName="BancoDados.Curriculo">
         <MappingFragment StoreEntitySet="Curriculo">
+          <ScalarProperty Name="DescricaoAtividades" ColumnName="DescricaoAtividades" />
+          <ScalarProperty Name="DataTermino" ColumnName="DataTermino" />
+          <ScalarProperty Name="Data_inicio" ColumnName="Data_inicio" />
+          <ScalarProperty Name="Empresa" ColumnName="Empresa" />
+          <ScalarProperty Name="TituloCargo" ColumnName="TituloCargo" />
+          <ScalarProperty Name="Curso_status" ColumnName="Curso_status" />
+          <ScalarProperty Name="Curso" ColumnName="Curso" />
+          <ScalarProperty Name="Pais" ColumnName="Pais" />
+          <ScalarProperty Name="CEP" ColumnName="CEP" />
+          <ScalarProperty Name="Estado" ColumnName="Estado" />
+          <ScalarProperty Name="Cidade" ColumnName="Cidade" />
+          <ScalarProperty Name="Endereco" ColumnName="Endereco" />
+          <ScalarProperty Name="DataNascimento" ColumnName="DataNascimento" />
+          <ScalarProperty Name="Genero" ColumnName="Genero" />
+          <ScalarProperty Name="Telefone" ColumnName="Telefone" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="SobreNome" ColumnName="SobreNome" />
+          <ScalarProperty Name="Nome" ColumnName="Nome" />
           <ScalarProperty Name="codigo_curriculo" ColumnName="codigo_curriculo" />
-          <ScalarProperty Name="campo_a" ColumnName="campo_a" />
-          <ScalarProperty Name="campo_b" ColumnName="campo_b" />
           <ScalarProperty Name="codigo_user" ColumnName="codigo_user" />
         </MappingFragment>
       </EntityTypeMapping>
