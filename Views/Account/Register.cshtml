@@ -15,29 +15,32 @@
         Cadastre-se
     </h1>
     <div class="appointment-w3">
-        <form action="#" method="post">
+
+        <form action="Salvar_registro" method="post">
+
+
             <div class="personal">
                 <h2>Detalhes Pessoais</h2>
                 <div class="form-left-w3l">
                     <p>Nome</p>
-                    <input type="text" name="name" required="">
+                    <input type="text" name="Nome" required="" value="Lion">
                 </div>
                 <div class="form-right-w3ls ">
                     <p>Sobrenome</p>
-                    <input type="text" name="lastName" required="">
+                    <input type="text" name="SobreNome" required="" value="Lindo">
                     <div class="clear"></div>
                 </div>
                 <div class="form-left-w3l">
                     <p>Email</p>
-                    <input type="email" name="email" placeholder="Mail@example.com" required="">
+                    <input type="email" name="Email" placeholder="Mail@example.com" required="" value="teste@teste.com">
                 </div>
                 <div class="form-right-w3ls ">
                     <p>Telefone</p>
-                    <input class="buttom" type="text" name="phone" id="phone"  required="">
+                    <input class="buttom" type="text" name="Telefone" id="phone"  required="" value="12-999999999">
                 </div>
                 <div class="form-left-w3l">
                     <p>Gênero</p>
-                    <select class="form-control" name="genero">
+                    <select class="form-control" name="Genero">
                         <option value="">Selecione</option>
                         <option value="masculino">Masculino</option>
                         <option value="feminino">Feminino</option>
@@ -45,17 +48,23 @@
                 </div>
                 <div class="form-right-w3ls">
                     <p>Data de Nascimento</p>
-                    <input id="dateBorn" name="dateBorn" type="text" placeholder="dd/mm/aaaa" required="">
+                    <input id="dateBorn" name="DataNascimento" type="text" placeholder="dd/mm/aaaa" required="" value="30/12/1999">
                 </div>
+
+
+
+
                 <div class="form-left-w3l">
                     <p>Usuário para Login:</p>
-                    <input type="text" name="usuario" required="">
+                    <input type="text" name="Usuario" required="" value="teste_lion">
                 </div>
                 <div class="form-right-w3ls ">
                     <p>Senha para Login:</p>
-                    <input type="text" name="senha" required="">
+                    <input type="text" name="Senha" required="" value="teste">
                     <div class="clear"></div>
                 </div>
+
+
 
 
 
@@ -66,48 +75,48 @@
                 <h3> Endereço</h3>
                 <div class="form-add-w3ls">
                     <p>Endereço</p>
-                    <input type="text" name="endereco" required="">
+                    <input type="text" name="Endereco" required="" value="rua teste, 85 Sao Judas">
                 </div>
                 <div class="form-left-w3l">
                     <p>Cidade</p>
-                    <input type="text" name="city" required="">
+                    <input type="text" name="Cidade" required="" value="Sao Jose dos Campos">
                 </div>
                 <div class="form-right-w3ls ">
                     <p>Estado</p>
-                    <input type="text" name="state" required="">
+                    <input type="text" name="Estado" required="" value="Sao Paulo">
                 </div>
                 <div class="clear"></div>
                 <div class="form-left-w3l">
                     <p>CEP</p>
-                    <input type="text" name="cep" placeholder="00000-000" required="">
+                    <input type="text" name="CEP" placeholder="00000-000" required="" value="12-228-290">
                 </div>
                 <div class="form-right-w3ls">
                     <p>País</p>
-                    <select class="form-control buttom" name="country">
-                        <option value="">
-                            Selecione
-                        </option>
-                        <option value="Ale">Alemanha</option>
-                        <option value="Br">Brasil</option>
-                        <option value="Can">Canadá</option>
-                        <option value="Eua">EUA</option>
-                        <option value="Pt">Portugal</option>
+                    <select class="form-control buttom" name="Pais">
+                        <option value="">Selecione</option>
+                        <option value="Alemanha">Alemanha</option>
+                        <option value="Brasil">Brasil</option>
+                        <option value="Canada">Canadá</option>
+                        <option value="EUA">EUA</option>
+                        <option value="Portugal">Portugal</option>
                     </select>
 
                 </div>
                 <div class="clear"></div>
             </div>
+
+
             <div class="education">
                 <h3>Formação Acadêmica</h3>
 
                 <div class="clearfix"></div>
                 <div class="form-left-w3l ">
                     <p>Curso</p>
-                    <input type="text" name="curso"  required="">
+                    <input type="text" name="Curso"  required="" value="Analise e Desenvolvimento de Sistemas">
                 </div>
                 <div class="form-right-w3ls">
                     <p>Estado</p>
-                    <select class="form-control" name="estadoCurso">
+                    <select class="form-control" name="Curso_status">
                         <option value="">Selecione</option>
                         <option value="concluido">Concluído </option>
                         <option value="cursando">Cursando </option>
@@ -116,34 +125,36 @@
                 </div>
                 <div class="clear"></div>
             </div>
+
+
             <div class="education">
                 <h3>Experiência Profissional</h3>
 
                 <div class="clearfix"></div>
                 <div class="form-left-w3l ">
                     <p>Título do Cargo</p>
-                    <input type="text" name="cargo" required="">
+                    <input type="text" name="TituloCargo" required="" value="Desenvolvimento">
                 </div>
                 <div class="form-right-w3ls ">
                     <p>Empresa</p>
-                    <input type="text" name="empresa" required="">
+                    <input type="text" name="Empresa" required="" value="Signa">
                 </div>
                 <div class="form-left-w3l ">
                     <p>Data Início</p>
-                    <input id="dateInicio" name="text" type="text" placeholder="dd/mm/aaaa" required="">
+                    <input id="dateInicio" name="Data_inicio" type="text" placeholder="dd/mm/aaaa" required="" value="01/01/2018">
                 </div>
                 <div class="form-right-w3ls ">
                     <p>Data Término</p>
-                    <input id="dateFim" name="text" type="text" placeholder="dd/mm/aaaa" required="">
+                    <input id="dateFim" name="DataTermino" type="text" placeholder="dd/mm/aaaa" required="" value="01/10/2018">
                 </div>
                 <div class="form-control-w3l">
                     <p>Descrição das atividades</p>
-                    <textarea name="description"></textarea>
+                    <textarea name="DescricaoAtividades"></textarea>
                 </div>
 
                 <div class="clear"></div>
-
             </div>
+
             <input type="submit" value="Salvar">
         </form>
     </div>

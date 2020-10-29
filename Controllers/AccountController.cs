@@ -23,13 +23,32 @@ namespace Faps.Controllers
             return View();
         }
 
-        [HttpGet]
+        //Chama a view Do registro
         public ActionResult Register()
         {
             return View();
         }
 
-        void connectionString()
+        //Salva o registro do usuario
+        [HttpPost]
+        public ActionResult Salvar_registro(Curriculo resume)
+        {
+
+            Usuarios user = new Usuarios();
+            user.role = "user";
+            user.Usuario = resume.Usuario.ToString();
+            user.Senha = resume.Senha.ToString();
+
+            FAPSEntities db = new FAPSEntities();
+            db.Usuarios.Add(user);
+            db.Curriculo.Add(resume);
+            db.SaveChanges();
+
+            return View("Login");
+        }
+
+
+            void connectionString()
         {
             con.ConnectionString = "Data Source=NBGV00116;Initial Catalog=FAPS;User ID=sa;Password=root";
         }
@@ -45,10 +64,6 @@ namespace Faps.Controllers
 
             if (dr.Read())
             {
-                /*int teste0 = (int)dr.GetValue(0);
-                string teste1 = (string)dr.GetValue(1);
-                string teste2 = (string)dr.GetValue(2);
-                string teste3 = (string)dr.GetValue(3);*/
 
                 if (dr.GetValue(3).Equals("admin"))
                 {
