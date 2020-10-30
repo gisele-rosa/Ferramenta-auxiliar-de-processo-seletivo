@@ -28,8 +28,8 @@
             @Html.DisplayFor(modelItem => item.Usuarios.Usuario)
         </td>
         <td>
-            @Html.ActionLink("Analisar Curriculo", "Details", new { id=item.Codigo_Candidatura }) |
-            @Html.ActionLink("Descartar Candidatura", "Delete", new { id=item.Codigo_Candidatura })
+            @Html.ActionLink("Analisar Curriculo", "Analisar_curriculo", new { id_candidato=item.Codigo_user }, new { @class = "btn btn-success" }) |
+            @Html.ActionLink("Descartar Candidatura", "Deletar_candidatura", new { id_candidatura=item.Codigo_Candidatura }, new { @class = "btn btn-danger delete" })
         </td>
     </tr>
 }

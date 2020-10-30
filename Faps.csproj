@@ -217,6 +217,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\_RegisterPage.cshtml" />
     <Content Include="Views\Admin\Ver_candidaturas.cshtml" />
+    <Content Include="Views\Admin\Analisar_curriculo.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
