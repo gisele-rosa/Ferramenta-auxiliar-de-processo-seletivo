@@ -14,7 +14,6 @@ namespace Faps.Controllers
         {
             FAPSEntities db = new FAPSEntities();
 
-
             //Responsavel por colocar o nome do usuario nas views User e copular as view bags dessas telas
             var nome = db.Usuarios.Where(f => f.Codigo_user == id).FirstOrDefault().Usuario;
             ViewBag.nome = nome;
@@ -47,8 +46,6 @@ namespace Faps.Controllers
             }
             
 
-
-  
             //Copula a tela home Status vaga = 0 SEM CANDIDATURA A NENHUMA VAGA
             var getVagasLista = db.Vagas.ToList();
 
@@ -66,11 +63,10 @@ namespace Faps.Controllers
             cd.Status_candidatura = 1;
             cd.Codigo_Vaga = id_vaga;
 
-
             db.Candidaturas.Add(cd);
             db.SaveChanges();
 
-
+            //retorna a para a home e carrega ela com o id do usuario
             return RedirectToAction("User_home", "User", new { id = id_applyer });
         }
 

@@ -67,6 +67,9 @@ namespace Faps.Controllers
 
                 if (dr.GetValue(3).Equals("admin"))
                 {
+                    
+                    Session["id_admin"] = (int)dr.GetValue(0);
+
                     con.Close();
                     return RedirectToAction("Admin_home", "Admin");
                 }
