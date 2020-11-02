@@ -250,9 +250,9 @@ h1 {
     color: #fff;
     text-shadow: 1px 1px 1px #000;
     letter-spacing: 3px;
-    padding: 1em 1vw;
+    padding: 3px 0px;
     text-align: center;
-	font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro', sans-serif;
 }
 
 .w3ls-login form {
@@ -654,5 +654,40 @@ input:checked+.slider:before {
         padding: 25px 8px;
     }
 }
+.container {
+    padding: 0;
+    overflow: hidden;
+}
+.banner-text {
+    margin-top: 60px;
+    float: left;
+    background: rgba(0, 0, 0, 0.43);
+    width: 100%;
+}
+.banner-text h1 {
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 17px;
+    color: #fff;
+}
 
+.banner-text p {
+   text-align: center;
+   color: #fff;
+   padding: 30px 30px;
+}
+tr.vagas{
+    padding: 0px;
+    margin: 0px;
+}
+th.vagas {
+    list-style: none;
+    float: left;
+    width: 25%;
+    height: 188px;
+    margin: 23px 46px;
+}
+.btn-default{
+    color: #fff;
+}
 /*--//responsive--*/
