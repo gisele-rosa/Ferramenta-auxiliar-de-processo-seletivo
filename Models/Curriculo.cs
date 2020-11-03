@@ -18,13 +18,6 @@ namespace Faps.Models
         public int codigo_user { get; set; }
         public string Nome { get; set; }
         public string SobreNome { get; set; }
-
-
-        public string Usuario { get; set; }
-        public string Senha { get; set; }
-
-
-
         public string Email { get; set; }
         public string Telefone { get; set; }
         public string Genero { get; set; }
@@ -44,5 +37,7 @@ namespace Faps.Models
     
         public virtual Usuarios Usuarios { get; set; }
 
+        public string Usuario { get; set; }
+        public string Senha { get; set; }
     }
 }

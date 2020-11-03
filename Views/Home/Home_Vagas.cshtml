@@ -4,37 +4,38 @@
     ViewBag.Title = "Home_Vagas";
     Layout = "";
 }
-
-<h2>Home_Vagas</h2>
+<head>
+    <link href="~/styles/font-awesome.css" rel="stylesheet" />
+    <link href="~/styles/style.css" rel="stylesheet" />
+</head>
+<h1>
+    FAPS - Vagas
+</h1>
 
 <table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.Vaga)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Vaga_descricao)
-        </th>
-        <th></th>
+    <tr class="vagas">
+        @foreach (var item in Model)
+         {
+            <th class="vagas">
+                <div class="container">
+                    <div class="banner-text">
+                        <h1> @Html.DisplayFor(modelItem => item.Vaga)</h1>
+                        <p>
+                           @Html.DisplayFor(modelItem => item.Vaga_descricao)
+                        </p>
+                    </div>
+                </div>
+            </th>
+         }
     </tr>
-
-    @foreach (var item in Model)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vaga)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Vaga_descricao)
-            </td>
-        </tr>
-    }
 </table>
+<footer>
+    <br>
+    Gosto de alguma vaga?
+    <a href="@Url.Action("Login", "Account")" class="btn btn-default">Faça seu login agora!</a>
 
-<br>
-Gosto de alguma vaga?
-<a href="@Url.Action("Login", "Account")" class="btn btn-default">Faça seu login agora!</a>
+    <br>
+    Não tem uma conta?
+    <a href="@Url.Action("Register", "Account")" class="btn btn-default">Cadastre seu perfil agora!</a>
 
-<br>
-Não tem uma conta?
-<a href="@Url.Action("Register", "Account")" class="btn btn-default">Cadastre seu perfil agora!</a>
+</footer>

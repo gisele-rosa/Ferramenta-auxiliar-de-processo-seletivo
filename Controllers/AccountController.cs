@@ -50,7 +50,7 @@ namespace Faps.Controllers
 
             void connectionString()
         {
-            con.ConnectionString = "Data Source=NBGV00116;Initial Catalog=FAPS;User ID=sa;Password=root";
+            con.ConnectionString = "Data Source=GI-PC;Initial Catalog=FAPS;User ID=sa;Password=root";
         }
         [HttpPost]
         public ActionResult Verify(Account acc)
