@@ -47,6 +47,7 @@
     <Property Name="role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <NavigationProperty Name="Candidaturas" Relationship="Self.FK_Candidaturas_Usuarios" FromRole="Usuarios" ToRole="Candidaturas" />
     <NavigationProperty Name="Curriculo" Relationship="Self.FK_Curriculos_Usuarios" FromRole="Usuarios" ToRole="Curriculo" />
+    <NavigationProperty Name="Interview" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Usuarios" ToRole="Interview" />
   </EntityType>
   <EntityType Name="Vagas">
     <Key>
@@ -110,5 +111,34 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Curriculo" EntitySet="Curriculo" />
     </AssociationSet>
+    <EntitySet Name="Interview" EntityType="BancoDados.Interview" />
+    <AssociationSet Name="FK_Interview_Usuarios" Association="BancoDados.FK_Interview_Usuarios">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Interview" EntitySet="Interview" />
+    </AssociationSet>
   </EntityContainer>
+  <EntityType Name="Interview">
+    <Key>
+      <PropertyRef Name="Codigo_entrevista" />
+    </Key>
+    <Property Name="Codigo_entrevista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Codigo_user" Type="Int32" Nullable="false" />
+    <Property Name="Entrevistador" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data_Entrevista" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Data_criacao" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Interview" ToRole="Usuarios" />
+    <Property Name="Codigo_vaga" Type="Int32" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Interview_Usuarios">
+    <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="BancoDados.Interview" Role="Interview" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Codigo_user" />
+      </Principal>
+      <Dependent Role="Interview">
+        <PropertyRef Name="Codigo_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

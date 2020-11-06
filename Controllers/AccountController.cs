@@ -12,10 +12,6 @@ namespace Faps.Controllers
 {
     public class AccountController : Controller
     {
-        SqlConnection con = new SqlConnection();
-        SqlCommand com = new SqlCommand();
-        SqlDataReader dr;
-
         
         [HttpGet]
         public ActionResult Login()
@@ -48,14 +44,43 @@ namespace Faps.Controllers
         }
 
 
-            void connectionString()
-        {
-            con.ConnectionString = "Data Source=GI-PC;Initial Catalog=FAPS;User ID=sa;Password=root";
-        }
+
+        //Valida se a conta existe e faz login dos usuarios admin e user
         [HttpPost]
-        public ActionResult Verify(Account acc)
+        public ActionResult Verify(Usuarios acc)
         {
-            connectionString();
+            FAPSEntities db = new FAPSEntities();
+            var user_logado = db.Usuarios.Where(f => f.Usuario == acc.Usuario && f.Senha == acc.Senha)?.FirstOrDefault();
+
+            if (user_logado != null)
+            {
+                if (user_logado.role == "admin"){
+
+                    Session["id_admin"] = (int)user_logado.Codigo_user;
+
+
+                    return RedirectToAction("Admin_home", "Admin");
+
+                }
+                else {
+
+                    Session["id_user"] = (int)user_logado.Codigo_user;
+
+                    int codigo = (int)user_logado.Codigo_user;
+
+                    return RedirectToAction("User_home", "User", new { id = codigo });
+                }
+            }
+            else {
+                return View("Login");
+            }
+
+
+
+            /*SqlConnection con = new SqlConnection();
+            SqlCommand com = new SqlCommand();
+            SqlDataReader dr;
+            con.ConnectionString = "Data Source=NBGV00116;Initial Catalog=FAPS;User ID=sa;Password=root";
             con.Open();
             com.Connection = con;
             com.CommandText = "select * from dbo.Usuarios where Usuario='"+acc.Name+ "' and Senha='"+acc.Password+"'";
@@ -75,7 +100,10 @@ namespace Faps.Controllers
                 }
                 else if (dr.GetValue(3).Equals("user"))
                 {
+                    Session["id_user"] = (int)dr.GetValue(0);
+
                     int codigo = (int)dr.GetValue(0);
+
                     con.Close();
                     return RedirectToAction("User_home", "User", new { id = codigo });
                 }
@@ -88,8 +116,25 @@ namespace Faps.Controllers
             {
                con.Close();
                return View("Login");
-            }
+            }*/
+
 
         }
+
+
+        //Efetua o logout do usuario
+        public ActionResult Logout()
+        {
+            //reset session
+            Session["id_admin"] = null;
+            Session["id_user"] = null;
+
+            //implementar tabela Sessao
+
+
+
+            return View("Login");
+        }
+
     }
 }

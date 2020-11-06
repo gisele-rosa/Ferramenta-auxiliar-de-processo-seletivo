@@ -13,7 +13,7 @@ namespace Faps.Controllers
         // Home admin esperando o id do admin
         public ActionResult Admin_home()
         {
-            var username = Session["id_admin"];
+            var user_id = Session["id_admin"];
 
 
             FAPSEntities db = new FAPSEntities();
@@ -44,14 +44,6 @@ namespace Faps.Controllers
         }
 
         //Atualizar vagas
-
-
-
-
-
-
-
-
 
 
 
@@ -101,7 +93,7 @@ namespace Faps.Controllers
 
             var getCurriculo = db.Curriculo.Where(f => f.codigo_user == id_candidato);
 
-            var username = Session["id_admin"];
+            var user_id = Session["id_admin"];
 
             ViewBag.nome = getCurriculo.FirstOrDefault()?.Nome + " " + getCurriculo.FirstOrDefault()?.SobreNome; ;
             ViewBag.CodigoCandidatura = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault()?.Codigo_Candidatura;
@@ -119,6 +111,35 @@ namespace Faps.Controllers
 
 
         }
+
+        //Aprova a candidatura chama a view de agendamento da entrevista
+        public ActionResult Aprovar_candidatura(int id_candidato)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            var Candidatura_to_update = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault();
+
+            //status 2 = aprovado para entrevista
+            Candidatura_to_update.Status_candidatura = 2;
+
+            TryUpdateModel(Candidatura_to_update);
+            db.SaveChanges();
+
+
+            return View("Agendar_entrevista");
+        }
+
+        //Agendamento da entrevista
+        [HttpPost]
+        public ActionResult Agendar_entrevista(Interview entrevista)
+        {
+            FAPSEntities db = new FAPSEntities();
+           /* vagas_Entity.Vagas.Add(vagas);
+            vagas_Entity.SaveChanges();*/
+
+            return RedirectToAction("Admin_home", "Admin");
+        }
+
 
 
 
@@ -141,8 +162,7 @@ namespace Faps.Controllers
             db.SaveChanges();
 
 
-            //não posso retornar pra view "de mãos vazias" ela exige o id da vaga ou seja o codigo da vaga a qual essa candidatura pertencia
-            return RedirectToAction("Ver_candidaturas", "Admin", new { id = codigo_vaga });
+            return RedirectToAction("Admin_home", "Admin");
 
         }
 

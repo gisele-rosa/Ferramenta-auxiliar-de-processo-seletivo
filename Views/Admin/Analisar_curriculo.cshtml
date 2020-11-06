@@ -133,7 +133,7 @@
 <br />
 <br />
 
-@Html.ActionLink("Aprovar candidatura e Agendar entrevista", "Aprovar_candidatura", new { id = Model.FirstOrDefault().codigo_user}, new { @class = "btn btn-success" })
+@Html.ActionLink("Aprovar candidatura e Agendar entrevista", "Aprovar_candidatura", new { id_candidato = Model.FirstOrDefault().codigo_user}, new { @class = "btn btn-success" })
 
 @Html.ActionLink("Reprovar Candidatura", "Deletar_candidatura", new { id_candidatura = ViewBag.CodigoCandidatura }, new { @class = "btn btn-danger delete" })
 

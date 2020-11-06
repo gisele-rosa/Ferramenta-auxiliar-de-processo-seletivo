@@ -2,12 +2,14 @@
 
 @{
     ViewBag.Title = "Home_Vagas";
-    Layout = "";
 }
+
 <head>
     <link href="~/styles/font-awesome.css" rel="stylesheet" />
     <link href="~/styles/style.css" rel="stylesheet" />
 </head>
+
+
 <h1>
     FAPS - Vagas
 </h1>
@@ -15,24 +17,25 @@
 <table class="table">
     <tr class="vagas">
         @foreach (var item in Model)
-         {
+        {
             <th class="vagas">
                 <div class="container">
                     <div class="banner-text">
                         <h1> @Html.DisplayFor(modelItem => item.Vaga)</h1>
                         <p>
-                           @Html.DisplayFor(modelItem => item.Vaga_descricao)
+                            @Html.DisplayFor(modelItem => item.Vaga_descricao)
                         </p>
                     </div>
                 </div>
             </th>
-         }
+        }
     </tr>
 </table>
 <footer>
     <br>
     Gosto de alguma vaga?
     <a href="@Url.Action("Login", "Account")" class="btn btn-default">Faça seu login agora!</a>
+
 
     <br>
     Não tem uma conta?
