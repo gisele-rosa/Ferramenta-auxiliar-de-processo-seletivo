@@ -1,0 +1,49 @@
+﻿@model IEnumerable<Faps.Models.Interview>
+
+@{
+    ViewBag.Title = "Listar_interviews";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Entrevistas Agendadas</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Entrevistador)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_Entrevista)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Data_criacao)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Vaga)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Entrevistador)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_Entrevista)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Data_criacao)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Vaga)
+        </td>
+
+        <td>
+            @Html.ActionLink("Remarcar", "Edit", new { id=item.Codigo_entrevista }, new { @class = "btn btn-primary edit" }) |
+            @Html.ActionLink("Cancelar", "Delete", new { id=item.Codigo_entrevista }, new { @class = "btn btn-danger delete" })
+        </td>
+    </tr>
+}
+
+</table>

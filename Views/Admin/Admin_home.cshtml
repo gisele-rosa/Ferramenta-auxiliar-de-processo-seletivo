@@ -37,7 +37,7 @@
                 </td>
                 <td>
                     @Html.ActionLink("Ver Candidaturas", "Ver_candidaturas", new { id = item.Codigo_vaga }, new { @class = "btn btn-success" }) |
-                    @Html.ActionLink("Alterar vaga", "Details", new { id = item.Codigo_vaga }, new { @class = "btn btn-primary edit" }) |
+                    @Html.ActionLink("Alterar vaga", "listar_vaga_to_update", new { id_vaga = item.Codigo_vaga }, new { @class = "btn btn-primary edit" }) |
                     @Html.ActionLink("Deletar Vaga", "Deletar_vaga", new { id = item.Codigo_vaga }, new { @class = "btn btn-danger delete" })
                 </td>
             </tr>

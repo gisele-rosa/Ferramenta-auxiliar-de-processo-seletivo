@@ -123,11 +123,11 @@
     </Key>
     <Property Name="Codigo_entrevista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Codigo_user" Type="Int32" Nullable="false" />
-    <Property Name="Entrevistador" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Entrevistador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Data_Entrevista" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="Data_criacao" Type="DateTime" Nullable="false" Precision="3" />
     <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Interview" ToRole="Usuarios" />
-    <Property Name="Codigo_vaga" Type="Int32" Nullable="false" />
+    <Property Name="Vaga" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Interview_Usuarios">
     <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />

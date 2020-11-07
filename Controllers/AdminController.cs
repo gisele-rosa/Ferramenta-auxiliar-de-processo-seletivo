@@ -36,18 +36,46 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Confirmar_vaga(Vagas vagas)
         {
-            FAPSEntities vagas_Entity = new FAPSEntities();
-            vagas_Entity.Vagas.Add(vagas);
-            vagas_Entity.SaveChanges();
+            FAPSEntities db = new FAPSEntities();
+            db.Vagas.Add(vagas);
+            db.SaveChanges();
 
             return RedirectToAction("Admin_home", "Admin");
         }
 
-        //Atualizar vagas
+
+        //Recebe da view admin o id da vaga que precisa alterar
+        [HttpGet]
+        public ActionResult listar_vaga_to_update(int id_vaga)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            var vaga_to_update = db.Vagas.Where(f => f.Codigo_vaga == id_vaga).FirstOrDefault();
 
 
+            return View("Alterar_vaga", vaga_to_update);
+        }
 
 
+        //Recebe a vaga da view e salva ela
+        [HttpPost]
+        public ActionResult Alterar_vaga(Vagas vaga_to_update)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            //Procura a vaga a ser salva a altera item por item conforme oque veio da view
+            var to_update = db.Vagas.Where(f => f.Codigo_vaga == vaga_to_update.Codigo_vaga).FirstOrDefault();
+            to_update.Codigo_vaga = vaga_to_update.Codigo_vaga;
+            to_update.Vaga = vaga_to_update.Vaga;
+            to_update.Vaga_descricao = vaga_to_update.Vaga_descricao;
+
+            TryUpdateModel(to_update);
+            db.SaveChanges();
+
+            return RedirectToAction("Admin_home", "Admin");
+        }
+
+        
 
 
         //Deletar vagas, espera o id da vaga ou codigo_vaga
@@ -91,14 +119,28 @@ namespace Faps.Controllers
 
             FAPSEntities db = new FAPSEntities();
 
-            var getCurriculo = db.Curriculo.Where(f => f.codigo_user == id_candidato);
-
+            //validação usuario logado
             var user_id = Session["id_admin"];
+            //Copular Log do sistema
+
+
+            //Consulta no db o curriculo do candidato
+            var getCurriculo = db.Curriculo.Where(f => f.codigo_user == id_candidato);
 
             ViewBag.nome = getCurriculo.FirstOrDefault()?.Nome + " " + getCurriculo.FirstOrDefault()?.SobreNome; ;
             ViewBag.CodigoCandidatura = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault()?.Codigo_Candidatura;
 
-            //tratamento de null exception
+
+            //Altera o status do curriculo para 2 = em analise pela equipe // somente se for menor que 3 pq 3 é o status da entrevista
+            var status_candidatura = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault()?.Status_candidatura;
+            if (status_candidatura < 3) {
+                var Candidatura_to_update = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault();
+                Candidatura_to_update.Status_candidatura = 2;
+                TryUpdateModel(Candidatura_to_update);
+                db.SaveChanges();
+            }
+
+            //tratamento de null exception e carregar na view o curriculo do candidato
             if (getCurriculo.Any())
             {
                 return View(getCurriculo);
@@ -112,6 +154,9 @@ namespace Faps.Controllers
 
         }
 
+
+
+
         //Aprova a candidatura chama a view de agendamento da entrevista
         public ActionResult Aprovar_candidatura(int id_candidato)
         {
@@ -119,27 +164,70 @@ namespace Faps.Controllers
 
             var Candidatura_to_update = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault();
 
-            //status 2 = aprovado para entrevista
-            Candidatura_to_update.Status_candidatura = 2;
+            //status 3 = aprovado para entrevista
+            Candidatura_to_update.Status_candidatura = 3;
 
             TryUpdateModel(Candidatura_to_update);
             db.SaveChanges();
 
 
-            return View("Agendar_entrevista");
+            return RedirectToAction("Agendar_entrevista", "Admin", new { id_candidato });
         }
 
-        //Agendamento da entrevista
-        [HttpPost]
-        public ActionResult Agendar_entrevista(Interview entrevista)
+
+
+        //Carrega a view agendarmento da entrevista com as informacoes do candidato
+        [HttpGet]
+        public ActionResult Agendar_entrevista(int id_candidato)
         {
+            int admin_id = (int)Session["id_admin"];
+            
             FAPSEntities db = new FAPSEntities();
-           /* vagas_Entity.Vagas.Add(vagas);
-            vagas_Entity.SaveChanges();*/
+
+            ViewBag.Candidato = db.Curriculo.FirstOrDefault()?.Nome + " " + db.Curriculo.FirstOrDefault()?.SobreNome;
+
+            //instancia e copula a model interview q vai ser enviada para a Agendar Entrevista
+            Interview entrevista = new Interview();
+            entrevista.Codigo_user = id_candidato;
+
+            //tratamento null / preenche o entrevistador na model interview
+            if (db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario != null)
+            {
+                entrevista.Entrevistador = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            }
+            else {
+                entrevista.Entrevistador = "nenhum";
+            }
+
+            entrevista.Data_criacao = DateTime.Now;
+
+
+            //pega o codigo da vaga que esse candidato esta concorrendo
+            int codigo_vaga = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault().Codigo_Vaga;
+            entrevista.Vaga = db.Vagas.Where(f => f.Codigo_vaga == codigo_vaga).FirstOrDefault().Vaga;
+
+
+            //manda pra a propria view a model acima com as alteracoes somente faltando o preencimento da data da entrevista
+            //Na view deve ter HiddenFor para cada item da model acima
+            //para que esses campos não sejam editados pelo usuario e para que sejam salvos no modelo que a view vai enviar de voltar pra proxima action
+            return View(entrevista);
+        }
+
+
+
+
+        //Agendamento da entrevista e salva a model que vem da view no db
+        [HttpPost]
+        public ActionResult Marcar_entrevista(Interview entrevista)
+        {
+
+            FAPSEntities db = new FAPSEntities();
+
+            db.Interview.Add(entrevista);
+            db.SaveChanges();
 
             return RedirectToAction("Admin_home", "Admin");
         }
-
 
 
 
@@ -166,6 +254,16 @@ namespace Faps.Controllers
 
         }
 
+
+        //Lista e controla entrevistas agendadas
+        public ActionResult Listar_interviews()
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            var getInterviewsList = db.Interview.ToList();
+
+            return View(getInterviewsList);
+        }
 
 
     }

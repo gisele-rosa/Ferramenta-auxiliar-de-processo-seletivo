@@ -204,7 +204,7 @@
     <Content Include="fonts\fontawesome-webfont.woff2" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="packages.config" />
-    <Content Include="Views\_FapsPage.cshtml" />
+    <Content Include="Views\Account\_FapsPage.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Error.cshtml" />
     <Content Include="Views\Admin\Admin_home.cshtml" />
@@ -217,10 +217,12 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout_user.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
-    <Content Include="Views\_RegisterPage.cshtml" />
+    <Content Include="Views\Account\_RegisterPage.cshtml" />
     <Content Include="Views\Admin\Ver_candidaturas.cshtml" />
     <Content Include="Views\Admin\Analisar_curriculo.cshtml" />
     <Content Include="Views\Admin\Agendar_entrevista.cshtml" />
+    <Content Include="Views\Admin\Listar_interviews.cshtml" />
+    <Content Include="Views\Admin\Alterar_vaga.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

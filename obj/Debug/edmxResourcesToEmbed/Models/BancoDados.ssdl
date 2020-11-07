@@ -40,10 +40,10 @@
     </Key>
     <Property Name="Codigo_entrevista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Codigo_user" Type="int" Nullable="false" />
-    <Property Name="Entrevistador" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Entrevistador" Type="varchar" MaxLength="50" />
     <Property Name="Data_Entrevista" Type="datetime" Nullable="false" />
     <Property Name="Data_criacao" Type="datetime" Nullable="false" />
-    <Property Name="Codigo_vaga" Type="int" Nullable="false" />
+    <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>

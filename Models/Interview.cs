@@ -11,15 +11,19 @@ namespace Faps.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Interview
     {
         public int Codigo_entrevista { get; set; }
         public int Codigo_user { get; set; }
         public string Entrevistador { get; set; }
+
+        [Display(Name = "Data da entrevista: ")]
+        [DataType(DataType.Date, ErrorMessage = "Data em formato inválido")]
         public System.DateTime Data_Entrevista { get; set; }
         public System.DateTime Data_criacao { get; set; }
-        public int Codigo_vaga { get; set; }
+        public string Vaga { get; set; }
     
         public virtual Usuarios Usuarios { get; set; }
     }
