@@ -10,9 +10,11 @@ namespace Faps.Controllers
 {
     public class AdminController : Controller
     {
-        // Home admin esperando o id do admin
+        // Home admin
         public ActionResult Admin_home()
         {
+            //validação usuario logado
+            //Copular Log do Sistema
             var user_id = Session["id_admin"];
 
 
@@ -57,7 +59,7 @@ namespace Faps.Controllers
         }
 
 
-        //Recebe a vaga da view e salva ela
+        //Recebe a vaga editada da view e salva ela
         [HttpPost]
         public ActionResult Alterar_vaga(Vagas vaga_to_update)
         {
@@ -77,7 +79,6 @@ namespace Faps.Controllers
 
         
 
-
         //Deletar vagas, espera o id da vaga ou codigo_vaga
         [HttpGet]
         public ActionResult Deletar_vaga(int id)
@@ -91,7 +92,6 @@ namespace Faps.Controllers
 
             return RedirectToAction("Admin_home", "Admin");
         }
-
 
 
 
@@ -110,6 +110,8 @@ namespace Faps.Controllers
             return View(getCandidaturasLista);
 
         }
+
+
 
 
         //Carrega a view Analisar_curriculo/ Backend da view Analisar_curriculo e espera o id do candidato
@@ -202,14 +204,12 @@ namespace Faps.Controllers
             entrevista.Data_criacao = DateTime.Now;
 
 
-            //pega o codigo da vaga que esse candidato esta concorrendo
-            int codigo_vaga = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault().Codigo_Vaga;
-            entrevista.Vaga = db.Vagas.Where(f => f.Codigo_vaga == codigo_vaga).FirstOrDefault().Vaga;
+            //pega a vaga que esse candidato esta concorrendo
+            entrevista.Vaga = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault().Vagas.Vaga;
 
 
-            //manda pra a propria view a model acima com as alteracoes somente faltando o preencimento da data da entrevista
-            //Na view deve ter HiddenFor para cada item da model acima
-            //para que esses campos não sejam editados pelo usuario e para que sejam salvos no modelo que a view vai enviar de voltar pra proxima action
+            //*Manda pra a propria view a MODEL "entrevista" com as alteracoes somente faltando o preencimento da data da entrevista
+            //**Na view deve ter HiddenFor para cada item da model acima para que esses campos não sejam editados pelo usuario e para que sejam salvos no modelo que a view vai enviar de voltar pra proxima action
             return View(entrevista);
         }
 

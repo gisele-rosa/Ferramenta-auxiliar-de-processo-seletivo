@@ -13,6 +13,10 @@
             @Html.DisplayNameFor(model => model.Entrevistador)
         </th>
         <th>
+            @Html.DisplayName("Nome do Candidato")
+
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.Data_Entrevista)
         </th>
         <th>
@@ -25,25 +29,28 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Entrevistador)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data_Entrevista)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Data_criacao)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Vaga)
-        </td>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.Entrevistador)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Usuarios.Usuario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Data_Entrevista)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Data_criacao)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Vaga)
+    </td>
 
-        <td>
-            @Html.ActionLink("Remarcar", "Edit", new { id=item.Codigo_entrevista }, new { @class = "btn btn-primary edit" }) |
-            @Html.ActionLink("Cancelar", "Delete", new { id=item.Codigo_entrevista }, new { @class = "btn btn-danger delete" })
-        </td>
-    </tr>
+    <td>
+        @Html.ActionLink("Remarcar", "Edit", new { id = item.Codigo_entrevista }, new { @class = "btn btn-primary edit" }) |
+        @Html.ActionLink("Cancelar", "Delete", new { id = item.Codigo_entrevista }, new { @class = "btn btn-danger delete" })
+    </td>
+</tr>
 }
 
 </table>
