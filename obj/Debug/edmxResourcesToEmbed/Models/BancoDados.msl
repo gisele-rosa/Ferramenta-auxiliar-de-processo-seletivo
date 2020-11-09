@@ -68,5 +68,15 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Log">
+      <EntityTypeMapping TypeName="BancoDados.Log">
+        <MappingFragment StoreEntitySet="Log">
+          <ScalarProperty Name="Data" ColumnName="Data" />
+          <ScalarProperty Name="Log1" ColumnName="Log" />
+          <ScalarProperty Name="Codigo_user" ColumnName="Codigo_user" />
+          <ScalarProperty Name="Codigo_log" ColumnName="Codigo_log" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

@@ -30,5 +30,6 @@ namespace Faps.Models
         public virtual DbSet<Usuarios> Usuarios { get; set; }
         public virtual DbSet<Vagas> Vagas { get; set; }
         public virtual DbSet<Interview> Interview { get; set; }
+        public virtual DbSet<Log> Log { get; set; }
     }
 }

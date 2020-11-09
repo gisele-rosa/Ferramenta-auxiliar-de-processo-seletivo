@@ -188,6 +188,9 @@
     <Compile Include="Models\Interview.cs">
       <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Log.cs">
+      <DependentUpon>BancoDados.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Usuarios.cs">
       <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>

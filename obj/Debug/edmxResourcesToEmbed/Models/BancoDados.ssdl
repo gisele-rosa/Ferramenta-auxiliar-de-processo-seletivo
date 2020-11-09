@@ -45,6 +45,15 @@
     <Property Name="Data_criacao" Type="datetime" Nullable="false" />
     <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Codigo_log" />
+    </Key>
+    <Property Name="Codigo_log" Type="int" Nullable="false" />
+    <Property Name="Codigo_user" Type="int" Nullable="false" />
+    <Property Name="Log" Type="varchar" MaxLength="50" />
+    <Property Name="Data" Type="datetime" Nullable="false" />
+  </EntityType>
   <EntityType Name="Usuarios">
     <Key>
       <PropertyRef Name="Codigo_user" />
@@ -110,10 +119,23 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_usuario_log">
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Log" Type="Self.Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Codigo_user" />
+      </Principal>
+      <Dependent Role="Log">
+        <PropertyRef Name="Codigo_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="BancoDadosStoreContainer">
     <EntitySet Name="Candidaturas" EntityType="Self.Candidaturas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Curriculo" EntityType="Self.Curriculo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Interview" EntityType="Self.Interview" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vagas" EntityType="Self.Vagas" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Candidaturas_Usuarios" Association="Self.FK_Candidaturas_Usuarios">
@@ -131,6 +153,10 @@
     <AssociationSet Name="FK_Interview_Usuarios" Association="Self.FK_Interview_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Interview" EntitySet="Interview" />
+    </AssociationSet>
+    <AssociationSet Name="FK_usuario_log" Association="Self.FK_usuario_log">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Log" EntitySet="Log" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

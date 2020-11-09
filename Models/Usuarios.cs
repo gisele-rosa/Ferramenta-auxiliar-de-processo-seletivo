@@ -20,6 +20,7 @@ namespace Faps.Models
             this.Candidaturas = new HashSet<Candidaturas>();
             this.Curriculo = new HashSet<Curriculo>();
             this.Interview = new HashSet<Interview>();
+            this.Log = new HashSet<Log>();
         }
     
         public int Codigo_user { get; set; }
@@ -33,5 +34,7 @@ namespace Faps.Models
         public virtual ICollection<Curriculo> Curriculo { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Interview> Interview { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Log> Log { get; set; }
     }
 }

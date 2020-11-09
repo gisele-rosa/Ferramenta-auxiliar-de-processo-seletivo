@@ -12,14 +12,12 @@ namespace Faps.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Interview
+    public partial class Log
     {
-        public int Codigo_entrevista { get; set; }
+        public int Codigo_log { get; set; }
         public int Codigo_user { get; set; }
-        public string Entrevistador { get; set; }
-        public System.DateTime Data_Entrevista { get; set; }
-        public System.DateTime Data_criacao { get; set; }
-        public string Vaga { get; set; }
+        public string Log1 { get; set; }
+        public System.DateTime Data { get; set; }
     
         public virtual Usuarios Usuarios { get; set; }
     }

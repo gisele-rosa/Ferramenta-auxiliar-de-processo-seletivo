@@ -48,6 +48,7 @@
     <NavigationProperty Name="Candidaturas" Relationship="Self.FK_Candidaturas_Usuarios" FromRole="Usuarios" ToRole="Candidaturas" />
     <NavigationProperty Name="Curriculo" Relationship="Self.FK_Curriculos_Usuarios" FromRole="Usuarios" ToRole="Curriculo" />
     <NavigationProperty Name="Interview" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Usuarios" ToRole="Interview" />
+    <NavigationProperty Name="Log" Relationship="BancoDados.FK_usuario_log" FromRole="Usuarios" ToRole="Log" />
   </EntityType>
   <EntityType Name="Vagas">
     <Key>
@@ -116,6 +117,11 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Interview" EntitySet="Interview" />
     </AssociationSet>
+    <EntitySet Name="Log" EntityType="BancoDados.Log" />
+    <AssociationSet Name="FK_usuario_log" Association="BancoDados.FK_usuario_log">
+      <End Role="Usuarios" EntitySet="Usuarios" />
+      <End Role="Log" EntitySet="Log" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Interview">
     <Key>
@@ -137,6 +143,28 @@
         <PropertyRef Name="Codigo_user" />
       </Principal>
       <Dependent Role="Interview">
+        <PropertyRef Name="Codigo_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityType Name="Log">
+    <Key>
+      <PropertyRef Name="Codigo_log" />
+    </Key>
+    <Property Name="Codigo_log" Type="Int32" Nullable="false" />
+    <Property Name="Codigo_user" Type="Int32" Nullable="false" />
+    <Property Name="Log1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+    <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_usuario_log" FromRole="Log" ToRole="Usuarios" />
+  </EntityType>
+  <Association Name="FK_usuario_log">
+    <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="BancoDados.Log" Role="Log" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Usuarios">
+        <PropertyRef Name="Codigo_user" />
+      </Principal>
+      <Dependent Role="Log">
         <PropertyRef Name="Codigo_user" />
       </Dependent>
     </ReferentialConstraint>

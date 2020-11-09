@@ -50,6 +50,15 @@
           <Property Name="Data_criacao" Type="datetime" Nullable="false" />
           <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Codigo_log" />
+          </Key>
+          <Property Name="Codigo_log" Type="int" Nullable="false" />
+          <Property Name="Codigo_user" Type="int" Nullable="false" />
+          <Property Name="Log" Type="varchar" MaxLength="50" />
+          <Property Name="Data" Type="datetime" Nullable="false" />
+        </EntityType>
         <EntityType Name="Usuarios">
           <Key>
             <PropertyRef Name="Codigo_user" />
@@ -115,10 +124,23 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_usuario_log">
+          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+          <End Role="Log" Type="Self.Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Codigo_user" />
+            </Principal>
+            <Dependent Role="Log">
+              <PropertyRef Name="Codigo_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="BancoDadosStoreContainer">
           <EntitySet Name="Candidaturas" EntityType="Self.Candidaturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Curriculo" EntityType="Self.Curriculo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Interview" EntityType="Self.Interview" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vagas" EntityType="Self.Vagas" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Candidaturas_Usuarios" Association="Self.FK_Candidaturas_Usuarios">
@@ -136,6 +158,10 @@
           <AssociationSet Name="FK_Interview_Usuarios" Association="Self.FK_Interview_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Interview" EntitySet="Interview" />
+          </AssociationSet>
+          <AssociationSet Name="FK_usuario_log" Association="Self.FK_usuario_log">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Log" EntitySet="Log" />
           </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -190,6 +216,7 @@
           <NavigationProperty Name="Candidaturas" Relationship="Self.FK_Candidaturas_Usuarios" FromRole="Usuarios" ToRole="Candidaturas" />
           <NavigationProperty Name="Curriculo" Relationship="Self.FK_Curriculos_Usuarios" FromRole="Usuarios" ToRole="Curriculo" />
           <NavigationProperty Name="Interview" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Usuarios" ToRole="Interview" />
+          <NavigationProperty Name="Log" Relationship="BancoDados.FK_usuario_log" FromRole="Usuarios" ToRole="Log" />
         </EntityType>
         <EntityType Name="Vagas">
           <Key>
@@ -258,6 +285,11 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Interview" EntitySet="Interview" />
           </AssociationSet>
+          <EntitySet Name="Log" EntityType="BancoDados.Log" />
+          <AssociationSet Name="FK_usuario_log" Association="BancoDados.FK_usuario_log">
+            <End Role="Usuarios" EntitySet="Usuarios" />
+            <End Role="Log" EntitySet="Log" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Interview">
           <Key>
@@ -279,6 +311,28 @@
               <PropertyRef Name="Codigo_user" />
             </Principal>
             <Dependent Role="Interview">
+              <PropertyRef Name="Codigo_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Codigo_log" />
+          </Key>
+          <Property Name="Codigo_log" Type="Int32" Nullable="false" />
+          <Property Name="Codigo_user" Type="Int32" Nullable="false" />
+          <Property Name="Log1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_usuario_log" FromRole="Log" ToRole="Usuarios" />
+        </EntityType>
+        <Association Name="FK_usuario_log">
+          <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BancoDados.Log" Role="Log" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Usuarios">
+              <PropertyRef Name="Codigo_user" />
+            </Principal>
+            <Dependent Role="Log">
               <PropertyRef Name="Codigo_user" />
             </Dependent>
           </ReferentialConstraint>
@@ -353,6 +407,16 @@
                 <ScalarProperty Name="Entrevistador" ColumnName="Entrevistador" />
                 <ScalarProperty Name="Codigo_user" ColumnName="Codigo_user" />
                 <ScalarProperty Name="Codigo_entrevista" ColumnName="Codigo_entrevista" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="BancoDados.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Data" ColumnName="Data" />
+                <ScalarProperty Name="Log1" ColumnName="Log" />
+                <ScalarProperty Name="Codigo_user" ColumnName="Codigo_user" />
+                <ScalarProperty Name="Codigo_log" ColumnName="Codigo_log" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
