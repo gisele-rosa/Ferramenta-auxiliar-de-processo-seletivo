@@ -292,7 +292,7 @@ namespace Faps.Controllers
             db.Usuarios.Remove(u);
             db.SaveChanges();
 
-            return View("Listar_users");
+            return RedirectToAction("Listar_users", "Admin");
         }
     }
 }

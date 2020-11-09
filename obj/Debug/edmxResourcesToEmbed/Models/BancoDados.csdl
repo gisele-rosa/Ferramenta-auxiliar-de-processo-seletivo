@@ -60,7 +60,9 @@
     <NavigationProperty Name="Candidaturas" Relationship="Self.FK_Candidaturas_vaga" FromRole="Vagas" ToRole="Candidaturas" />
   </EntityType>
   <Association Name="FK_Candidaturas_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Candidaturas" Type="Self.Candidaturas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
@@ -72,7 +74,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Candidaturas_vaga">
-    <End Role="Vagas" Type="Self.Vagas" Multiplicity="1" />
+    <End Role="Vagas" Type="Self.Vagas" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Candidaturas" Type="Self.Candidaturas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Vagas">
@@ -84,7 +88,9 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Curriculos_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
+    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Role="Curriculo" Type="Self.Curriculo" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
@@ -136,7 +142,9 @@
     <Property Name="Vaga" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK_Interview_Usuarios">
-    <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="BancoDados.Interview" Role="Interview" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
@@ -158,7 +166,9 @@
     <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_usuario_log" FromRole="Log" ToRole="Usuarios" />
   </EntityType>
   <Association Name="FK_usuario_log">
-    <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />
+    <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
     <End Type="BancoDados.Log" Role="Log" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Usuarios">
