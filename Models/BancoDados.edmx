@@ -304,7 +304,8 @@
           <Property Name="Vaga" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
         </EntityType>
         <Association Name="FK_Interview_Usuarios">
-          <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />
+          <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" >
+          </End>
           <End Type="BancoDados.Interview" Role="Interview" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Usuarios">

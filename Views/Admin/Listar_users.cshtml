@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Faps.Models.Usuarios>
+
+@{
+    ViewBag.Title = "Listar_users";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Listar_users</h2>
+
+<p>
+    @Html.ActionLink("Criar novo usuario", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Usuario)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Senha)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.role)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Usuario)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Senha)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.role)
+        </td>
+        <td>
+            @Html.ActionLink("Alterar", "Alterar_user", new { id = item.Codigo_user }, new { @class = "btn btn-primary edit" }) |
+            @Html.ActionLink("Deletar", "Deletar_user", new { id = item.Codigo_user }, new { @class = "btn btn-danger delete" })
+        </td>
+    </tr>
+}
+
+</table>

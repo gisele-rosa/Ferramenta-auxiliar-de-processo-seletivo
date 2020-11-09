@@ -266,5 +266,33 @@ namespace Faps.Controllers
         }
 
 
+
+
+
+
+
+        //Lista e controla Usuarios
+        public ActionResult Listar_users()
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            var getUserList = db.Usuarios.ToList();
+
+            return View(getUserList);
+        }
+
+
+        //Deletar Usuario
+        [HttpGet]
+        public ActionResult Deletar_user(int id)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            Usuarios u = db.Usuarios.Find(id);
+            db.Usuarios.Remove(u);
+            db.SaveChanges();
+
+            return View("Listar_users");
+        }
     }
 }
