@@ -204,6 +204,9 @@ namespace Faps.Controllers
             entrevista.Data_criacao = DateTime.Now;
 
 
+            entrevista.Data_Entrevista = DateTime.Now;
+
+
             //pega a vaga que esse candidato esta concorrendo
             entrevista.Vaga = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault().Vagas.Vaga;
 
@@ -222,7 +225,7 @@ namespace Faps.Controllers
         {
 
             FAPSEntities db = new FAPSEntities();
-
+           
             db.Interview.Add(entrevista);
             db.SaveChanges();
 
@@ -231,7 +234,8 @@ namespace Faps.Controllers
 
 
 
-        //Interrompe ou recusa o processo seletivo do candidato
+
+        //Interrompe ou recusa o processo seletivo do candidato / deleta candidatura
         [HttpGet]
         public ActionResult Deletar_candidatura(int id_candidatura)
         {
@@ -245,6 +249,15 @@ namespace Faps.Controllers
             var codigo_vaga = db.Candidaturas.Where(linha => linha.Codigo_user == c_user).FirstOrDefault().Codigo_Vaga;
 
 
+            //valida se a candidatura tem alguma entrevista relacionada, se tiver ela precisa ser deletada
+            var id_interview = db.Interview.Where(l => l.Codigo_user == c_user).FirstOrDefault()?.Codigo_entrevista;
+            if (id_interview != null) {
+                //agora podemos deletar a entrevista
+                Interview i = db.Interview.Find(id_interview);
+                db.Interview.Remove(i);
+            }
+
+
             Candidaturas c = db.Candidaturas.Find(id_candidatura);
             db.Candidaturas.Remove(c);
             db.SaveChanges();
@@ -255,6 +268,10 @@ namespace Faps.Controllers
         }
 
 
+
+
+
+
         //Lista e controla entrevistas agendadas
         public ActionResult Listar_interviews()
         {
@@ -263,6 +280,31 @@ namespace Faps.Controllers
             var getInterviewsList = db.Interview.ToList();
 
             return View(getInterviewsList);
+        }
+
+
+        //Deletar Interview
+        [HttpGet]
+        public ActionResult Deletar_interview(int id)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            //Para deletar uma entrevista eu preciso regressar a candidatura do candidato ao status 2 (em analise)
+            //Abaixo eu busco pelo id do canditato que será necessario para alterar a candidatura na linha seguinte a essa
+            var id_user = db.Interview.Where(f => f.Codigo_entrevista == id).FirstOrDefault()?.Codigo_user;
+
+            //Alteração do status da candidatura para 2
+            var Candidatura_to_update = db.Candidaturas.Where(f => f.Codigo_user == id_user)?.FirstOrDefault();
+            Candidatura_to_update.Status_candidatura = 2;
+            TryUpdateModel(Candidatura_to_update);
+
+
+            //agora podemos deletar a entrevista
+            Interview i = db.Interview.Find(id);
+            db.Interview.Remove(i);
+            db.SaveChanges();
+
+            return RedirectToAction("Listar_interviews", "Admin");
         }
 
 
