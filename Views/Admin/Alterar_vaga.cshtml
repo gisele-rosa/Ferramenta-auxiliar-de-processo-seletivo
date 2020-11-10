@@ -5,14 +5,13 @@
     Layout = "~/Views/Shared/_Layout_admin.cshtml";
 }
 
-<h2>Alterar_vaga</h2>
+<h2>Alterar vaga</h2>
 
 @using (Html.BeginForm("Alterar_vaga", "Admin", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>Vagas</h4>
         <hr />
         @Html.HiddenFor(model => model.Codigo_vaga)
 
@@ -31,6 +30,7 @@
                 @Html.ValidationMessageFor(model => model.Vaga_descricao, "", new { @class = "text-danger" })
             </div>
         </div>
+
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

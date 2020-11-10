@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Faps.Models.Curriculo>
+
+@{
+    ViewBag.Title = "Listar_curriculos";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Listar curriculos</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("Nome do Candidato")
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nome)
+            @Html.DisplayFor(modelItem => item.SobreNome)
+        </td>
+        <td>
+            @Html.ActionLink("Ver Curriculo", "Detalhes_curriculo", new { id=item.codigo_user }, new { @class = "btn btn-primary edit" })
+        </td>
+    </tr>
+}
+
+</table>

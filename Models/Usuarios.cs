@@ -11,7 +11,8 @@ namespace Faps.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Usuarios
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -26,6 +27,8 @@ namespace Faps.Models
         public int Codigo_user { get; set; }
         public string Usuario { get; set; }
         public string Senha { get; set; }
+
+        [Display(Name = "Tipo de Usuario"), Required]
         public string role { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

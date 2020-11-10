@@ -1,0 +1,131 @@
+﻿@model IEnumerable<Faps.Models.Curriculo>
+
+@{
+    ViewBag.Title = "Analisar_curriculo";
+    Layout = "~/Views/Shared/_Layout_admin.cshtml";
+}
+
+<h2>Analisando curriculo do candidato @ViewBag.nome</h2>
+
+
+@foreach (var item in Model)
+{
+
+    @Html.DisplayNameFor(model => model.Nome)
+    <br />
+    @Html.DisplayFor(modelItem => item.Nome)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.SobreNome)
+    <br />
+    @Html.DisplayFor(modelItem => item.SobreNome)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Email)
+    <br />
+    @Html.DisplayFor(modelItem => item.Email)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Telefone)
+    <br />
+    @Html.DisplayFor(modelItem => item.Telefone)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Genero)
+    <br />
+    @Html.DisplayFor(modelItem => item.Genero)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.DataNascimento)
+    <br />
+    @Html.DisplayFor(modelItem => item.DataNascimento)
+
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Endereco)
+    <br />
+    @Html.DisplayFor(modelItem => item.Endereco)
+
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Cidade)
+    <br />
+    @Html.DisplayFor(modelItem => item.Cidade)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Estado)
+    <br />
+    @Html.DisplayFor(modelItem => item.Estado)
+
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.CEP)
+    <br />
+    @Html.DisplayFor(modelItem => item.CEP)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Pais)
+    <br />
+    @Html.DisplayFor(modelItem => item.Pais)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Curso)
+    <br />
+    @Html.DisplayFor(modelItem => item.Curso)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Curso_status)
+    <br />
+    @Html.DisplayFor(modelItem => item.Curso_status)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.TituloCargo)
+    <br />
+    @Html.DisplayFor(modelItem => item.TituloCargo)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Empresa)
+    <br />
+    @Html.DisplayFor(modelItem => item.Empresa)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Data_inicio)
+    <br />
+    @Html.DisplayFor(modelItem => item.Data_inicio)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.DataTermino)
+    <br />
+    @Html.DisplayFor(modelItem => item.DataTermino)
+
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.DescricaoAtividades)
+    <br />
+    @Html.DisplayFor(modelItem => item.DescricaoAtividades)
+
+}

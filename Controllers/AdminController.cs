@@ -26,12 +26,11 @@ namespace Faps.Controllers
         }
 
 
-        //Carrega a view do cadastrar vagas
+        //Carrega a view do cadastrar vagas---------------------------------------------------------------------------------------------------------
         public ActionResult Cadastrar_vaga()
         {
             return View();
         }
-
 
 
         //BackEnd do cadastrar vagas (salvar)
@@ -46,7 +45,10 @@ namespace Faps.Controllers
         }
 
 
-        //Recebe da view admin o id da vaga que precisa alterar
+
+
+
+        //Recebe da view admin o id da vaga que precisa alterar : UPDATE VAGA
         [HttpGet]
         public ActionResult listar_vaga_to_update(int id_vaga)
         {
@@ -79,6 +81,7 @@ namespace Faps.Controllers
 
         
 
+
         //Deletar vagas, espera o id da vaga ou codigo_vaga
         [HttpGet]
         public ActionResult Deletar_vaga(int id)
@@ -95,7 +98,15 @@ namespace Faps.Controllers
 
 
 
-        //Chama a view ver candidaturas da vaga e espera receber o codigo da vaga "id"
+
+
+
+
+
+
+
+
+        //Chama a view ver candidaturas da vaga e espera receber o codigo da vaga "id"---------------------------------------------------------------------------------------------------------
         [HttpGet]
         public ActionResult Ver_candidaturas(int id)
         {
@@ -112,9 +123,45 @@ namespace Faps.Controllers
         }
 
 
+        //Interrompe ou recusa o processo seletivo do candidato / deleta candidatura
+        [HttpGet]
+        public ActionResult Deletar_candidatura(int id_candidatura)
+        {
+
+            FAPSEntities db = new FAPSEntities();
+
+            //pego o user antes de rodar o delete
+            var c_user = db.Candidaturas.Where(linha => linha.Codigo_Candidatura == id_candidatura).FirstOrDefault().Codigo_user;
+
+            //pego o codigo da vaga antes de rodar o delete
+            var codigo_vaga = db.Candidaturas.Where(linha => linha.Codigo_user == c_user).FirstOrDefault().Codigo_Vaga;
 
 
-        //Carrega a view Analisar_curriculo/ Backend da view Analisar_curriculo e espera o id do candidato
+            //valida se a candidatura tem alguma entrevista relacionada, se tiver ela precisa ser deletada
+            var id_interview = db.Interview.Where(l => l.Codigo_user == c_user).FirstOrDefault()?.Codigo_entrevista;
+            if (id_interview != null)
+            {
+                //agora podemos deletar a entrevista
+                Interview i = db.Interview.Find(id_interview);
+                db.Interview.Remove(i);
+            }
+
+
+            Candidaturas c = db.Candidaturas.Find(id_candidatura);
+            db.Candidaturas.Remove(c);
+            db.SaveChanges();
+
+
+            return RedirectToAction("Admin_home", "Admin");
+
+        }
+
+
+
+
+
+
+        //Carrega a view Analisar_curriculo/ Backend da view Analisar_curriculo e espera o id do candidato---------------------------------------------------------------------------------
         [HttpGet]
         public ActionResult Analisar_curriculo(int id_candidato)
         {
@@ -157,8 +204,6 @@ namespace Faps.Controllers
         }
 
 
-
-
         //Aprova a candidatura chama a view de agendamento da entrevista
         public ActionResult Aprovar_candidatura(int id_candidato)
         {
@@ -178,7 +223,12 @@ namespace Faps.Controllers
 
 
 
-        //Carrega a view agendarmento da entrevista com as informacoes do candidato
+
+
+
+
+
+        //Carrega a view agendarmento da entrevista com as informacoes do candidato----------------------------------------------------------------------------------------------------------------
         [HttpGet]
         public ActionResult Agendar_entrevista(int id_candidato)
         {
@@ -235,44 +285,9 @@ namespace Faps.Controllers
 
 
 
-        //Interrompe ou recusa o processo seletivo do candidato / deleta candidatura
-        [HttpGet]
-        public ActionResult Deletar_candidatura(int id_candidatura)
-        {
-
-            FAPSEntities db = new FAPSEntities();
-
-            //pego o user antes de rodar o delete
-            var c_user = db.Candidaturas.Where(linha => linha.Codigo_Candidatura == id_candidatura).FirstOrDefault().Codigo_user;
-
-            //pego o codigo da vaga antes de rodar o delete
-            var codigo_vaga = db.Candidaturas.Where(linha => linha.Codigo_user == c_user).FirstOrDefault().Codigo_Vaga;
 
 
-            //valida se a candidatura tem alguma entrevista relacionada, se tiver ela precisa ser deletada
-            var id_interview = db.Interview.Where(l => l.Codigo_user == c_user).FirstOrDefault()?.Codigo_entrevista;
-            if (id_interview != null) {
-                //agora podemos deletar a entrevista
-                Interview i = db.Interview.Find(id_interview);
-                db.Interview.Remove(i);
-            }
-
-
-            Candidaturas c = db.Candidaturas.Find(id_candidatura);
-            db.Candidaturas.Remove(c);
-            db.SaveChanges();
-
-
-            return RedirectToAction("Admin_home", "Admin");
-
-        }
-
-
-
-
-
-
-        //Lista e controla entrevistas agendadas
+        //Lista e controla entrevistas agendadas--------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_interviews()
         {
             FAPSEntities db = new FAPSEntities();
@@ -313,7 +328,7 @@ namespace Faps.Controllers
 
 
 
-        //Lista e controla Usuarios
+        //Lista e controla Usuarios--------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_users()
         {
             FAPSEntities db = new FAPSEntities();
@@ -324,7 +339,45 @@ namespace Faps.Controllers
         }
 
 
-        //Deletar Usuario
+        //Recebe da view admin o id da vaga que precisa alterar : UPDATE
+        [HttpGet]
+        public ActionResult listar_usuario_to_update(int id)
+        {
+
+
+            FAPSEntities db = new FAPSEntities();
+
+            var user_to_update = db.Usuarios.Where(f => f.Codigo_user == id).FirstOrDefault();
+
+
+            return View("Alterar_usuario", user_to_update);
+
+
+        }
+
+
+        //Recebe a vaga editada da view e salva ela
+        [HttpPost]
+        public ActionResult Alterar_usuario(Usuarios user_to_update)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            //Procura a vaga a ser salva a altera item por item conforme oque veio da view
+            var to_update = db.Usuarios.Where(f => f.Codigo_user == user_to_update.Codigo_user).FirstOrDefault();
+            to_update.Codigo_user = user_to_update.Codigo_user;
+            to_update.Usuario = user_to_update.Usuario;
+            to_update.Senha = user_to_update.Senha;
+            to_update.role = user_to_update.role;
+
+            TryUpdateModel(to_update);
+            db.SaveChanges();
+
+            return RedirectToAction("Listar_users", "Admin");
+        }
+
+
+
+        //Deletar Usuario : DELETE
         [HttpGet]
         public ActionResult Deletar_user(int id)
         {
@@ -336,5 +389,64 @@ namespace Faps.Controllers
 
             return RedirectToAction("Listar_users", "Admin");
         }
+
+
+
+
+        //Carrega a view do cadastrar usuario : CREATE
+        public ActionResult Cadastrar_usuario()
+        {
+            return View();
+        }
+
+
+        //BackEnd do cadastrar vagas (salvar)
+        [HttpPost]
+        public ActionResult Confirmar_usuario(Usuarios user)
+        {
+            FAPSEntities db = new FAPSEntities();
+            db.Usuarios.Add(user);
+            db.SaveChanges();
+
+            return RedirectToAction("Listar_users", "Admin");
+        }
+
+
+
+
+
+
+
+        //Listar Curriculos--------------------------------------------------------------------------------------------------------------------------------
+        public ActionResult Listar_curriculos()
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            var getCurriculoList = db.Curriculo.ToList();
+
+            return View(getCurriculoList);
+        }
+
+
+        //Detalhes do curriculo
+        [HttpGet]
+        public ActionResult Detalhes_curriculo(int id)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            //validação usuario logado
+            var user_id = Session["id_admin"];
+            //Copular Log do sistema
+
+
+            //Consulta no db o curriculo do candidato
+            var getCurriculo = db.Curriculo.Where(f => f.codigo_user == id);
+
+            ViewBag.nome = getCurriculo.FirstOrDefault()?.Nome + " " + getCurriculo.FirstOrDefault()?.SobreNome;
+
+
+            return View(getCurriculo);
+        }
+
     }
 }

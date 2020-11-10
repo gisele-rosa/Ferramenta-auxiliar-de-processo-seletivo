@@ -11,6 +11,7 @@ namespace Faps.Models
 {
     using System;
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Interview
@@ -19,7 +20,6 @@ namespace Faps.Models
         public int Codigo_user { get; set; }
         public string Entrevistador { get; set; }
 
-        [Required]
         public System.DateTime Data_Entrevista { get; set; }
         public System.DateTime Data_criacao { get; set; }
         public string Vaga { get; set; }
