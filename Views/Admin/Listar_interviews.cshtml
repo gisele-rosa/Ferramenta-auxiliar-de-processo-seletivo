@@ -47,6 +47,7 @@
     </td>
 
     <td>
+        @Html.ActionLink("Concluir", "Concluir_interview", new { id = item.Codigo_entrevista }, new { @class = "btn btn-success" }) |
         @Html.ActionLink("Remarcar", "Edit", new { id = item.Codigo_entrevista }, new { @class = "btn btn-primary edit" }) |
         @Html.ActionLink("Cancelar", "Deletar_interview", new { id = item.Codigo_entrevista }, new { @class = "btn btn-danger delete" })
     </td>

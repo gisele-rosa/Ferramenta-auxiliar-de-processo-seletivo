@@ -124,6 +124,9 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BancoDados.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="images\progressBar1.jpg" />
+    <Content Include="images\progressBar2.jpg" />
+    <Content Include="images\progressBar3.jpg" />
     <Content Include="Models\BancoDados.edmx.diagram">
       <DependentUpon>BancoDados.edmx</DependentUpon>
     </Content>

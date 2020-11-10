@@ -1,10 +1,16 @@
 ﻿
 @{
-    ViewBag.Title = "User_home_1";
+    var Image1Path = "/images/progressBar1.jpg";
+    ViewBag.Title = "Home_1";
     Layout = "~/Views/Shared/_Layout_user.cshtml";
 }
 
-<h2> Obrigado por se candidatar a vaga de @ViewBag.vaga, Boa Sorte!</h2>
+
+<div>
+    <img src="@Image1Path" alt="Status1" width="60%" />
+    <h2> Obrigado por se candidatar a vaga de @ViewBag.vaga, Boa Sorte!</h2>
+</div>
+
 
 
 

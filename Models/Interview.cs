@@ -20,6 +20,7 @@ namespace Faps.Models
         public int Codigo_user { get; set; }
         public string Entrevistador { get; set; }
 
+        [Display(Name = "Data da entrevista"), Required]
         public System.DateTime Data_Entrevista { get; set; }
         public System.DateTime Data_criacao { get; set; }
         public string Vaga { get; set; }
