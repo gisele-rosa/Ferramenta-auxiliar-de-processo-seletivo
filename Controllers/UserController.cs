@@ -20,14 +20,19 @@ namespace Faps.Controllers
             FAPSEntities db = new FAPSEntities();
 
             //Responsavel por colocar o nome do usuario nas views User
-            var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault().Nome;
+            var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
             ViewBag.nome = nome;
             ViewBag.id_applyer = id_usuario;
 
-
-            //veririca se o usuario esta candidatado em alguma vaga---------------------------------------------------
+            //pega o status da candidatura do usuario
             var Applyed_Status = db.Candidaturas.Where(f => f.Codigo_user == id_usuario).FirstOrDefault()?.Status_candidatura;
-            if (Applyed_Status != null) {
+
+
+            //verifica se o usuario tem algum curriculo cadastrado
+            if (db.Curriculo.Where(f => f.codigo_user == id_usuario).Any())
+            {
+
+                //veririca se o usuario esta candidatado em alguma vaga---------------------------------------------------
                 if (Applyed_Status == 1)
                 {
 
@@ -42,19 +47,26 @@ namespace Faps.Controllers
                     return RedirectToAction("User_home_2", "User");
 
                 }
-                else {
-
+                else if (Applyed_Status == 3)
+                {
                     //Entrevista
                     return RedirectToAction("User_home_3", "User");
                 }
+                else
+                {
+                    //Copula a tela home Status vaga = 0 SEM CANDIDATURA A NENHUMA VAGA
+                    var getVagasLista = db.Vagas.ToList();
+
+                    return View(getVagasLista);
+                }
 
             }
-            
+            else
+            {
+                return RedirectToAction("Cadastro_curriculo", "User");
 
-            //Copula a tela home Status vaga = 0 SEM CANDIDATURA A NENHUMA VAGA
-            var getVagasLista = db.Vagas.ToList();
+            }
 
-            return View(getVagasLista);
         }
 
 
@@ -156,6 +168,37 @@ namespace Faps.Controllers
             return RedirectToAction("User_home", "User", new { id = id_applyer });
         }
 
+
+
+
+
+
+        //Chama a view de cadastro do curriculo SOMENTE PARA USUARIOS SEM CURRICULO CADASTRADO - SOMENTE USUARIO CADASTRADO PELO ADMIN
+        public ActionResult Cadastro_curriculo()
+        {
+            return View();
+        }
+
+        //Salva o cadastro do usuario
+        [HttpPost]
+        public ActionResult Salvar_registro(Curriculo resume)
+        {
+            //Validação usuario logado
+            //Copular Log do Sistema
+            int id_usuario = (int)Session["id_user"];
+
+
+            FAPSEntities db = new FAPSEntities();
+
+            resume.codigo_user = id_usuario;
+            resume.Usuario = db.Usuarios.Where(f => f.Codigo_user == id_usuario).FirstOrDefault()?.Usuario;
+            resume.Senha = db.Usuarios.Where(f => f.Codigo_user == id_usuario).FirstOrDefault()?.Senha;
+
+            db.Curriculo.Add(resume);
+            db.SaveChanges();
+
+            return RedirectToAction("User_home", "User");
+        }
 
     }
 }

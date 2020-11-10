@@ -80,8 +80,6 @@ namespace Faps.Controllers
         }
 
         
-
-
         //Deletar vagas, espera o id da vaga ou codigo_vaga
         [HttpGet]
         public ActionResult Deletar_vaga(int id)
@@ -95,11 +93,6 @@ namespace Faps.Controllers
 
             return RedirectToAction("Admin_home", "Admin");
         }
-
-
-
-
-
 
 
 
