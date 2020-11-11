@@ -71,7 +71,6 @@ namespace Faps.Controllers
 
 
 
-
         //view Candidatura realizada STATUS CANDIDATURA = 1
         public ActionResult User_home_1()
         {

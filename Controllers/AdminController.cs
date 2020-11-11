@@ -26,7 +26,7 @@ namespace Faps.Controllers
         }
 
 
-        //Carrega a view do cadastrar vagas---------------------------------------------------------------------------------------------------------
+        //Carrega a view do cadastrar vagas---------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Cadastrar_vaga()
         {
             return View();
@@ -50,7 +50,7 @@ namespace Faps.Controllers
 
         //Recebe da view admin o id da vaga que precisa alterar : UPDATE VAGA
         [HttpGet]
-        public ActionResult listar_vaga_to_update(int id_vaga)
+        public ActionResult Listar_vaga_to_update(int id_vaga)
         {
             FAPSEntities db = new FAPSEntities();
 
@@ -197,29 +197,6 @@ namespace Faps.Controllers
         }
 
 
-        //Aprova a candidatura chama a view de agendamento da entrevista
-        public ActionResult Aprovar_candidatura(int id_candidato)
-        {
-            FAPSEntities db = new FAPSEntities();
-
-            var Candidatura_to_update = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault();
-
-            //status 3 = aprovado para entrevista
-            Candidatura_to_update.Status_candidatura = 3;
-
-            TryUpdateModel(Candidatura_to_update);
-            db.SaveChanges();
-
-
-            return RedirectToAction("Agendar_entrevista", "Admin", new { id_candidato });
-        }
-
-
-
-
-
-
-
 
         //Carrega a view agendarmento da entrevista com as informacoes do candidato----------------------------------------------------------------------------------------------------------------
         [HttpGet]
@@ -227,8 +204,11 @@ namespace Faps.Controllers
         {
             int admin_id = (int)Session["id_admin"];
             
+
+
             FAPSEntities db = new FAPSEntities();
 
+            //Coloca na view bag o nome do candidato confirme o nome que esta no curriculo
             ViewBag.Candidato = db.Curriculo.FirstOrDefault()?.Nome + " " + db.Curriculo.FirstOrDefault()?.SobreNome;
 
             //instancia e copula a model interview q vai ser enviada para a Agendar Entrevista
@@ -249,6 +229,7 @@ namespace Faps.Controllers
 
             entrevista.Data_Entrevista = DateTime.Now;
 
+            entrevista.Status_interview = "Em aberto";
 
             //pega a vaga que esse candidato esta concorrendo
             entrevista.Vaga = db.Candidaturas.Where(f => f.Codigo_user == id_candidato).FirstOrDefault().Vagas.Vaga;
@@ -268,8 +249,17 @@ namespace Faps.Controllers
         {
 
             FAPSEntities db = new FAPSEntities();
-           
+
+
+            //status 3 = aprovado para entrevista
+            var Candidatura_to_update = db.Candidaturas.Where(f => f.Codigo_user == entrevista.Codigo_user).FirstOrDefault();
+            Candidatura_to_update.Status_candidatura = 3;
+
+            TryUpdateModel(Candidatura_to_update);
+
+
             db.Interview.Add(entrevista);
+
             db.SaveChanges();
 
             return RedirectToAction("Admin_home", "Admin");
@@ -280,7 +270,7 @@ namespace Faps.Controllers
 
 
 
-        //Lista e controla entrevistas agendadas--------------------------------------------------------------------------------------------------------------------------------
+        //Lista e controla entrevistas agendadas--------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_interviews()
         {
             FAPSEntities db = new FAPSEntities();
@@ -304,10 +294,11 @@ namespace Faps.Controllers
             var Candidatura_to_delete = db.Candidaturas.Where(f => f.Codigo_user == id_user)?.FirstOrDefault();
             db.Candidaturas.Remove(Candidatura_to_delete);
 
-            //agora podemos deletar a entrevista
+            //Mudando o status da interview para Concluido
             Interview i = db.Interview.Find(id);
-            db.Interview.Remove(i);
+            i.Status_interview = "Concluido";
 
+            TryUpdateModel(i);
 
             db.SaveChanges();
 
@@ -348,7 +339,7 @@ namespace Faps.Controllers
 
 
 
-        //Lista e controla Usuarios--------------------------------------------------------------------------------------------------------------------------------
+        //Lista e controla Usuarios---------------------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_users()
         {
             FAPSEntities db = new FAPSEntities();
@@ -361,7 +352,7 @@ namespace Faps.Controllers
 
         //Recebe da view admin o id da vaga que precisa alterar : UPDATE
         [HttpGet]
-        public ActionResult listar_usuario_to_update(int id)
+        public ActionResult Listar_usuario_to_update(int id)
         {
 
 
@@ -437,7 +428,7 @@ namespace Faps.Controllers
 
 
 
-        //Listar Curriculos--------------------------------------------------------------------------------------------------------------------------------
+        //Listar Curriculos-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_curriculos()
         {
             FAPSEntities db = new FAPSEntities();

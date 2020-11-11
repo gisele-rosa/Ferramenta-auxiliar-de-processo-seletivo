@@ -59,6 +59,7 @@
     <EntitySetMapping Name="Interview">
       <EntityTypeMapping TypeName="BancoDados.Interview">
         <MappingFragment StoreEntitySet="Interview">
+          <ScalarProperty Name="Status_interview" ColumnName="Status_interview" />
           <ScalarProperty Name="Vaga" ColumnName="Vaga" />
           <ScalarProperty Name="Data_criacao" ColumnName="Data_criacao" />
           <ScalarProperty Name="Data_Entrevista" ColumnName="Data_Entrevista" />
@@ -75,6 +76,17 @@
           <ScalarProperty Name="Log1" ColumnName="Log" />
           <ScalarProperty Name="Codigo_user" ColumnName="Codigo_user" />
           <ScalarProperty Name="Codigo_log" ColumnName="Codigo_log" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblA">
+      <EntityTypeMapping TypeName="BancoDados.tblA">
+        <MappingFragment StoreEntitySet="tblA">
+          <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
+          <ScalarProperty Name="lname" ColumnName="lname" />
+          <ScalarProperty Name="fname" ColumnName="fname" />
+          <ScalarProperty Name="Cod_user" ColumnName="Cod_user" />
+          <ScalarProperty Name="Id" ColumnName="Id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

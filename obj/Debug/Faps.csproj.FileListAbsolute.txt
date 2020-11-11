@@ -245,4 +245,3 @@ C:\Users\userguiche\Desktop\Ferramenta-auxiliar-de-processo-seletivo\obj\Debug\F
 C:\Users\userguiche\Desktop\Ferramenta-auxiliar-de-processo-seletivo\obj\Debug\Faps.csproj.CopyComplete
 C:\Users\userguiche\Desktop\Ferramenta-auxiliar-de-processo-seletivo\obj\Debug\Faps.dll
 C:\Users\userguiche\Desktop\Ferramenta-auxiliar-de-processo-seletivo\obj\Debug\Faps.pdb
-C:\Users\userguiche\Desktop\Ferramenta-auxiliar-de-processo-seletivo\obj\Debug\Faps.csprojAssemblyReference.cache
