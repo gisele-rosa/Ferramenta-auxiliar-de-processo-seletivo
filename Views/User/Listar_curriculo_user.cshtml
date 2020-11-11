@@ -1,0 +1,172 @@
+﻿@model IEnumerable<Faps.Models.Curriculo>
+@{
+    ViewBag.Title = "Listar_curriculo_user";
+    Layout = "~/Views/Shared/_Layout_user.cshtml";
+
+}
+
+@Styles.Render("~/Content/themes/base/jquery-ui.css")
+@Scripts.Render("~/Scripts/jquery-3.5.1.js")
+@Scripts.Render("~/Scripts/jquery-ui.js")
+
+
+
+<h4>Visualizar Curriculo</h4>
+<br />
+@foreach (var item in Model)
+{
+
+    @Html.DisplayNameFor(model => model.Nome)
+    <br />
+    @Html.DisplayFor(modelItem => item.Nome)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.SobreNome)
+    <br />
+    @Html.DisplayFor(modelItem => item.SobreNome)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Email)
+    <br />
+    @Html.DisplayFor(modelItem => item.Email)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Telefone)
+    <br />
+    @Html.DisplayFor(modelItem => item.Telefone)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Genero)
+    <br />
+    @Html.DisplayFor(modelItem => item.Genero)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.DataNascimento)
+    <br />
+    @Html.DisplayFor(modelItem => item.DataNascimento)
+
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Endereco)
+    <br />
+    @Html.DisplayFor(modelItem => item.Endereco)
+
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Cidade)
+    <br />
+    @Html.DisplayFor(modelItem => item.Cidade)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Estado)
+    <br />
+    @Html.DisplayFor(modelItem => item.Estado)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.CEP)
+    <br />
+    @Html.DisplayFor(modelItem => item.CEP)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Pais)
+    <br />
+    @Html.DisplayFor(modelItem => item.Pais)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Curso)
+    <br />
+    @Html.DisplayFor(modelItem => item.Curso)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.Curso_status)
+    <br />
+    @Html.DisplayFor(modelItem => item.Curso_status)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.TituloCargo)
+    <br />
+    @Html.DisplayFor(modelItem => item.TituloCargo)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Empresa)
+    <br />
+    @Html.DisplayFor(modelItem => item.Empresa)
+
+    <br />
+
+
+    @Html.DisplayNameFor(model => model.Data_inicio)
+    <br />
+    @Html.DisplayFor(modelItem => item.Data_inicio)
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.DataTermino)
+    <br />
+    @Html.DisplayFor(modelItem => item.DataTermino)
+
+
+    <br />
+
+    @Html.DisplayNameFor(model => model.DescricaoAtividades)
+    <br />
+    @Html.DisplayFor(modelItem => item.DescricaoAtividades)
+    <br />
+    <br />
+    <button class="btn btn-danger editar" data-id="@item.codigo_curriculo"><i class="glyphicon glyphicon-trash"></i></button>
+}
+
+
+
+
+
+
+<div id="modal">
+
+</div>
+
+
+
+<script>
+    $(function () {
+        $(".btn-create").click(function () {
+            $("#modal").load("/clientes/create").attr("title",
+                "Adicionar cliente").dialog();
+        });
+
+        $(".btn-details").click(function () {
+            var codigo = $(this).attr("data-codigo");
+            $("#modal").load("/clientes/details/" + codigo).attr("title", "Dados do cliente").dialog();
+        });
+
+        $(".btn-editar").click(function () {
+            var codigo = $(this).attr("data-id");
+            $("#modal").load("/User/Editar_curriculo/" + codigo).attr("title", "Editar cliente").dialog();
+        });
+
+        $(".btn-delete").click(function () {
+            var codigo = $(this).attr("data-codigo");
+            $("#modal").load("/clientes/delete/" + codigo).attr("title", "Excluir cliente").dialog();
+        });
+    });
+</script>

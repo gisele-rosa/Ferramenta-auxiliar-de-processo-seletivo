@@ -199,5 +199,75 @@ namespace Faps.Controllers
             return RedirectToAction("User_home", "User");
         }
 
+
+
+
+
+
+
+        //Permite o usuario listar seu curriculo
+        public ActionResult Listar_curriculo()
+        {
+            //Validação usuario logado
+            //Copular Log do Sistema
+            int id_usuario = (int)Session["id_user"];
+
+
+            FAPSEntities db = new FAPSEntities();
+            //Responsavel por colocar o nome do usuario nas views User
+            var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
+            ViewBag.nome = nome;
+
+
+
+            //Consulta no db o curriculo do candidato
+            var getCurriculo = db.Curriculo.Where(f => f.codigo_user == id_usuario);
+
+            return View("Listar_curriculo_user",getCurriculo);
+        }
+
+        
+        //Permite o usuario listar seu curriculo
+        [HttpGet]
+        public ActionResult Editar_curriculo(int id)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            return PartialView("_Editar_curriculo");
+        }
+
+
+
+
+        public ActionResult FileUpload(HttpPostedFileBase file)
+        {
+            int id_usuario = (int)Session["id_user"];
+
+
+            if (file != null)
+            {
+                FAPSEntities db = new FAPSEntities();
+                string ImageName = System.IO.Path.GetFileName(file.FileName);
+                string physicalPath = Server.MapPath("~/images/" + ImageName);
+
+                // save image in folder
+                file.SaveAs(physicalPath);
+
+                //save new record in database
+                tblA newRecord = new tblA();
+                newRecord.fname = Request.Form["fname"];
+                newRecord.lname = Request.Form["lname"];
+                newRecord.imageUrl = ImageName;
+                newRecord.Cod_user = id_usuario;
+                db.tblA.Add(newRecord);
+                db.SaveChanges();
+
+            }
+            //Display records
+            return RedirectToAction("../home/Display/");
+        }
+
+
+
     }
 }

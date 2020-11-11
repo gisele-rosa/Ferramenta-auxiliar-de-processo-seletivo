@@ -22,7 +22,7 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Meu Curriculo", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Meu Curriculo", "Listar_curriculo", "User")</li>
                     <li>@Html.ActionLink("Log out", "Logout", "Account")</li>
                 </ul>
             </div>
@@ -32,8 +32,6 @@
         <br />
         <h3>Bem Vindo: @ViewBag.nome </h3>
         <br />
-        <br />
-
         @RenderBody()
         <hr />
         <footer>
