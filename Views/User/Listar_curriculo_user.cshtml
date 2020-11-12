@@ -133,40 +133,60 @@
     @Html.DisplayFor(modelItem => item.DescricaoAtividades)
     <br />
     <br />
-    <button class="btn btn-danger editar" data-id="@item.codigo_curriculo"><i class="glyphicon glyphicon-trash"></i></button>
+    <button class="btn btn-warning" onClick="Editar_curriculo(@item.codigo_curriculo)">Editar Curriculo</button>
+    <button class="btn btn-info" onClick="Upload_imagem()">Colocar imagem no curriculo</button>
 }
 
 
 
 
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Editar Curriculo</h3>
+            </div>
+            <div class="modal-body" id="myModalBodyDiv">
+                hjhgjhg
+            </div>
+        </div>
+    </div>
+</div>
 
 
-<div id="modal">
-
+<div class="modal fade" id="EnviarFoto">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Enviar foto para o curriculo</h3>
+            </div>
+            <div class="modal-body" id="myModalBodyDiv">
+                Teste
+            </div>
+        </div>
+    </div>
 </div>
 
 
 
+
 <script>
-    $(function () {
-        $(".btn-create").click(function () {
-            $("#modal").load("/clientes/create").attr("title",
-                "Adicionar cliente").dialog();
-        });
+    var Upload_imagem = function () {
 
-        $(".btn-details").click(function () {
-            var codigo = $(this).attr("data-codigo");
-            $("#modal").load("/clientes/details/" + codigo).attr("title", "Dados do cliente").dialog();
-        });
+        $("#EnviarFoto").modal("show");
 
-        $(".btn-editar").click(function () {
-            var codigo = $(this).attr("data-id");
-            $("#modal").load("/User/Editar_curriculo/" + codigo).attr("title", "Editar cliente").dialog();
-        });
+    }
 
-        $(".btn-delete").click(function () {
-            var codigo = $(this).attr("data-codigo");
-            $("#modal").load("/clientes/delete/" + codigo).attr("title", "Excluir cliente").dialog();
-        });
-    });
+
+    var Editar_curriculo = function (codigo_curriculo) {
+
+        var url = "/User/Editar_curriculo?id=" + codigo_curriculo;
+
+        $("#myModalBodyDiv").load(url, function () {
+            $("#myModal").modal("show");
+        })
+    }
+
 </script>

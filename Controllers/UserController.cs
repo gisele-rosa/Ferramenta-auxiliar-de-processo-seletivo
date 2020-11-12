@@ -227,18 +227,57 @@ namespace Faps.Controllers
         }
 
         
-        //Permite o usuario listar seu curriculo
+        //Chama a partial view que carregada com o curriculo que sera editado
         [HttpGet]
         public ActionResult Editar_curriculo(int id)
         {
             FAPSEntities db = new FAPSEntities();
 
-            return PartialView("_Editar_curriculo");
+            Curriculo c = db.Curriculo.Where(f => f.codigo_curriculo == id).FirstOrDefault();
+
+            return PartialView("_Editar_curriculo", c);
         }
 
 
+        //Recebe o curriculo editado da partial acima view e salva ele
+        [HttpPost]
+        public ActionResult Salvar_curriculo(Curriculo c)
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            //Procura a vaga a ser salva a altera item por item conforme oque veio da view
+            var to_update = db.Curriculo.Where(f => f.codigo_curriculo == c.codigo_curriculo).FirstOrDefault();
+            to_update.codigo_curriculo = c.codigo_curriculo;
+            to_update.codigo_user = c.codigo_user;
+
+            to_update.Nome = c.Nome;
+            to_update.SobreNome = c.SobreNome;
+            to_update.Email = c.Email;
+            to_update.Telefone = c.Telefone;
+            to_update.Genero = c.Genero;
+            to_update.DataNascimento = c.DataNascimento;
+            to_update.Endereco = c.Endereco;
+            to_update.Cidade = c.Cidade;
+            to_update.Estado = c.Estado;
+            to_update.CEP = c.CEP;
+            to_update.Pais = c.Pais;
+            to_update.Curso = c.Curso;
+            to_update.Curso_status = c.Curso_status;
+            to_update.TituloCargo = c.TituloCargo;
+            to_update.Empresa = c.Empresa;
+            to_update.Data_inicio = c.Data_inicio;
+            to_update.DataTermino = c.DataTermino;
+            to_update.DescricaoAtividades = c.DescricaoAtividades;
 
 
+            TryUpdateModel(to_update);
+            db.SaveChanges();
+
+            return RedirectToAction("Listar_curriculo", "User");
+        }
+
+
+        //Salvar foto no curriculo
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
             int id_usuario = (int)Session["id_user"];
