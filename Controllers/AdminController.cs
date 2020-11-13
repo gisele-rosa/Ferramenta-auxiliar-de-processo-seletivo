@@ -459,5 +459,20 @@ namespace Faps.Controllers
             return View(getCurriculo);
         }
 
+
+
+
+
+        //Listar Log-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        public ActionResult Listar_log()
+        {
+            FAPSEntities db = new FAPSEntities();
+
+            var getLogList = db.Log.ToList();
+
+            return View(getLogList);
+        }
+
+
     }
 }

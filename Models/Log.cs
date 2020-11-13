@@ -11,11 +11,14 @@ namespace Faps.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Log
     {
         public int Codigo_log { get; set; }
         public int Codigo_user { get; set; }
+
+        [Display(Name = "Registro:")]
         public string Log1 { get; set; }
         public System.DateTime Data { get; set; }
     

@@ -28,44 +28,58 @@ namespace Faps.Controllers
             var Applyed_Status = db.Candidaturas.Where(f => f.Codigo_user == id_usuario).FirstOrDefault()?.Status_candidatura;
 
 
-            //verifica se o usuario tem algum curriculo cadastrado
-            if (db.Curriculo.Where(f => f.codigo_user == id_usuario).Any())
+            //Validando se o usuario quer colocar uma imagem no seu curriculo
+            var img_on_cv = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.imageUrl;
+
+
+            //Copula a tela home com as vagas disponiveis
+            var getVagasLista = db.Vagas.ToList();
+
+
+            if (img_on_cv != null)
             {
-
-                //veririca se o usuario esta candidatado em alguma vaga---------------------------------------------------
-                if (Applyed_Status == 1)
+                //verifica se o usuario tem algum curriculo cadastrado
+                if (db.Curriculo.Where(f => f.codigo_user == id_usuario).Any())
                 {
 
-                    //Candidatura realizada
-                    return RedirectToAction("User_home_1", "User");
+                    //veririca se o usuario esta candidatado em alguma vaga---------------------------------------------------
+                    if (Applyed_Status == 1)
+                    {
 
-                }
-                else if (Applyed_Status == 2)
-                {
+                        //Candidatura realizada
+                        return RedirectToAction("User_home_1", "User");
 
-                    //Curriculo em Analise pela equipe
-                    return RedirectToAction("User_home_2", "User");
+                    }
+                    else if (Applyed_Status == 2)
+                    {
 
-                }
-                else if (Applyed_Status == 3)
-                {
-                    //Entrevista
-                    return RedirectToAction("User_home_3", "User");
+                        //Curriculo em Analise pela equipe
+                        return RedirectToAction("User_home_2", "User");
+
+                    }
+                    else if (Applyed_Status == 3)
+                    {
+                        //Entrevista
+                        return RedirectToAction("User_home_3", "User");
+                    }
+                    else
+                    {
+                        //Status vaga = 0 SEM CANDIDATURA A NENHUMA VAGA
+                        return View(getVagasLista);
+                    }
+
                 }
                 else
                 {
-                    //Copula a tela home Status vaga = 0 SEM CANDIDATURA A NENHUMA VAGA
-                    var getVagasLista = db.Vagas.ToList();
+                    return RedirectToAction("Cadastro_curriculo", "User");
 
-                    return View(getVagasLista);
                 }
-
             }
-            else
-            {
-                return RedirectToAction("Cadastro_curriculo", "User");
-
+            else {
+                ViewBag.Img_on_Cv = false;
+                return View(getVagasLista);
             }
+           
 
         }
 
@@ -172,6 +186,8 @@ namespace Faps.Controllers
 
 
 
+
+
         //Chama a view de cadastro do curriculo SOMENTE PARA USUARIOS SEM CURRICULO CADASTRADO - SOMENTE USUARIO CADASTRADO PELO ADMIN
         public ActionResult Cadastro_curriculo()
         {
@@ -198,9 +214,6 @@ namespace Faps.Controllers
 
             return RedirectToAction("User_home", "User");
         }
-
-
-
 
 
 

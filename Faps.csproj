@@ -283,6 +283,7 @@
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\User\Listar_curriculo_user.cshtml" />
     <Content Include="Views\User\_Editar_curriculo.cshtml" />
+    <Content Include="Views\Admin\Listar_log.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

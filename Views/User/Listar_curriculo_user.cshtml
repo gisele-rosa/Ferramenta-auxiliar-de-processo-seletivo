@@ -10,12 +10,23 @@
 @Scripts.Render("~/Scripts/jquery-ui.js")
 
 
-
-<h4>Visualizar Curriculo</h4>
 <br />
 @foreach (var item in Model)
 {
+    <button class="btn btn-warning" onClick="Editar_curriculo(@item.codigo_curriculo)">Editar Curriculo</button>
+    <button class="btn btn-info" onClick="Upload_imagem()">Colocar imagem no curriculo</button>
+    <br />
+    <br />
 
+    if (@item.imageUrl == null)
+    {
+        <img src="~/images/withoutPicture.jpg" width="100" height="100" />
+    }
+    else { 
+        <img src="~/imagesDB/@item.imageUrl" width="100" height="100" />
+    }
+    <br />
+    <br />
     @Html.DisplayNameFor(model => model.Nome)
     <br />
     @Html.DisplayFor(modelItem => item.Nome)
@@ -133,11 +144,8 @@
     @Html.DisplayFor(modelItem => item.DescricaoAtividades)
     <br />
     <br />
-    <img src="~/imagesDB/@item.imageUrl" width="100" height="100" />
-    <br />
-    <br />
-    <button class="btn btn-warning" onClick="Editar_curriculo(@item.codigo_curriculo)">Editar Curriculo</button>
-    <button class="btn btn-info" onClick="Upload_imagem()">Colocar imagem no curriculo</button>
+
+
 }
 
 
@@ -151,7 +159,7 @@
                 <h3 class="modal-title">Editar Curriculo</h3>
             </div>
             <div class="modal-body" id="myModalBodyDiv">
-                hjhgjhg
+
             </div>
         </div>
     </div>
@@ -184,22 +192,24 @@
 
 
 
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        var Upload_imagem = function () {
 
-<script>
-    var Upload_imagem = function () {
+            $("#EnviarFoto").modal("show");
 
-        $("#EnviarFoto").modal("show");
-
-    }
+        }
 
 
-    var Editar_curriculo = function (codigo_curriculo) {
+        var Editar_curriculo = function (codigo_curriculo) {
 
-        var url = "/User/Editar_curriculo?id=" + codigo_curriculo;
+            var url = "/User/Editar_curriculo?id=" + codigo_curriculo;
 
-        $("#myModalBodyDiv").load(url, function () {
-            $("#myModal").modal("show");
-        })
-    }
+            $("#myModalBodyDiv").load(url, function () {
+                $("#myModal").modal("show");
+            })
+        }
 
-</script>
+    </script>
+}
