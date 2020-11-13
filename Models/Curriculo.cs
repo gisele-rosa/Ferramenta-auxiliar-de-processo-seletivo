@@ -34,6 +34,7 @@ namespace Faps.Models
         public string Data_inicio { get; set; }
         public string DataTermino { get; set; }
         public string DescricaoAtividades { get; set; }
+        public string imageUrl { get; set; }
 
         public string Usuario { get; set; }
         public string Senha { get; set; }

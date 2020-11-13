@@ -36,6 +36,7 @@
     <Property Name="Data_inicio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="DataTermino" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="DescricaoAtividades" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="imageUrl" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
@@ -49,7 +50,6 @@
     <NavigationProperty Name="Curriculo" Relationship="Self.FK_Curriculos_Usuarios" FromRole="Usuarios" ToRole="Curriculo" />
     <NavigationProperty Name="Interview" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Usuarios" ToRole="Interview" />
     <NavigationProperty Name="Log" Relationship="BancoDados.FK_usuario_log" FromRole="Usuarios" ToRole="Log" />
-    <NavigationProperty Name="tblA" Relationship="BancoDados.FK_tblA_Usuarios" FromRole="Usuarios" ToRole="tblA" />
   </EntityType>
   <EntityType Name="Vagas">
     <Key>
@@ -129,11 +129,6 @@
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Log" EntitySet="Log" />
     </AssociationSet>
-    <EntitySet Name="tblA" EntityType="BancoDados.tblA" />
-    <AssociationSet Name="FK_tblA_Usuarios" Association="BancoDados.FK_tblA_Usuarios">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="tblA" EntitySet="tblA" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="Interview">
     <Key>
@@ -183,29 +178,6 @@
       </Principal>
       <Dependent Role="Log">
         <PropertyRef Name="Codigo_user" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
-  <EntityType Name="tblA">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Cod_user" Type="Int32" Nullable="false" />
-    <Property Name="fname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="lname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <Property Name="imageUrl" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-    <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_tblA_Usuarios" FromRole="tblA" ToRole="Usuarios" />
-  </EntityType>
-  <Association Name="FK_tblA_Usuarios">
-    <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />
-    <End Type="BancoDados.tblA" Role="tblA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="Codigo_user" />
-      </Principal>
-      <Dependent Role="tblA">
-        <PropertyRef Name="Cod_user" />
       </Dependent>
     </ReferentialConstraint>
   </Association>

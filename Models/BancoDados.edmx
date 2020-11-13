@@ -38,6 +38,7 @@
           <Property Name="Data_inicio" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DataTermino" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DescricaoAtividades" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="imageUrl" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Interview">
           <Key>
@@ -59,16 +60,6 @@
           <Property Name="Codigo_user" Type="int" Nullable="false" />
           <Property Name="Log" Type="varchar" MaxLength="50" />
           <Property Name="Data" Type="datetime" Nullable="false" />
-        </EntityType>
-        <EntityType Name="tblA">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Cod_user" Type="int" Nullable="false" />
-          <Property Name="fname" Type="nchar" MaxLength="50" />
-          <Property Name="lname" Type="nchar" MaxLength="50" />
-          <Property Name="imageUrl" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -143,18 +134,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_tblA_Usuarios">
-          <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-          <End Role="tblA" Type="Self.tblA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="Codigo_user" />
-            </Principal>
-            <Dependent Role="tblA">
-              <PropertyRef Name="Cod_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_usuario_log">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -174,7 +153,6 @@
           <EntitySet Name="Curriculo" EntityType="Self.Curriculo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Interview" EntityType="Self.Interview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblA" EntityType="Self.tblA" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Vagas" EntityType="Self.Vagas" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_Candidaturas_Usuarios" Association="Self.FK_Candidaturas_Usuarios">
@@ -192,10 +170,6 @@
           <AssociationSet Name="FK_Interview_Usuarios" Association="Self.FK_Interview_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Interview" EntitySet="Interview" />
-          </AssociationSet>
-          <AssociationSet Name="FK_tblA_Usuarios" Association="Self.FK_tblA_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="tblA" EntitySet="tblA" />
           </AssociationSet>
           <AssociationSet Name="FK_usuario_log" Association="Self.FK_usuario_log">
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -242,6 +216,7 @@
           <Property Name="Data_inicio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DataTermino" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DescricaoAtividades" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="imageUrl" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Usuarios">
           <Key>
@@ -255,7 +230,6 @@
           <NavigationProperty Name="Curriculo" Relationship="Self.FK_Curriculos_Usuarios" FromRole="Usuarios" ToRole="Curriculo" />
           <NavigationProperty Name="Interview" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Usuarios" ToRole="Interview" />
           <NavigationProperty Name="Log" Relationship="BancoDados.FK_usuario_log" FromRole="Usuarios" ToRole="Log" />
-          <NavigationProperty Name="tblA" Relationship="BancoDados.FK_tblA_Usuarios" FromRole="Usuarios" ToRole="tblA" />
         </EntityType>
         <EntityType Name="Vagas">
           <Key>
@@ -335,11 +309,6 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Log" EntitySet="Log" />
           </AssociationSet>
-          <EntitySet Name="tblA" EntityType="BancoDados.tblA" />
-          <AssociationSet Name="FK_tblA_Usuarios" Association="BancoDados.FK_tblA_Usuarios">
-            <End Role="Usuarios" EntitySet="Usuarios" />
-            <End Role="tblA" EntitySet="tblA" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Interview">
           <Key>
@@ -392,29 +361,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="tblA">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Cod_user" Type="Int32" Nullable="false" />
-          <Property Name="fname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="lname" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="imageUrl" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_tblA_Usuarios" FromRole="tblA" ToRole="Usuarios" />
-        </EntityType>
-        <Association Name="FK_tblA_Usuarios">
-          <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" />
-          <End Type="BancoDados.tblA" Role="tblA" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Usuarios">
-              <PropertyRef Name="Codigo_user" />
-            </Principal>
-            <Dependent Role="tblA">
-              <PropertyRef Name="Cod_user" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -434,6 +380,7 @@
           <EntitySetMapping Name="Curriculo">
             <EntityTypeMapping TypeName="BancoDados.Curriculo">
               <MappingFragment StoreEntitySet="Curriculo">
+                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
                 <ScalarProperty Name="DescricaoAtividades" ColumnName="DescricaoAtividades" />
                 <ScalarProperty Name="DataTermino" ColumnName="DataTermino" />
                 <ScalarProperty Name="Data_inicio" ColumnName="Data_inicio" />
@@ -496,17 +443,6 @@
                 <ScalarProperty Name="Log1" ColumnName="Log" />
                 <ScalarProperty Name="Codigo_user" ColumnName="Codigo_user" />
                 <ScalarProperty Name="Codigo_log" ColumnName="Codigo_log" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="tblA">
-            <EntityTypeMapping TypeName="BancoDados.tblA">
-              <MappingFragment StoreEntitySet="tblA">
-                <ScalarProperty Name="imageUrl" ColumnName="imageUrl" />
-                <ScalarProperty Name="lname" ColumnName="lname" />
-                <ScalarProperty Name="fname" ColumnName="fname" />
-                <ScalarProperty Name="Cod_user" ColumnName="Cod_user" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

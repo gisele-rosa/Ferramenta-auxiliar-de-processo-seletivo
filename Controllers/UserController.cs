@@ -277,7 +277,8 @@ namespace Faps.Controllers
         }
 
 
-        //Salvar foto no curriculo
+        //Adicionar foto no curriculo
+        [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
             int id_usuario = (int)Session["id_user"];
@@ -287,23 +288,21 @@ namespace Faps.Controllers
             {
                 FAPSEntities db = new FAPSEntities();
                 string ImageName = System.IO.Path.GetFileName(file.FileName);
-                string physicalPath = Server.MapPath("~/images/" + ImageName);
+                string physicalPath = Server.MapPath("~/imagesDB/" + ImageName);
 
                 // save image in folder
                 file.SaveAs(physicalPath);
 
                 //save new record in database
-                tblA newRecord = new tblA();
-                newRecord.fname = Request.Form["fname"];
-                newRecord.lname = Request.Form["lname"];
-                newRecord.imageUrl = ImageName;
-                newRecord.Cod_user = id_usuario;
-                db.tblA.Add(newRecord);
+                Curriculo to_add_image = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault();
+                to_add_image.imageUrl = ImageName;
+
+                TryUpdateModel(to_add_image);
                 db.SaveChanges();
 
             }
-            //Display records
-            return RedirectToAction("../home/Display/");
+
+            return RedirectToAction("Listar_curriculo", "User");
         }
 
 

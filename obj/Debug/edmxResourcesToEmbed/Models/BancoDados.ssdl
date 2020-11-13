@@ -33,6 +33,7 @@
     <Property Name="Data_inicio" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DataTermino" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DescricaoAtividades" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="imageUrl" Type="nchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Interview">
     <Key>
@@ -54,16 +55,6 @@
     <Property Name="Codigo_user" Type="int" Nullable="false" />
     <Property Name="Log" Type="varchar" MaxLength="50" />
     <Property Name="Data" Type="datetime" Nullable="false" />
-  </EntityType>
-  <EntityType Name="tblA">
-    <Key>
-      <PropertyRef Name="Id" />
-    </Key>
-    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Cod_user" Type="int" Nullable="false" />
-    <Property Name="fname" Type="nchar" MaxLength="50" />
-    <Property Name="lname" Type="nchar" MaxLength="50" />
-    <Property Name="imageUrl" Type="nchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Usuarios">
     <Key>
@@ -138,18 +129,6 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <Association Name="FK_tblA_Usuarios">
-    <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1" />
-    <End Role="tblA" Type="Self.tblA" Multiplicity="*" />
-    <ReferentialConstraint>
-      <Principal Role="Usuarios">
-        <PropertyRef Name="Codigo_user" />
-      </Principal>
-      <Dependent Role="tblA">
-        <PropertyRef Name="Cod_user" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <Association Name="FK_usuario_log">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -169,7 +148,6 @@
     <EntitySet Name="Curriculo" EntityType="Self.Curriculo" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Interview" EntityType="Self.Interview" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
-    <EntitySet Name="tblA" EntityType="Self.tblA" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Vagas" EntityType="Self.Vagas" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_Candidaturas_Usuarios" Association="Self.FK_Candidaturas_Usuarios">
@@ -187,10 +165,6 @@
     <AssociationSet Name="FK_Interview_Usuarios" Association="Self.FK_Interview_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Interview" EntitySet="Interview" />
-    </AssociationSet>
-    <AssociationSet Name="FK_tblA_Usuarios" Association="Self.FK_tblA_Usuarios">
-      <End Role="Usuarios" EntitySet="Usuarios" />
-      <End Role="tblA" EntitySet="tblA" />
     </AssociationSet>
     <AssociationSet Name="FK_usuario_log" Association="Self.FK_usuario_log">
       <End Role="Usuarios" EntitySet="Usuarios" />

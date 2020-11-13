@@ -239,9 +239,6 @@
     <Compile Include="Models\Log.cs">
       <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\tblA.cs">
-      <DependentUpon>BancoDados.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\Usuarios.cs">
       <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
