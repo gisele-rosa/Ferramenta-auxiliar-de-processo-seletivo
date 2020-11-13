@@ -56,7 +56,7 @@
           <Key>
             <PropertyRef Name="Codigo_log" />
           </Key>
-          <Property Name="Codigo_log" Type="int" Nullable="false" />
+          <Property Name="Codigo_log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo_user" Type="int" Nullable="false" />
           <Property Name="Log" Type="varchar" MaxLength="50" />
           <Property Name="Data" Type="datetime" Nullable="false" />

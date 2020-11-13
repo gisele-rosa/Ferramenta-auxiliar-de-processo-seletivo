@@ -5,7 +5,31 @@
 }
 
 <body>
-    <h1>FAPS </h1>
+    @if (ViewBag.SenhaInvalida == true)
+    {
+        <div class="modal fade" id="myModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                        <h3 class="modal-title">Login ou Senha invalido</h3>
+                    </div>
+                    <div class="modal-body" id="myModalBodyDiv">
+                        Usuario ou senha incorretos, tente novamente!
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type="button" value="Cancelar" class="btn btn-default" data-dismiss="modal" />
+                        <input type="button" value="OK" class="btn btn-info" onclick='window.location = "@Url.Action("Login", "Account")";' />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    }
+
+
+    <h1 style="color:white;">FAPS</h1>
     <div class="clear-loading spinner">
         <span></span>
     </div>
@@ -14,11 +38,15 @@
         <form action="Verify" method="post">
             <div class="agile-field-txt">
                 <label><i class="fa fa-user" aria-hidden="true"></i> Usuario </label>
-                <input type="text" name="Usuario" placeholder="Entre com seu login" id="Name" required="" value="teste_admin"/>
+                <br />
+                <input type="text" name="Usuario" placeholder="Entre com seu login" id="Name" required="" value="teste_admin" />
             </div>
             <div class="agile-field-txt">
                 <label><i class="fa fa-unlock-alt" aria-hidden="true"></i> Senha </label>
-                <input type="password" name="Senha" placeholder="Entre com sua senha" required="" id="myInput"  value="teste"/>
+                <br />
+                <input type="password" name="Senha" placeholder="Entre com sua senha" required="" id="myInput" value="teste" />
+                <br />
+                <br />
                 <div class="agile_label">
                     <input id="check3" name="check3" type="checkbox" value="show password" onclick="myFunction()">
                     <label class="check" for="check3">Mostrar Senha</label>
@@ -27,18 +55,7 @@
                     <a href="#">Esqueceu sua Senha?</a>
                 </div>
             </div>
-            <!-- script for show password -->
-            <script>
-				function myFunction() {
-					var x = document.getElementById("myInput");
-					if (x.type === "password") {
-						x.type = "text";
-					} else {
-						x.type = "password";
-					}
-				}
-            </script>
-            <!-- //end script -->
+
             <input type="submit" value="LOGIN">
         </form>
     </div>
@@ -51,3 +68,29 @@
     </div>
     <!--//copyright-->
 </body>
+
+
+
+
+<!-- script for show password and modal-->
+<script>
+    function myFunction() {
+        var x = document.getElementById("myInput");
+        if (x.type === "password") {
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+
+
+
+    $(document).ready(function () {
+        $('#myModal').modal('show');
+    });
+
+
+
+</script>
+<!-- //end script -->

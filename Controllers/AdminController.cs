@@ -468,7 +468,7 @@ namespace Faps.Controllers
         {
             FAPSEntities db = new FAPSEntities();
 
-            var getLogList = db.Log.ToList();
+            var getLogList = db.Log.OrderByDescending(f => f.Data).ToList();
 
             return View(getLogList);
         }

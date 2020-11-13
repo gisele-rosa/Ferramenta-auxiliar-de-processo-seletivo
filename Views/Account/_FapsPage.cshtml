@@ -6,6 +6,17 @@
     <title>@ViewBag.Title</title>
     <link href="~/styles/font-awesome.css" rel="stylesheet" />
     <link href="~/styles/style.css" rel="stylesheet" />
+
+
+
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
 </head>
 <body>
     <div>

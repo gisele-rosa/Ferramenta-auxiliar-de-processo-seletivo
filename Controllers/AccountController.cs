@@ -72,6 +72,7 @@ namespace Faps.Controllers
                 }
             }
             else {
+                ViewBag.SenhaInvalida = true;
                 return View("Login");
             }
 

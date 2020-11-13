@@ -36,11 +36,20 @@ namespace Faps.Controllers
             var getVagasLista = db.Vagas.ToList();
 
 
-            if (img_on_cv != null)
+
+            //verifica se o usuario tem algum curriculo cadastrado
+            if (db.Curriculo.Where(f => f.codigo_user == id_usuario).Any())
             {
-                //verifica se o usuario tem algum curriculo cadastrado
-                if (db.Curriculo.Where(f => f.codigo_user == id_usuario).Any())
+                if (img_on_cv != null)
                 {
+                    //#############################Registrando log no DB###########################################
+                    Log log = new Log();
+                    log.Codigo_user = id_usuario;
+                    log.Log1 = "Login do usuario " + nome;
+                    log.Data = DateTime.Now;
+                    db.Log.Add(log);
+                    db.SaveChanges();
+                    //#################################-log-#######################################################
 
                     //veririca se o usuario esta candidatado em alguma vaga---------------------------------------------------
                     if (Applyed_Status == 1)
@@ -67,19 +76,19 @@ namespace Faps.Controllers
                         //Status vaga = 0 SEM CANDIDATURA A NENHUMA VAGA
                         return View(getVagasLista);
                     }
-
                 }
                 else
                 {
-                    return RedirectToAction("Cadastro_curriculo", "User");
-
+                    ViewBag.Img_on_Cv = false;
+                    return View(getVagasLista);
                 }
+
             }
-            else {
-                ViewBag.Img_on_Cv = false;
-                return View(getVagasLista);
+            else
+            {
+                return RedirectToAction("Cadastro_curriculo", "User");
+
             }
-           
 
         }
 
@@ -164,8 +173,13 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Apply(int id_vaga, int id_applyer)
         {
+            //validação usuario logado
+            //Copular Log do Sistema
+            int id_usuario = (int)Session["id_user"];
+
 
             FAPSEntities db = new FAPSEntities();
+
 
             Candidaturas cd = new Candidaturas();
 
@@ -177,10 +191,23 @@ namespace Faps.Controllers
             db.Candidaturas.Add(cd);
             db.SaveChanges();
 
+
+            //#############################Registrando log no DB###########################################
+            var nome_vaga = db.Vagas.Where(f => f.Codigo_vaga == id_vaga).FirstOrDefault()?.Vaga;
+
+
+            var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
+            Log log = new Log();
+            log.Codigo_user = id_usuario;
+            log.Log1 = "Usuario " + nome + " Aplicou para a vaga " + nome_vaga;
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
             //retorna a para a home e carrega ela com o id do usuario
             return RedirectToAction("User_home", "User", new { id = id_applyer });
         }
-
 
 
 
@@ -212,6 +239,17 @@ namespace Faps.Controllers
             db.Curriculo.Add(resume);
             db.SaveChanges();
 
+
+            //#############################Registrando log no DB###########################################
+            var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
+            Log log = new Log();
+            log.Codigo_user = id_usuario;
+            log.Log1 = "Usuario " + nome + " Cadastrou seu curriculo";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
             return RedirectToAction("User_home", "User");
         }
 
@@ -236,17 +274,41 @@ namespace Faps.Controllers
             //Consulta no db o curriculo do candidato
             var getCurriculo = db.Curriculo.Where(f => f.codigo_user == id_usuario);
 
-            return View("Listar_curriculo_user",getCurriculo);
+
+            //#############################Registrando log no DB###########################################
+            Log log = new Log();
+            log.Codigo_user = id_usuario;
+            log.Log1 = "Usuario " + nome + " Listou os curriculos";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
+            return View("Listar_curriculo_user", getCurriculo);
         }
 
-        
+
         //Chama a partial view que carregada com o curriculo que sera editado
         [HttpGet]
         public ActionResult Editar_curriculo(int id)
         {
+            //Validação usuario logado
+            //Copular Log do Sistema
+            int id_usuario = (int)Session["id_user"];
+
             FAPSEntities db = new FAPSEntities();
 
             Curriculo c = db.Curriculo.Where(f => f.codigo_curriculo == id).FirstOrDefault();
+
+            //#############################Registrando log no DB###########################################
+            var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
+            Log log = new Log();
+            log.Codigo_user = id_usuario;
+            log.Log1 = "Usuario " + nome + " Editou seu curriculo";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
 
             return PartialView("_Editar_curriculo", c);
         }
@@ -294,7 +356,11 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
+            //Validação usuario logado
+            //Copular Log do Sistema
             int id_usuario = (int)Session["id_user"];
+
+
 
 
             if (file != null)
@@ -313,11 +379,53 @@ namespace Faps.Controllers
                 TryUpdateModel(to_add_image);
                 db.SaveChanges();
 
+                //#############################Registrando log no DB###########################################
+                var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
+                Log log = new Log();
+                log.Codigo_user = id_usuario;
+                log.Log1 = "Usuario " + nome + " Adicionou foto ao seu curriculo";
+                log.Data = DateTime.Now;
+                db.Log.Add(log);
+                db.SaveChanges();
+                //#################################-log-#######################################################
+
             }
+
 
             return RedirectToAction("Listar_curriculo", "User");
         }
 
+
+
+
+        public ActionResult Logout()
+        {
+            //Validação usuario logado
+            //Copular Log do Sistema
+            int id_usuario = (int)Session["id_user"];
+
+
+            FAPSEntities db = new FAPSEntities();
+            //Responsavel por colocar o nome do usuario nas views User
+            var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
+            ViewBag.nome = nome;
+
+
+
+
+            //#############################Registrando log no DB###########################################
+            Log log = new Log();
+            log.Codigo_user = id_usuario;
+            log.Log1 = "Usuario " + nome + " Saiu do sistema (Logout)";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
+            Session["id_user"] = null;
+
+            return RedirectToAction("Login", "Account");
+        }
 
 
     }
