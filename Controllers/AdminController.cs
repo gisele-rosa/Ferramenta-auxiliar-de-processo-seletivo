@@ -10,13 +10,39 @@ namespace Faps.Controllers
 {
     public class AdminController : Controller
     {
+
+        //Valida se o usuario esta "logado" e retorna seu id
+        public int? User_id() {
+            //validação usuario logado
+            //Copular Log do Sistema
+            int user_id;
+
+            if (Session["id_admin"] != null)
+            {
+                user_id = (int)Session["id_admin"];
+                return user_id;
+            }
+            else {
+                //se retornar null manda pra tela de erro
+                return null;
+            }
+        }
+
+
+
         // Home admin
         public ActionResult Admin_home()
         {
-            //validação usuario logado
-            //Copular Log do Sistema
-            var user_id = Session["id_admin"];
-
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
 
             FAPSEntities db = new FAPSEntities();
             var getVagasLista = db.Vagas.ToList();
@@ -29,6 +55,18 @@ namespace Faps.Controllers
         //Carrega a view do cadastrar vagas---------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Cadastrar_vaga()
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
             return View();
         }
 
@@ -52,6 +90,19 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Listar_vaga_to_update(int id_vaga)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+
             FAPSEntities db = new FAPSEntities();
 
             var vaga_to_update = db.Vagas.Where(f => f.Codigo_vaga == id_vaga).FirstOrDefault();
@@ -65,6 +116,18 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Alterar_vaga(Vagas vaga_to_update)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
             FAPSEntities db = new FAPSEntities();
 
             //Procura a vaga a ser salva a altera item por item conforme oque veio da view
@@ -84,6 +147,19 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Deletar_vaga(int id)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+
             FAPSEntities vagas_Entity = new FAPSEntities();
 
             Vagas v = vagas_Entity.Vagas.Find(id);
@@ -103,6 +179,19 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Ver_candidaturas(int id)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+
             FAPSEntities db = new FAPSEntities();
 
             var getCandidaturasLista = db.Candidaturas.Where(f => f.Codigo_Vaga == id && f.Status_candidatura < 3).ToList();
@@ -120,6 +209,18 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Deletar_candidatura(int id_candidatura)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
 
             FAPSEntities db = new FAPSEntities();
 
@@ -158,13 +259,20 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Analisar_curriculo(int id_candidato)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
 
             FAPSEntities db = new FAPSEntities();
-
-            //validação usuario logado
-            var user_id = Session["id_admin"];
-            //Copular Log do sistema
-
 
             //Consulta no db o curriculo do candidato
             var getCurriculo = db.Curriculo.Where(f => f.codigo_user == id_candidato);
@@ -202,8 +310,18 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Agendar_entrevista(int id_candidato)
         {
-            int admin_id = (int)Session["id_admin"];
-            
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
 
 
             FAPSEntities db = new FAPSEntities();
@@ -247,6 +365,18 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Marcar_entrevista(Interview entrevista)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
 
             FAPSEntities db = new FAPSEntities();
 
@@ -273,6 +403,18 @@ namespace Faps.Controllers
         //Lista e controla entrevistas agendadas--------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_interviews()
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
             FAPSEntities db = new FAPSEntities();
 
             var getInterviewsList = db.Interview.ToList();
@@ -285,6 +427,20 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Concluir_interview(int id)
         {
+
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+
             FAPSEntities db = new FAPSEntities();
 
             //Abaixo eu busco pelo id do canditato que será necessario para remover a candidatura na linha seguinte a essa
@@ -311,6 +467,18 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Deletar_interview(int id)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
             FAPSEntities db = new FAPSEntities();
 
             //Para deletar uma entrevista eu preciso regressar a candidatura do candidato ao status 2 (em analise)
@@ -333,8 +501,64 @@ namespace Faps.Controllers
             return RedirectToAction("Listar_interviews", "Admin");
         }
 
+        
 
 
+        //Chama a partial view que carregada com a interview que sera editada
+        [HttpGet]
+        public ActionResult Editar_interview(int id)
+        {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+
+            FAPSEntities db = new FAPSEntities();
+
+            Interview i = db.Interview.Where(f => f.Codigo_entrevista == id).FirstOrDefault();
+
+
+            return PartialView("_Editar_interview", i);
+        }
+
+
+        //BackEnd do _Editar_interview (salvar)
+        [HttpPost]
+        public ActionResult Salvar_interview(Interview i)
+        {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+            FAPSEntities db = new FAPSEntities();
+
+            //Procura a vaga a ser salva a altera item por item conforme oque veio da view
+            var to_update = db.Interview.Where(f => f.Codigo_entrevista == i.Codigo_entrevista).FirstOrDefault();
+
+            to_update.Data_Entrevista = i.Data_Entrevista;
+
+
+            TryUpdateModel(to_update);
+            db.SaveChanges();
+
+            return RedirectToAction("Listar_interviews", "Admin");
+        }
 
 
 
@@ -342,6 +566,18 @@ namespace Faps.Controllers
         //Lista e controla Usuarios---------------------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_users()
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
             FAPSEntities db = new FAPSEntities();
 
             var getUserList = db.Usuarios.ToList();
@@ -354,6 +590,17 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Listar_usuario_to_update(int id)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
 
 
             FAPSEntities db = new FAPSEntities();
@@ -371,6 +618,19 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Alterar_usuario(Usuarios user_to_update)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+
             FAPSEntities db = new FAPSEntities();
 
             //Procura a vaga a ser salva a altera item por item conforme oque veio da view
@@ -392,6 +652,18 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Deletar_user(int id)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
             FAPSEntities db = new FAPSEntities();
 
             Usuarios u = db.Usuarios.Find(id);
@@ -407,8 +679,22 @@ namespace Faps.Controllers
         //Carrega a view do cadastrar usuario : CREATE
         public ActionResult Cadastrar_usuario()
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
             return View();
         }
+
+
 
 
         //BackEnd do cadastrar vagas (salvar)
@@ -431,6 +717,18 @@ namespace Faps.Controllers
         //Listar Curriculos-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_curriculos()
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
             FAPSEntities db = new FAPSEntities();
 
             var getCurriculoList = db.Curriculo.ToList();
@@ -443,11 +741,21 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Detalhes_curriculo(int id)
         {
-            FAPSEntities db = new FAPSEntities();
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
 
-            //validação usuario logado
-            var user_id = Session["id_admin"];
-            //Copular Log do sistema
+
+
+
+            FAPSEntities db = new FAPSEntities();
 
 
             //Consulta no db o curriculo do candidato
@@ -466,11 +774,62 @@ namespace Faps.Controllers
         //Listar Log-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
         public ActionResult Listar_log()
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+
             FAPSEntities db = new FAPSEntities();
 
             var getLogList = db.Log.OrderByDescending(f => f.Data).ToList();
 
             return View(getLogList);
+        }
+
+
+
+
+
+
+
+
+        public ActionResult Logout()
+        {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+            FAPSEntities db = new FAPSEntities();
+
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + " Saiu do sistema (Logout)";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
+            Session["id_admin"] = null;
+
+            return RedirectToAction("Login", "Account");
         }
 
 

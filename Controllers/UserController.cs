@@ -9,12 +9,41 @@ namespace Faps.Controllers
 {
     public class UserController : Controller
     {
-        // GET: User
-        public ActionResult User_home()
+        //Valida se o usuario esta "logado" e retorna seu id
+        public int? User_id()
         {
             //validação usuario logado
             //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            int user_id;
+
+            if (Session["id_user"] != null)
+            {
+                user_id = (int)Session["id_user"];
+                return user_id;
+            }
+            else
+            {
+                //se retornar null manda pra tela de erro
+                return null;
+            }
+        }
+
+
+
+
+        // GET: User
+        public ActionResult User_home()
+        {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
 
 
             FAPSEntities db = new FAPSEntities();
@@ -40,47 +69,41 @@ namespace Faps.Controllers
             //verifica se o usuario tem algum curriculo cadastrado
             if (db.Curriculo.Where(f => f.codigo_user == id_usuario).Any())
             {
-                if (img_on_cv != null)
+                //veririca se o usuario esta candidatado em alguma vaga---------------------------------------------------
+                if (Applyed_Status == 1)
                 {
-                    //#############################Registrando log no DB###########################################
-                    Log log = new Log();
-                    log.Codigo_user = id_usuario;
-                    log.Log1 = "Login do usuario " + nome;
-                    log.Data = DateTime.Now;
-                    db.Log.Add(log);
-                    db.SaveChanges();
-                    //#################################-log-#######################################################
 
-                    //veririca se o usuario esta candidatado em alguma vaga---------------------------------------------------
-                    if (Applyed_Status == 1)
-                    {
+                    //Candidatura realizada
+                    return RedirectToAction("User_home_1", "User");
 
-                        //Candidatura realizada
-                        return RedirectToAction("User_home_1", "User");
+                }
+                else if (Applyed_Status == 2)
+                {
 
-                    }
-                    else if (Applyed_Status == 2)
-                    {
+                    //Curriculo em Analise pela equipe
+                    return RedirectToAction("User_home_2", "User");
 
-                        //Curriculo em Analise pela equipe
-                        return RedirectToAction("User_home_2", "User");
-
-                    }
-                    else if (Applyed_Status == 3)
-                    {
-                        //Entrevista
-                        return RedirectToAction("User_home_3", "User");
-                    }
-                    else
+                }
+                else if (Applyed_Status == 3)
+                {
+                    //Entrevista
+                    return RedirectToAction("User_home_3", "User");
+                }
+                else
+                {
+                    if (img_on_cv != null)
                     {
                         //Status vaga = 0 SEM CANDIDATURA A NENHUMA VAGA
                         return View(getVagasLista);
                     }
-                }
-                else
-                {
-                    ViewBag.Img_on_Cv = false;
-                    return View(getVagasLista);
+                    else
+                    {
+                        //Mostra msg de colocar imagem no curriculo na view
+                        ViewBag.Img_on_Cv = false;
+
+                        //Status vaga = 0 SEM CANDIDATURA A NENHUMA VAGA
+                        return View(getVagasLista);
+                    }
                 }
 
             }
@@ -97,9 +120,17 @@ namespace Faps.Controllers
         //view Candidatura realizada STATUS CANDIDATURA = 1
         public ActionResult User_home_1()
         {
-            //validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
 
 
             FAPSEntities db = new FAPSEntities();
@@ -121,9 +152,17 @@ namespace Faps.Controllers
         //view CANDIDATURA EM ANALISE == STATUS CANDIDATURA = 2
         public ActionResult User_home_2()
         {
-            //validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
 
             FAPSEntities db = new FAPSEntities();
 
@@ -145,9 +184,18 @@ namespace Faps.Controllers
         //view CANDIDATURA EM ANALISE == STATUS CANDIDATURA = 2
         public ActionResult User_home_3()
         {
-            //validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
+
 
             FAPSEntities db = new FAPSEntities();
 
@@ -173,9 +221,17 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Apply(int id_vaga, int id_applyer)
         {
-            //validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
 
 
             FAPSEntities db = new FAPSEntities();
@@ -198,7 +254,7 @@ namespace Faps.Controllers
 
             var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
             Log log = new Log();
-            log.Codigo_user = id_usuario;
+            log.Codigo_user = (int)id_usuario;
             log.Log1 = "Usuario " + nome + " Aplicou para a vaga " + nome_vaga;
             log.Data = DateTime.Now;
             db.Log.Add(log);
@@ -218,6 +274,18 @@ namespace Faps.Controllers
         //Chama a view de cadastro do curriculo SOMENTE PARA USUARIOS SEM CURRICULO CADASTRADO - SOMENTE USUARIO CADASTRADO PELO ADMIN
         public ActionResult Cadastro_curriculo()
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
+
             return View();
         }
 
@@ -225,14 +293,21 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Salvar_registro(Curriculo resume)
         {
-            //Validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
 
 
             FAPSEntities db = new FAPSEntities();
 
-            resume.codigo_user = id_usuario;
+            resume.codigo_user = (int)id_usuario;
             resume.Usuario = db.Usuarios.Where(f => f.Codigo_user == id_usuario).FirstOrDefault()?.Usuario;
             resume.Senha = db.Usuarios.Where(f => f.Codigo_user == id_usuario).FirstOrDefault()?.Senha;
 
@@ -243,7 +318,7 @@ namespace Faps.Controllers
             //#############################Registrando log no DB###########################################
             var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
             Log log = new Log();
-            log.Codigo_user = id_usuario;
+            log.Codigo_user = (int)id_usuario;
             log.Log1 = "Usuario " + nome + " Cadastrou seu curriculo";
             log.Data = DateTime.Now;
             db.Log.Add(log);
@@ -259,9 +334,17 @@ namespace Faps.Controllers
         //Permite o usuario listar seu curriculo
         public ActionResult Listar_curriculo()
         {
-            //Validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
 
 
             FAPSEntities db = new FAPSEntities();
@@ -277,7 +360,7 @@ namespace Faps.Controllers
 
             //#############################Registrando log no DB###########################################
             Log log = new Log();
-            log.Codigo_user = id_usuario;
+            log.Codigo_user = (int)id_usuario;
             log.Log1 = "Usuario " + nome + " Listou os curriculos";
             log.Data = DateTime.Now;
             db.Log.Add(log);
@@ -292,9 +375,18 @@ namespace Faps.Controllers
         [HttpGet]
         public ActionResult Editar_curriculo(int id)
         {
-            //Validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
+
 
             FAPSEntities db = new FAPSEntities();
 
@@ -303,7 +395,7 @@ namespace Faps.Controllers
             //#############################Registrando log no DB###########################################
             var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
             Log log = new Log();
-            log.Codigo_user = id_usuario;
+            log.Codigo_user = (int)id_usuario;
             log.Log1 = "Usuario " + nome + " Editou seu curriculo";
             log.Data = DateTime.Now;
             db.Log.Add(log);
@@ -318,6 +410,19 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Salvar_curriculo(Curriculo c)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
+
+
             FAPSEntities db = new FAPSEntities();
 
             //Procura a vaga a ser salva a altera item por item conforme oque veio da view
@@ -356,9 +461,16 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult FileUpload(HttpPostedFileBase file)
         {
-            //Validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
 
 
 
@@ -382,7 +494,7 @@ namespace Faps.Controllers
                 //#############################Registrando log no DB###########################################
                 var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
                 Log log = new Log();
-                log.Codigo_user = id_usuario;
+                log.Codigo_user = (int)id_usuario;
                 log.Log1 = "Usuario " + nome + " Adicionou foto ao seu curriculo";
                 log.Data = DateTime.Now;
                 db.Log.Add(log);
@@ -400,9 +512,16 @@ namespace Faps.Controllers
 
         public ActionResult Logout()
         {
-            //Validação usuario logado
-            //Copular Log do Sistema
-            int id_usuario = (int)Session["id_user"];
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
 
 
             FAPSEntities db = new FAPSEntities();
@@ -415,7 +534,7 @@ namespace Faps.Controllers
 
             //#############################Registrando log no DB###########################################
             Log log = new Log();
-            log.Codigo_user = id_usuario;
+            log.Codigo_user = (int)id_usuario;
             log.Log1 = "Usuario " + nome + " Saiu do sistema (Logout)";
             log.Data = DateTime.Now;
             db.Log.Add(log);

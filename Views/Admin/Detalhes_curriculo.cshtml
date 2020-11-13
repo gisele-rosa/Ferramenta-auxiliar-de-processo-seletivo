@@ -10,7 +10,16 @@
 
 @foreach (var item in Model)
 {
-
+    if (@item.imageUrl == null)
+    {
+        <img src="~/images/withoutPicture.jpg" width="100" height="100" />
+    }
+    else
+    {
+        <img src="~/imagesDB/@item.imageUrl" width="100" height="100" />
+    }
+    <br />
+    <br />
     @Html.DisplayNameFor(model => model.Nome)
     <br />
     @Html.DisplayFor(modelItem => item.Nome)

@@ -5,6 +5,11 @@
     Layout = "~/Views/Shared/_Layout_admin.cshtml";
 }
 
+@Styles.Render("~/Content/themes/base/jquery-ui.css")
+@Scripts.Render("~/Scripts/jquery-3.5.1.js")
+@Scripts.Render("~/Scripts/jquery-ui.js")
+
+
 <h2>Entrevistas Agendadas</h2>
 
 <table class="table">
@@ -31,33 +36,65 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.Entrevistador)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Usuarios.Usuario)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Data_Entrevista)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Data_criacao)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Status_interview)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.Vaga)
-    </td>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Entrevistador)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuarios.Usuario)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_Entrevista)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Data_criacao)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status_interview)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Vaga)
+            </td>
 
-    <td>
-        @Html.ActionLink("Concluir", "Concluir_interview", new { id = item.Codigo_entrevista }, new { @class = "btn btn-success" }) |
-        @Html.ActionLink("Remarcar", "Edit", new { id = item.Codigo_entrevista }, new { @class = "btn btn-primary edit" }) |
-        @Html.ActionLink("Cancelar", "Deletar_interview", new { id = item.Codigo_entrevista }, new { @class = "btn btn-danger delete" })
-    </td>
-</tr>
-}
+            <td>
+                @Html.ActionLink("Concluir", "Concluir_interview", new { id = item.Codigo_entrevista }, new { @class = "btn btn-success" }) |
+                <button class="btn btn-warning" onClick="Editar_interview(@item.Codigo_entrevista)">Remarcar</button> |
+                @Html.ActionLink("Cancelar", "Deletar_interview", new { id = item.Codigo_entrevista }, new { @class = "btn btn-danger delete" })
+            </td>
+        </tr>
+    }
 
 </table>
+
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">Remarcar Interview</h3>
+            </div>
+            <div class="modal-body" id="myModalBodyDiv">
+
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+
+        var Editar_interview = function (Codigo_entrevista) {
+
+            var url = "/Admin/Editar_interview?id=" + Codigo_entrevista;
+
+            $("#myModalBodyDiv").load(url, function () {
+                $("#myModal").modal("show");
+            })
+        }
+
+    </script>
+}

@@ -59,6 +59,17 @@ namespace Faps.Controllers
                     Session["id_admin"] = (int)user_logado.Codigo_user;
 
 
+                    //#############################Registrando log administrador no DB#############################
+                    var Usuario = db.Usuarios.Where(f => f.Codigo_user == (int)user_logado.Codigo_user).FirstOrDefault()?.Usuario;
+                    Log log = new Log();
+                    log.Codigo_user = (int)user_logado.Codigo_user;
+                    log.Log1 = "Adminstrador " + Usuario + " Entrou no sistema (Login)";
+                    log.Data = DateTime.Now;
+                    db.Log.Add(log);
+                    db.SaveChanges();
+                    //#################################-log-#######################################################
+
+
                     return RedirectToAction("Admin_home", "Admin");
 
                 }
@@ -67,6 +78,18 @@ namespace Faps.Controllers
                     Session["id_user"] = (int)user_logado.Codigo_user;
 
                     int codigo = (int)user_logado.Codigo_user;
+
+
+                    //#############################Registrando log usuario no DB#############################
+                    var Usuario = db.Usuarios.Where(f => f.Codigo_user == (int)user_logado.Codigo_user).FirstOrDefault()?.Usuario;
+                    Log log = new Log();
+                    log.Codigo_user = (int)user_logado.Codigo_user;
+                    log.Log1 = "Usuario " + Usuario + " Entrou no sistema (Login)";
+                    log.Data = DateTime.Now;
+                    db.Log.Add(log);
+                    db.SaveChanges();
+                    //#################################-log-#################################################
+
 
                     return RedirectToAction("User_home", "User", new { id = codigo });
                 }
