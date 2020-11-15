@@ -156,7 +156,6 @@
     <Content Include="Content\themes\base\theme.css" />
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="Global.asax" />
-    <Content Include="images\bg.jpg" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap.css.map" />
@@ -165,6 +164,7 @@
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>BancoDados.Designer.cs</LastGenOutput>
     </EntityDeploy>
+    <Content Include="images\bg.jpg" />
     <Content Include="images\progressBar1.jpg" />
     <Content Include="images\progressBar2.jpg" />
     <Content Include="images\progressBar3.jpg" />
