@@ -18,6 +18,7 @@ namespace Faps.Models
         public int codigo_curriculo { get; set; }
         public int codigo_user { get; set; }
         public string Nome { get; set; }
+        [Display(Name = "Sobrenome")]
         public string SobreNome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }

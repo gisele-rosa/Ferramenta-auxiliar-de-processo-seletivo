@@ -36,3 +36,29 @@ textarea {
     color: #000;
     text-decoration: none;
 }
+.form-left-w3l input {
+    color: #000;
+    outline: none;
+    font-size: 1em;
+    padding: .8em 1em;
+    margin-bottom: 2em;
+    border: none;
+    margin: 5px 0px 16px;
+    border-bottom: solid 2px #23b7bd;
+    -webkit-appearance: none;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.39);
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    /* -ms-transition: all 0.5s ease-in-out;*/
+    box-shadow: 2px 3px rgba(0, 0, 0, 0.42);
+    width: 91.3%;
+}
+.form-left-w3l {
+    color: #23b7bd;
+    font-size: 17px;
+    letter-spacing: .5px;
+    text-transform: capitalize;
+}
