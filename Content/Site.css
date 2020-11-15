@@ -36,7 +36,7 @@ textarea {
     color: #000;
     text-decoration: none;
 }
-.form-left-w3l input {
+.form-left-w3l input, .form-right-w3ls input {
     color: #000;
     outline: none;
     font-size: 1em;
@@ -52,13 +52,77 @@ textarea {
     -webkit-transition: all 0.5s ease-in-out;
     -moz-transition: all 0.5s ease-in-out;
     -o-transition: all 0.5s ease-in-out;
-    /* -ms-transition: all 0.5s ease-in-out;*/
+     -ms-transition: all 0.5s ease-in-out;
     box-shadow: 2px 3px rgba(0, 0, 0, 0.42);
     width: 91.3%;
 }
-.form-left-w3l {
+.form-left-w3l p, .form-right-w3ls p, .form-control-w3l p, .form-add-w3ls p {
     color: #23b7bd;
     font-size: 17px;
     letter-spacing: .5px;
     text-transform: capitalize;
 }
+
+.form-left-w3l {
+    float: left;
+    padding-left: 0px;
+}
+
+.form-right-w3ls {
+    float: right;
+    padding-right: 0px;
+}
+.form-right-w3ls, .form-left-w3l {
+    width: 48%;
+}
+.appointment-w3 {
+    width: 91%;
+    margin: 30px auto 30px;
+    background-color: rgba(0, 0, 0, 0.79);
+    padding: 40px 40px;
+    box-shadow: 2px 3px rgba(0, 0, 0, 0.42);
+}
+.appointment-w3 h2 {
+        color: #23b7bd;
+}
+img {
+    border: 5px solid #555;
+    width: 200px;
+    height: 200px;
+    float: left;
+    padding-left: 0px;
+    margin: 0px 0px 0px 30px;
+}
+.form-right-w3ls-teste {
+    width: 48%;
+    float: right;
+    padding-right: 0px;
+}
+.form-right-w3ls-teste p {
+    color: #23b7bd;
+    font-size: 17px;
+    letter-spacing: .5px;
+    text-transform: capitalize;
+}
+.form-right-w3ls-teste input {
+    color: #000;
+    outline: none;
+    font-size: 1em;
+    padding: .8em 1em;
+    margin-bottom: 2em;
+    border: none;
+    margin: 5px 0px 16px;
+    border-bottom: solid 2px #23b7bd;
+    -webkit-appearance: none;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.39);
+    transition: all 0.5s ease-in-out;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -o-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    box-shadow: 2px 3px rgba(0, 0, 0, 0.42);
+    width: 91.3%;
+ }
+
+   
