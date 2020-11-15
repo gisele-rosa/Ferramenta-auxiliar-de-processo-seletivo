@@ -8,7 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inver navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -16,13 +16,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Inicio", "Admin_home", "Admin", new { area = "" }, new { @class = "navbar-brand" })
+                @Html.ActionLink("Início", "Admin_home", "Admin", new { area = "" }, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Controlar Usuarios", "Listar_users", "Admin")</li>
+                    <li>@Html.ActionLink("Controlar Usuários", "Listar_users", "Admin")</li>
                     <li>@Html.ActionLink("Entrevistas", "Listar_interviews", "Admin")</li>
-                    <li>@Html.ActionLink("Curriculos Cadastrados", "Listar_curriculos", "Admin")</li>
+                    <li>@Html.ActionLink("Currículos Cadastrados", "Listar_curriculos", "Admin")</li>
                     <li>@Html.ActionLink("Log", "Listar_log", "Admin")</li>
                     <li>@Html.ActionLink("Logout", "Logout", "Admin")</li>
                 </ul>
