@@ -61,7 +61,7 @@
                     @Html.DisplayFor(modelItem => item.Vaga_descricao)
                 </td>
                 <td>
-                    @Html.ActionLink("Candidatar-se", "Apply", new { id_vaga = item.Codigo_vaga, id_applyer = ViewBag.id_applyer }, null)
+                    @Html.ActionLink("Candidatar-se", "Apply", new { id_vaga = item.Codigo_vaga, id_applyer = ViewBag.id_applyer }, new { @class = "btn btn-info" })
                 </td>
             </tr>
         }
