@@ -35,6 +35,14 @@
     <Property Name="DescricaoAtividades" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="imageUrl" Type="nchar" MaxLength="50" />
   </EntityType>
+  <EntityType Name="Feedback">
+    <Key>
+      <PropertyRef Name="Codigo_feedback" />
+    </Key>
+    <Property Name="Codigo_feedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Codigo_entrevista" Type="int" Nullable="false" />
+    <Property Name="Feedback" Type="varchar" MaxLength="500" Nullable="false" />
+  </EntityType>
   <EntityType Name="Interview">
     <Key>
       <PropertyRef Name="Codigo_entrevista" />
@@ -115,6 +123,18 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_Feedback_Interview1">
+    <End Role="Interview" Type="Self.Interview" Multiplicity="1" />
+    <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Interview">
+        <PropertyRef Name="Codigo_entrevista" />
+      </Principal>
+      <Dependent Role="Feedback">
+        <PropertyRef Name="Codigo_entrevista" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Association Name="FK_Interview_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
       <OnDelete Action="Cascade" />
@@ -146,6 +166,7 @@
   <EntityContainer Name="BancoDadosStoreContainer">
     <EntitySet Name="Candidaturas" EntityType="Self.Candidaturas" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Curriculo" EntityType="Self.Curriculo" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Interview" EntityType="Self.Interview" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
@@ -161,6 +182,10 @@
     <AssociationSet Name="FK_Curriculos_Usuarios" Association="Self.FK_Curriculos_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />
       <End Role="Curriculo" EntitySet="Curriculo" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Feedback_Interview1" Association="Self.FK_Feedback_Interview1">
+      <End Role="Interview" EntitySet="Interview" />
+      <End Role="Feedback" EntitySet="Feedback" />
     </AssociationSet>
     <AssociationSet Name="FK_Interview_Usuarios" Association="Self.FK_Interview_Usuarios">
       <End Role="Usuarios" EntitySet="Usuarios" />

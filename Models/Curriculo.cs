@@ -11,40 +11,31 @@ namespace Faps.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Curriculo
     {
         public int codigo_curriculo { get; set; }
         public int codigo_user { get; set; }
         public string Nome { get; set; }
-        [Display(Name = "Sobrenome")]
         public string SobreNome { get; set; }
         public string Email { get; set; }
         public string Telefone { get; set; }
-        [Display(Name = "Gênero")]
         public string Genero { get; set; }
-        [Display(Name = "Data de Nascimento")]
         public string DataNascimento { get; set; }
-        [Display(Name = "Endereço")]
         public string Endereco { get; set; }
         public string Cidade { get; set; }
         public string Estado { get; set; }
         public string CEP { get; set; }
         public string Pais { get; set; }
         public string Curso { get; set; }
-        [Display(Name = "Status do Curso")]
         public string Curso_status { get; set; }
-        [Display(Name = "Última Experiência")]
         public string TituloCargo { get; set; }
         public string Empresa { get; set; }
-        [Display(Name = "Data Início")]
         public string Data_inicio { get; set; }
-        [Display(Name = "Data Términio")]
         public string DataTermino { get; set; }
-        [Display(Name = "Descrição da Atividade")]
         public string DescricaoAtividades { get; set; }
         public string imageUrl { get; set; }
+
 
         public string Usuario { get; set; }
         public string Senha { get; set; }

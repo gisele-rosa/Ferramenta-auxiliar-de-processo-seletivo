@@ -12,13 +12,12 @@ namespace Faps.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Log
+    public partial class Feedback
     {
-        public int Codigo_log { get; set; }
-        public int Codigo_user { get; set; }
-        public string Log1 { get; set; }
-        public System.DateTime Data { get; set; }
+        public int Codigo_feedback { get; set; }
+        public int Codigo_entrevista { get; set; }
+        public string Feedback1 { get; set; }
     
-        public virtual Usuarios Usuarios { get; set; }
+        public virtual Interview Interview { get; set; }
     }
 }

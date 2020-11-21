@@ -40,6 +40,14 @@
           <Property Name="DescricaoAtividades" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="imageUrl" Type="nchar" MaxLength="50" />
         </EntityType>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Codigo_feedback" />
+          </Key>
+          <Property Name="Codigo_feedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Codigo_entrevista" Type="int" Nullable="false" />
+          <Property Name="Feedback" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
         <EntityType Name="Interview">
           <Key>
             <PropertyRef Name="Codigo_entrevista" />
@@ -120,6 +128,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK_Feedback_Interview1">
+          <End Role="Interview" Type="Self.Interview" Multiplicity="1" />
+          <End Role="Feedback" Type="Self.Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interview">
+              <PropertyRef Name="Codigo_entrevista" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="Codigo_entrevista" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Interview_Usuarios">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
             <OnDelete Action="Cascade" />
@@ -151,6 +171,7 @@
         <EntityContainer Name="BancoDadosStoreContainer">
           <EntitySet Name="Candidaturas" EntityType="Self.Candidaturas" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Curriculo" EntityType="Self.Curriculo" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Feedback" EntityType="Self.Feedback" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Interview" EntityType="Self.Interview" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Usuarios" EntityType="Self.Usuarios" Schema="dbo" store:Type="Tables" />
@@ -166,6 +187,10 @@
           <AssociationSet Name="FK_Curriculos_Usuarios" Association="Self.FK_Curriculos_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Curriculo" EntitySet="Curriculo" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Feedback_Interview1" Association="Self.FK_Feedback_Interview1">
+            <End Role="Interview" EntitySet="Interview" />
+            <End Role="Feedback" EntitySet="Feedback" />
           </AssociationSet>
           <AssociationSet Name="FK_Interview_Usuarios" Association="Self.FK_Interview_Usuarios">
             <End Role="Usuarios" EntitySet="Usuarios" />
@@ -309,6 +334,11 @@
             <End Role="Usuarios" EntitySet="Usuarios" />
             <End Role="Log" EntitySet="Log" />
           </AssociationSet>
+          <EntitySet Name="Feedback" EntityType="BancoDados.Feedback" />
+          <AssociationSet Name="FK_Feedback_Interview1" Association="BancoDados.FK_Feedback_Interview1">
+            <End Role="Interview" EntitySet="Interview" />
+            <End Role="Feedback" EntitySet="Feedback" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Interview">
           <Key>
@@ -322,6 +352,7 @@
           <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Interview" ToRole="Usuarios" />
           <Property Name="Vaga" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Status_interview" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Feedback" Relationship="BancoDados.FK_Feedback_Interview1" FromRole="Interview" ToRole="Feedback" />
         </EntityType>
         <Association Name="FK_Interview_Usuarios">
           <End Type="BancoDados.Usuarios" Role="Usuarios" Multiplicity="1" >
@@ -358,6 +389,29 @@
             </Principal>
             <Dependent Role="Log">
               <PropertyRef Name="Codigo_user" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Feedback">
+          <Key>
+            <PropertyRef Name="Codigo_feedback" />
+          </Key>
+          <Property Name="Codigo_feedback" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Codigo_entrevista" Type="Int32" Nullable="false" />
+          <Property Name="Feedback1" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Interview" Relationship="BancoDados.FK_Feedback_Interview1" FromRole="Feedback" ToRole="Interview" />
+        </EntityType>
+        <Association Name="FK_Feedback_Interview1">
+          <End Type="BancoDados.Interview" Role="Interview" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="BancoDados.Feedback" Role="Feedback" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Interview">
+              <PropertyRef Name="Codigo_entrevista" />
+            </Principal>
+            <Dependent Role="Feedback">
+              <PropertyRef Name="Codigo_entrevista" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -443,6 +497,15 @@
                 <ScalarProperty Name="Log1" ColumnName="Log" />
                 <ScalarProperty Name="Codigo_user" ColumnName="Codigo_user" />
                 <ScalarProperty Name="Codigo_log" ColumnName="Codigo_log" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Feedback">
+            <EntityTypeMapping TypeName="BancoDados.Feedback">
+              <MappingFragment StoreEntitySet="Feedback">
+                <ScalarProperty Name="Feedback1" ColumnName="Feedback" />
+                <ScalarProperty Name="Codigo_entrevista" ColumnName="Codigo_entrevista" />
+                <ScalarProperty Name="Codigo_feedback" ColumnName="Codigo_feedback" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -14,6 +14,12 @@ namespace Faps.Models
     
     public partial class Interview
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public Interview()
+        {
+            this.Feedback = new HashSet<Feedback>();
+        }
+    
         public int Codigo_entrevista { get; set; }
         public int Codigo_user { get; set; }
         public string Entrevistador { get; set; }
@@ -23,5 +29,7 @@ namespace Faps.Models
         public string Status_interview { get; set; }
     
         public virtual Usuarios Usuarios { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Feedback> Feedback { get; set; }
     }
 }

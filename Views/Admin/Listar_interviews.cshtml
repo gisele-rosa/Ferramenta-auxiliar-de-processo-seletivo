@@ -59,7 +59,7 @@
             </td>
 
             <td>
-                @Html.ActionLink("Concluir", "Concluir_interview", new { id = item.Codigo_entrevista }, new { @class = "btn btn-success" }) |
+                <button class="btn btn-info" onClick="Feedback(@item.Codigo_entrevista)">Concluir Entrevista</button> |
                 <button class="btn btn-warning" onClick="Editar_interview(@item.Codigo_entrevista)">Remarcar</button> |
                 @Html.ActionLink("Cancelar", "Deletar_interview", new { id = item.Codigo_entrevista }, new { @class = "btn btn-danger delete" })
             </td>
@@ -83,8 +83,46 @@
 </div>
 
 
+
+
+<div class="modal fade" id="FeedbackModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <a href="#" class="close" data-dismiss="modal">&times;</a>
+                <h3 class="modal-title">FeedBack da entrevista</h3>
+            </div>
+            <div class="modal-body" id="myModalBodyDiv">
+                @using (Html.BeginForm("Feedback", "Admin", FormMethod.Post))
+                {
+                <div>
+                    <input type="hidden" name="Codigo_entrevista" id="Codigo_entrevista" />
+
+                    <h4>
+                        Detalhe como foi sua experiencia em entrevistar o candidato ou
+                        faça um resumo construtivo para apoiar o candidato em possiveis melhorias
+                        ou elogios relacionados a entrevista
+                    </h4>
+
+                    <textarea name="Feedback1">
+                            
+                    </textarea>
+
+                    <br>
+                    <input type="submit" value="Concluir" class="btn btn-success" />
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
     <script>
 
         var Editar_interview = function (Codigo_entrevista) {
@@ -95,6 +133,18 @@
                 $("#myModal").modal("show");
             })
         }
+
+
+
+        var Feedback = function (Codigo_entrevista) {
+
+            var id = Codigo_entrevista;
+
+            $(".modal-body #Codigo_entrevista").val(id);
+
+            $("#FeedbackModal").modal("show");
+        }
+
 
     </script>
 }

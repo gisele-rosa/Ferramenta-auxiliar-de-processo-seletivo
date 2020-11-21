@@ -510,6 +510,50 @@ namespace Faps.Controllers
 
 
 
+        public ActionResult Listar_Feedback()
+        {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? id_usuario;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                id_usuario = User_id();
+            }
+
+
+
+            FAPSEntities db = new FAPSEntities();
+            //Responsavel por colocar o nome do usuario nas views User
+            var nome = db.Curriculo.Where(f => f.codigo_user == id_usuario).FirstOrDefault()?.Nome;
+            ViewBag.nome = nome;
+
+
+
+            //Consulta no db o feedback do candidato
+            var codigo_entrevista = db.Interview.Where(f => f.Codigo_user == id_usuario).FirstOrDefault()?.Codigo_entrevista;
+
+            var getFeedbackList = db.Feedback.Where(f => f.Codigo_entrevista == codigo_entrevista).ToList();
+
+
+            //#############################Registrando log no DB###########################################
+            Log log = new Log();
+            log.Codigo_user = (int)id_usuario;
+            log.Log1 = "Usuario " + nome + " Listou os feedbacks recebidos";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
+            return View(getFeedbackList);
+        }
+
+
+
+
+
         public ActionResult Logout()
         {
             //Valida se a sessão do usuario ainda existe e se ele esta logado

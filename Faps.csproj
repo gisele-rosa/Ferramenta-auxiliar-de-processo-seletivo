@@ -233,6 +233,9 @@
     <Compile Include="Models\Curriculo.cs">
       <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\Feedback.cs">
+      <DependentUpon>BancoDados.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\Interview.cs">
       <DependentUpon>BancoDados.tt</DependentUpon>
     </Compile>
@@ -285,6 +288,7 @@
     <Content Include="Views\User\_Editar_curriculo.cshtml" />
     <Content Include="Views\Admin\Listar_log.cshtml" />
     <Content Include="Views\Admin\_Editar_interview.cshtml" />
+    <Content Include="Views\User\Listar_Feedback.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

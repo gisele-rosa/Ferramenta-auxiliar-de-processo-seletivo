@@ -84,8 +84,6 @@ namespace Faps.Controllers
 
 
 
-
-
         //Recebe da view admin o id da vaga que precisa alterar : UPDATE VAGA
         [HttpGet]
         public ActionResult Listar_vaga_to_update(int id_vaga)
@@ -417,10 +415,37 @@ namespace Faps.Controllers
 
             FAPSEntities db = new FAPSEntities();
 
-            var getInterviewsList = db.Interview.ToList();
+            var getInterviewsList = db.Interview.Where(f => f.Status_interview != "Concluido").ToList();
 
             return View(getInterviewsList);
         }
+
+
+        
+        //Recebe um form do tipo feedback que vem de uma modal da view Listar_interviews
+        [HttpPost]
+        public ActionResult Feedback(Feedback fb)
+        {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+            FAPSEntities db = new FAPSEntities();
+            db.Feedback.Add(fb);
+            db.SaveChanges();
+
+
+            return RedirectToAction("Concluir_interview", "Admin", new { id = fb.Codigo_entrevista });
+        }
+
 
 
         //Concluir Interview : Remove do sistema a entrevista e a candidatura relacionada

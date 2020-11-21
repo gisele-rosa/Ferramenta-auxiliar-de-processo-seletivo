@@ -16,6 +16,8 @@
         <AssociationConnector Association="BancoDados.FK_Interview_Usuarios" />
         <EntityTypeShape EntityType="BancoDados.Log" Width="1.5" PointX="10.375" PointY="0.75" />
         <AssociationConnector Association="BancoDados.FK_usuario_log" />
+        <EntityTypeShape EntityType="BancoDados.Feedback" Width="1.5" PointX="13" PointY="6.125" />
+        <AssociationConnector Association="BancoDados.FK_Feedback_Interview1" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -23,6 +23,7 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Meu Curriculo", "Listar_curriculo", "User")</li>
+                    <li>@Html.ActionLink("Feedbacks", "Listar_Feedback", "User")</li>
                     <li>@Html.ActionLink("Logout", "Logout", "User")</li>
                 </ul>
             </div>
@@ -33,6 +34,10 @@
         <h3>Bem Vindo: @ViewBag.nome </h3>
         <br />
         @RenderBody()
+        <br />
+        <br />
+        <br />
+        <br />
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Ferramenta Auxiliar para Processos Seletivos - All Rights Reserved</p>
