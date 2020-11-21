@@ -241,6 +241,7 @@ body {
     -ms-flex-pack: center;
     -webkit-justify-content: center;
     justify-content: center;
+    padding: 35px 0px 0px 0px;
 }
 
 h1 {
@@ -270,7 +271,7 @@ h1 {
 .w3ls-login label {
     font-size: 16px;
     color: #086A87;
-    float: left;
+   /* float: left;*/
     margin-bottom: 15px;
     text-transform: capitalize;
     letter-spacing: 2px;
@@ -300,7 +301,7 @@ h1 {
     padding: 15px 20px;
     box-sizing: border-box;
     border: none;
-    border: 1px solid #a9a8a8;
+    border: 3px solid #a9a8a8;
     border-radius: 30px;
     -webkit-appearance: none;
     font-family: 'Source Sans Pro', sans-serif;
@@ -557,13 +558,13 @@ input:checked+.slider:before {
     padding: 2em 0 2em;
 }
 
-.copy-wthree p {
-    color: #ccc;
-    font-size: 16px;
-    letter-spacing: 1px;
-    line-height: 1.8;
-    margin: 0 3vw;
-}
+    .copy-wthree p {
+        color: #756464;
+        font-size: 16px;
+        letter-spacing: 1px;
+        line-height: 1.8;
+        margin: 0 3vw;
+    }
 
 .copy-wthree p a {
     color: #fff;
