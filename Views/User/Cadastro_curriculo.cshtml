@@ -135,7 +135,7 @@
                 </div>
                 <div class="form-control-w3l">
                     <p>Descrição das atividades</p>
-                    <textarea name="DescricaoAtividades"></textarea>
+                    <textarea name="DescricaoAtividades" required></textarea>
                 </div>
             </div>
 
@@ -143,21 +143,27 @@
         </form>
     </div>
 
+
     <div class="copy">
         <p>&copy;2020 Ferramenta Auxiliar para Processos Seletivos. All Rights Reserved</p>
     </div>
+
+
     <!-- js -->
-    <script type='text/javascript' src='js/jquery-2.2.3.min.js'></script>
+    <script type='text/javascript' src='~/Scripts/jquery-3.5.1.js'></script>
     <!-- //js -->
+
     <!-- Calendar -->
-    <link rel="stylesheet" href="css/jquery-ui.css" />
-    <script src="js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css" />
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script>
         $(function () {
-            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker();
+            $("#dateInicio,#dateFim,#dateBorn").datepicker();
         });
     </script>
     <!-- //Calendar -->
+
+
 </body>
 </html>
 

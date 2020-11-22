@@ -10,13 +10,14 @@
     <meta name="viewport" content="width=device-width" />
     <title>Register</title>
 </head>
+
 <body>
     <h1 class="header-w3ls">
         Cadastre-se
     </h1>
     <div class="appointment-w3">
 
-        <form action="Salvar_registro" method="post">
+        <form action="Salvar_registro" method="post" id="Salvar_registro">
 
 
             <div class="personal">
@@ -29,7 +30,7 @@
                 </div>
                 <div class="form-right-w3ls">
                     <p>Sobrenome</p>
-                    <input type="text" name="SobreNome" required="" value="teste" placeholder="Sobrenome" >
+                    <input type="text" name="SobreNome" required="" value="teste" placeholder="Sobrenome">
                     <div class="clear"></div>
                 </div>
 
@@ -40,7 +41,7 @@
 
                 <div class="form-right-w3ls ">
                     <p>Telefone</p>
-                    <input class="buttom" type="text" name="Telefone" id="phone"  required="" value="(12)99999-9999">
+                    <input class="buttom" type="text" name="Telefone" id="phone" required="" value="(12)99999-9999">
                 </div>
 
                 <div class="form-left-w3l">
@@ -80,17 +81,17 @@
 
                 <div class="form-left-w3l">
                     <p>Cidade</p>
-                    <input type="text" name="Cidade" required=""  value="Sao Jose dos Campos">
+                    <input type="text" name="Cidade" required="" value="Sao Jose dos Campos">
                 </div>
 
                 <div class="form-right-w3ls ">
                     <p>Estado</p>
-                    <input type="text" name="Estado" required=""  value="Sao Paulo">
+                    <input type="text" name="Estado" required="" value="Sao Paulo">
                 </div>
 
                 <div class="form-left-w3l">
                     <p>CEP</p>
-                    <input type="text" name="CEP" placeholder="00000-000" required=""  value="12228-290">
+                    <input type="text" name="CEP" placeholder="00000-000" required="" value="12228-290">
                 </div>
 
                 <div class="form-right-w3ls">
@@ -112,7 +113,7 @@
                 <div class="clearfix"></div>
                 <div class="form-left-w3l ">
                     <p>Curso</p>
-                    <input type="text" name="Curso"  required=""  value="Analise e Desenvolvimento de Sistemas">
+                    <input type="text" name="Curso" required="" value="Analise e Desenvolvimento de Sistemas">
                 </div>
                 <div class="form-right-w3ls">
                     <p>Estado</p>
@@ -130,11 +131,11 @@
 
                 <div class="form-left-w3l ">
                     <p>Título do Cargo</p>
-                    <input type="text" name="TituloCargo" required=""  value="Desenvolvimento">
+                    <input type="text" name="TituloCargo" required="" value="Desenvolvimento">
                 </div>
                 <div class="form-right-w3ls ">
                     <p>Empresa</p>
-                    <input type="text" name="Empresa" required=""  value="Signa">
+                    <input type="text" name="Empresa" required="" value="Signa">
                 </div>
                 <div class="form-left-w3l ">
                     <p>Data Início</p>
@@ -146,7 +147,7 @@
                 </div>
                 <div class="form-control-w3l">
                     <p>Descrição das atividades</p>
-                    <textarea name="DescricaoAtividades"></textarea>
+                    <textarea name="DescricaoAtividades" required></textarea>
                 </div>
             </div>
 
@@ -154,20 +155,28 @@
         </form>
     </div>
 
+
     <div class="copy">
         <p>&copy;2020 Ferramenta Auxiliar para Processos Seletivos. All Rights Reserved</p>
     </div>
+
+
     <!-- js -->
-    <script type='text/javascript' src='js/jquery-2.2.3.min.js'></script>
+    <script type='text/javascript' src='~/Scripts/jquery-3.5.1.js'></script>
     <!-- //js -->
+
     <!-- Calendar -->
-    <link rel="stylesheet" href="css/jquery-ui.css" />
-    <script src="js/jquery-ui.js"></script>
+    <link rel="stylesheet" href="~/Content/themes/base/jquery-ui.css" />
+    <script src="~/Scripts/jquery-ui-1.12.1.js"></script>
     <script>
         $(function () {
-            $("#datepicker,#datepicker1,#datepicker2,#datepicker3").datepicker();
+            $("#dateInicio,#dateFim,#dateBorn").datepicker();
         });
     </script>
     <!-- //Calendar -->
+
+
+
 </body>
+
 </html>

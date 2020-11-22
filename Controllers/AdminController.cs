@@ -10,6 +10,7 @@ namespace Faps.Controllers
 {
     public class AdminController : Controller
     {
+       
 
         //Valida se o usuario esta "logado" e retorna seu id
         public int? User_id() {
@@ -66,7 +67,6 @@ namespace Faps.Controllers
                 admin_id = User_id();
             }
 
-
             return View();
         }
 
@@ -75,9 +75,34 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Confirmar_vaga(Vagas vagas)
         {
+            //Valida se a sessão do usuario ainda existe e se ele esta logado
+            int? admin_id;
+            if (User_id() == null)
+            {
+                return View("Error");
+            }
+            else
+            {
+                admin_id = User_id();
+            }
+
+
+
+            //salvando a vaga nova no db
             FAPSEntities db = new FAPSEntities();
             db.Vagas.Add(vagas);
             db.SaveChanges();
+
+
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + " cadastrou a vaga " + vagas.Vaga;
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
 
             return RedirectToAction("Admin_home", "Admin");
         }
@@ -196,7 +221,19 @@ namespace Faps.Controllers
 
 
             //Cogido_vaga da tabela vagas é com o "v" minusculo
-            ViewBag.NomeVaga = db.Vagas.Where(f => f.Codigo_vaga == id).FirstOrDefault().Vaga;
+            var vaga = db.Vagas.Where(f => f.Codigo_vaga == id).FirstOrDefault().Vaga;
+            ViewBag.NomeVaga = vaga;
+
+
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + " visualizou as candidaturas da vaga "+ vaga;
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
 
             return View(getCandidaturasLista);
 
@@ -417,6 +454,17 @@ namespace Faps.Controllers
 
             var getInterviewsList = db.Interview.Where(f => f.Status_interview != "Concluido").ToList();
 
+
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + " Listou as entrevistas";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
             return View(getInterviewsList);
         }
 
@@ -522,6 +570,19 @@ namespace Faps.Controllers
 
 
             db.SaveChanges();
+
+
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + " Deletou a entrevista do candidato "+id_user;
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
+
 
             return RedirectToAction("Listar_interviews", "Admin");
         }
@@ -632,6 +693,16 @@ namespace Faps.Controllers
 
             var user_to_update = db.Usuarios.Where(f => f.Codigo_user == id).FirstOrDefault();
 
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + "Alterou informacoes do usuario "+user_to_update.Usuario;
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
 
             return View("Alterar_usuario", user_to_update);
 
@@ -695,6 +766,18 @@ namespace Faps.Controllers
             db.Usuarios.Remove(u);
             db.SaveChanges();
 
+
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + "deletou o usuario "+u.Usuario;
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
+
             return RedirectToAction("Listar_users", "Admin");
         }
 
@@ -715,6 +798,16 @@ namespace Faps.Controllers
                 admin_id = User_id();
             }
 
+            FAPSEntities db = new FAPSEntities();
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + "Cadastrou um curriculo";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
 
             return View();
         }
@@ -757,6 +850,18 @@ namespace Faps.Controllers
             FAPSEntities db = new FAPSEntities();
 
             var getCurriculoList = db.Curriculo.ToList();
+
+
+            //#############################Registrando log administrador no DB#############################
+            var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+            Log log = new Log();
+            log.Codigo_user = (int)admin_id;
+            log.Log1 = "Adminstrador " + Usuario + "Listou os curriculos";
+            log.Data = DateTime.Now;
+            db.Log.Add(log);
+            db.SaveChanges();
+            //#################################-log-#######################################################
+
 
             return View(getCurriculoList);
         }

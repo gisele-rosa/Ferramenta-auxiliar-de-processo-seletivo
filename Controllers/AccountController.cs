@@ -12,7 +12,9 @@ namespace Faps.Controllers
 {
     public class AccountController : Controller
     {
-        
+
+
+
         [HttpGet]
         public ActionResult Login()
         {
@@ -30,17 +32,28 @@ namespace Faps.Controllers
         public ActionResult Salvar_registro(Curriculo resume)
         {
 
-            Usuarios user = new Usuarios();
-            user.role = "user";
-            user.Usuario = resume.Usuario.ToString();
-            user.Senha = resume.Senha.ToString();
 
-            FAPSEntities db = new FAPSEntities();
-            db.Usuarios.Add(user);
-            db.Curriculo.Add(resume);
-            db.SaveChanges();
+            try
+            {
+                Usuarios user = new Usuarios();
+                user.role = "user";
+                user.Usuario = resume.Usuario.ToString();
+                user.Senha = resume.Senha.ToString();
 
-            return View("Login");
+                FAPSEntities db = new FAPSEntities();
+                db.Usuarios.Add(user);
+                db.Curriculo.Add(resume);
+                db.SaveChanges();
+
+                return View("Login");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex.Message);
+            }
+
+
+
         }
 
 
@@ -49,55 +62,71 @@ namespace Faps.Controllers
         [HttpPost]
         public ActionResult Verify(Usuarios acc)
         {
-            FAPSEntities db = new FAPSEntities();
-            var user_logado = db.Usuarios.Where(f => f.Usuario == acc.Usuario && f.Senha == acc.Senha)?.FirstOrDefault();
-
-            if (user_logado != null)
+            try
             {
-                if (user_logado.role == "admin"){
+                FAPSEntities db = new FAPSEntities();
+                var user_logado = db.Usuarios.Where(f => f.Usuario == acc.Usuario && f.Senha == acc.Senha)?.FirstOrDefault();
 
-                    Session["id_admin"] = (int)user_logado.Codigo_user;
+                if (user_logado != null)
+                {
+                    if (user_logado.role == "admin")
+                    {
 
-
-                    //#############################Registrando log administrador no DB#############################
-                    var Usuario = db.Usuarios.Where(f => f.Codigo_user == (int)user_logado.Codigo_user).FirstOrDefault()?.Usuario;
-                    Log log = new Log();
-                    log.Codigo_user = (int)user_logado.Codigo_user;
-                    log.Log1 = "Adminstrador " + Usuario + " Entrou no sistema (Login)";
-                    log.Data = DateTime.Now;
-                    db.Log.Add(log);
-                    db.SaveChanges();
-                    //#################################-log-#######################################################
+                        Session["id_admin"] = (int)user_logado.Codigo_user;
 
 
-                    return RedirectToAction("Admin_home", "Admin");
+                        //#############################Registrando log administrador no DB#############################
+                        var Usuario = db.Usuarios.Where(f => f.Codigo_user == (int)user_logado.Codigo_user).FirstOrDefault()?.Usuario;
+                        Log log = new Log();
+                        log.Codigo_user = (int)user_logado.Codigo_user;
+                        log.Log1 = "Adminstrador " + Usuario + " Entrou no sistema (Login)";
+                        log.Data = DateTime.Now;
+                        db.Log.Add(log);
+                        db.SaveChanges();
+                        //#################################-log-#######################################################
 
+
+                        return RedirectToAction("Admin_home", "Admin");
+
+                    }
+                    else
+                    {
+
+                        Session["id_user"] = (int)user_logado.Codigo_user;
+
+                        int codigo = (int)user_logado.Codigo_user;
+
+
+                        //#############################Registrando log usuario no DB#############################
+                        var Usuario = db.Usuarios.Where(f => f.Codigo_user == (int)user_logado.Codigo_user).FirstOrDefault()?.Usuario;
+                        Log log = new Log();
+                        log.Codigo_user = (int)user_logado.Codigo_user;
+                        log.Log1 = "Usuario " + Usuario + " Entrou no sistema (Login)";
+                        log.Data = DateTime.Now;
+                        db.Log.Add(log);
+                        db.SaveChanges();
+                        //#################################-log-#################################################
+
+
+                        return RedirectToAction("User_home", "User", new { id = codigo });
+                    }
                 }
-                else {
-
-                    Session["id_user"] = (int)user_logado.Codigo_user;
-
-                    int codigo = (int)user_logado.Codigo_user;
-
-
-                    //#############################Registrando log usuario no DB#############################
-                    var Usuario = db.Usuarios.Where(f => f.Codigo_user == (int)user_logado.Codigo_user).FirstOrDefault()?.Usuario;
-                    Log log = new Log();
-                    log.Codigo_user = (int)user_logado.Codigo_user;
-                    log.Log1 = "Usuario " + Usuario + " Entrou no sistema (Login)";
-                    log.Data = DateTime.Now;
-                    db.Log.Add(log);
-                    db.SaveChanges();
-                    //#################################-log-#################################################
-
-
-                    return RedirectToAction("User_home", "User", new { id = codigo });
+                else
+                {
+                    ViewBag.SenhaInvalida = true;
+                    return View("Login");
                 }
+
             }
-            else {
-                ViewBag.SenhaInvalida = true;
-                return View("Login");
+            catch (Exception ex)
+            {
+                return View("Error", ex.Message);
+
+
             }
+
+
+
 
 
 
@@ -149,16 +178,31 @@ namespace Faps.Controllers
         //Efetua o logout do usuario
         public ActionResult Logout()
         {
-            //reset session
-            Session["id_admin"] = null;
-            Session["id_user"] = null;
+            try
+            {
+                //reset session
+                Session["id_admin"] = null;
+                Session["id_user"] = null;
 
-            //implementar tabela Sessao
+                //implementar tabela Sessao
 
 
 
-            return View("Login");
+                return View("Login");
+            }
+            catch (Exception ex)
+            {
+                return View("Error", ex.Message);
+
+
+            }
+
+
         }
+
+
+
+
 
     }
 }
