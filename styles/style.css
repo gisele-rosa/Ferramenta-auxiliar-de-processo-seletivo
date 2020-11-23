@@ -686,7 +686,7 @@ th.vagas {
     float: left;
     width: 25%;
     height: 188px;
-    margin: 23px 46px;
+    margin: 9px 52px;
 }
 .btn-default{
     color: #0B4C5F;
@@ -696,4 +696,15 @@ th.vagas {
     background-color: #0B4C5F;
     border-color: #0B4C5F;
 }
+
+.btn-Home {
+    color: #011F58;
+    text-shadow: 1px 1px 1px #666;
+    font-size: 20px;
+    font-weight: bold;
+}
+    .btn-Home a {
+        color: #fff ;
+        text-shadow: 1px 1px 1px #000;
+    }
 
