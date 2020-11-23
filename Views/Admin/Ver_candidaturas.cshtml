@@ -19,19 +19,36 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status_candidatura)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Usuarios.Usuario)
-        </td>
-        <td>
-            @Html.ActionLink("Analisar Curriculo", "Analisar_curriculo", new { id_candidato=item.Codigo_user }, new { @class = "btn btn-success" }) |
-            @Html.ActionLink("Descartar Candidatura", "Deletar_candidatura", new { id_candidatura=item.Codigo_Candidatura }, new { @class = "btn btn-danger delete" })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+
+                @{
+                    if (item.Status_candidatura == 1)
+                    {
+                        @Html.DisplayName("Candidatura Realizada");
+
+                    }
+                    if (item.Status_candidatura == 2)
+                    {
+                        @Html.DisplayName("Em Analise");
+                    }
+                    if (item.Status_candidatura == 3)
+                    {
+                        @Html.DisplayName("Concluido");
+                    }
+                }
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Usuarios.Usuario)
+            </td>
+            <td>
+                @Html.ActionLink("Analisar Curriculo", "Analisar_curriculo", new { id_candidato = item.Codigo_user }, new { @class = "btn btn-success" }) |
+                @Html.ActionLink("Descartar Candidatura", "Deletar_candidatura", new { id_candidatura = item.Codigo_Candidatura }, new { @class = "btn btn-danger delete" })
+            </td>
+        </tr>
+    }
 
 </table>
