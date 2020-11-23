@@ -133,7 +133,7 @@ namespace Faps.Controllers
             /*SqlConnection con = new SqlConnection();
             SqlCommand com = new SqlCommand();
             SqlDataReader dr;
-            con.ConnectionString = "Data Source=NBGV00116;Initial Catalog=FAPS;User ID=sa;Password=root";
+            con.ConnectionString = "Data Source=GI-PC;Initial Catalog=FAPS;User ID=sa;Password=root";
             con.Open();
             com.Connection = con;
             com.CommandText = "select * from dbo.Usuarios where Usuario='"+acc.Name+ "' and Senha='"+acc.Password+"'";
