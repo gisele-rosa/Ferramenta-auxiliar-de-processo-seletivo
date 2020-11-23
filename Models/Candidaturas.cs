@@ -11,11 +11,14 @@ namespace Faps.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Candidaturas
     {
         public int Codigo_Candidatura { get; set; }
         public int Codigo_user { get; set; }
+
+        [Display(Name = "Status da Candidatura")]
         public int Status_candidatura { get; set; }
         public int Codigo_Vaga { get; set; }
     
