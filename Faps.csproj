@@ -289,6 +289,7 @@
     <Content Include="Views\Admin\Listar_log.cshtml" />
     <Content Include="Views\Admin\_Editar_interview.cshtml" />
     <Content Include="Views\User\Listar_Feedback.cshtml" />
+    <Content Include="Views\Shared\Erro_generico.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

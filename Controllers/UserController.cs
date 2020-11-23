@@ -117,7 +117,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
 
 
@@ -157,7 +158,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
 
         }
@@ -196,7 +198,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
 
         }
@@ -240,7 +243,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 
@@ -298,7 +302,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 
@@ -370,7 +375,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 
@@ -419,7 +425,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 
@@ -461,7 +468,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 
@@ -519,7 +527,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 
@@ -577,7 +586,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 
@@ -627,7 +637,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 
@@ -674,7 +685,8 @@ namespace Faps.Controllers
             }
             catch (Exception ex)
             {
-                return View("Error", ex.Message);
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
             }
         }
 

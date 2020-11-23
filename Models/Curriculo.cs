@@ -11,8 +11,7 @@ namespace Faps.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Curriculo
     {
         public int codigo_curriculo { get; set; }
@@ -34,13 +33,8 @@ namespace Faps.Models
         public string Empresa { get; set; }
         public string Data_inicio { get; set; }
         public string DataTermino { get; set; }
-
-
         public string DescricaoAtividades { get; set; }
-
-
         public string imageUrl { get; set; }
-
 
         public string Usuario { get; set; }
         public string Senha { get; set; }

@@ -15,24 +15,24 @@
     </Key>
     <Property Name="codigo_curriculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="codigo_user" Type="int" Nullable="false" />
-    <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="SobreNome" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Nome" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="SobreNome" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Email" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Telefone" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Genero" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DataNascimento" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Endereco" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Cidade" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Endereco" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Cidade" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="CEP" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="Pais" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Curso" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Curso" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Curso_status" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="TituloCargo" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Empresa" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="TituloCargo" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Empresa" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Data_inicio" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="DataTermino" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="DescricaoAtividades" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="DescricaoAtividades" Type="varchar" MaxLength="1000" Nullable="false" />
     <Property Name="imageUrl" Type="nchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="Feedback">
@@ -41,7 +41,7 @@
     </Key>
     <Property Name="Codigo_feedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Codigo_entrevista" Type="int" Nullable="false" />
-    <Property Name="Feedback" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Feedback" Type="varchar" MaxLength="1000" Nullable="false" />
   </EntityType>
   <EntityType Name="Interview">
     <Key>
@@ -49,10 +49,10 @@
     </Key>
     <Property Name="Codigo_entrevista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Codigo_user" Type="int" Nullable="false" />
-    <Property Name="Entrevistador" Type="varchar" MaxLength="50" />
+    <Property Name="Entrevistador" Type="varchar" MaxLength="500" />
     <Property Name="Data_Entrevista" Type="datetime" Nullable="false" />
     <Property Name="Data_criacao" Type="datetime" Nullable="false" />
-    <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Vaga" Type="varchar" MaxLength="500" Nullable="false" />
     <Property Name="Status_interview" Type="varchar" MaxLength="50" Nullable="false" />
   </EntityType>
   <EntityType Name="Log">
@@ -61,7 +61,7 @@
     </Key>
     <Property Name="Codigo_log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Codigo_user" Type="int" Nullable="false" />
-    <Property Name="Log" Type="varchar" MaxLength="50" />
+    <Property Name="Log" Type="varchar" MaxLength="500" />
     <Property Name="Data" Type="datetime" Nullable="false" />
   </EntityType>
   <EntityType Name="Usuarios">
@@ -78,8 +78,8 @@
       <PropertyRef Name="Codigo_vaga" />
     </Key>
     <Property Name="Codigo_vaga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
-    <Property Name="Vaga_descricao" Type="varchar" MaxLength="50" />
+    <Property Name="Vaga" Type="varchar" MaxLength="500" Nullable="false" />
+    <Property Name="Vaga_descricao" Type="varchar" MaxLength="1000" />
   </EntityType>
   <Association Name="FK_Candidaturas_Usuarios">
     <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">

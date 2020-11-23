@@ -20,24 +20,24 @@
           </Key>
           <Property Name="codigo_curriculo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="codigo_user" Type="int" Nullable="false" />
-          <Property Name="Nome" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="SobreNome" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Email" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Nome" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="SobreNome" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Telefone" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Genero" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DataNascimento" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Endereco" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Cidade" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Endereco" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Cidade" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Estado" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="CEP" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Pais" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Curso" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Curso" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Curso_status" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="TituloCargo" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Empresa" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="TituloCargo" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Empresa" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Data_inicio" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DataTermino" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="DescricaoAtividades" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="DescricaoAtividades" Type="varchar" MaxLength="1000" Nullable="false" />
           <Property Name="imageUrl" Type="nchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="Feedback">
@@ -46,7 +46,7 @@
           </Key>
           <Property Name="Codigo_feedback" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo_entrevista" Type="int" Nullable="false" />
-          <Property Name="Feedback" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Feedback" Type="varchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <EntityType Name="Interview">
           <Key>
@@ -54,10 +54,10 @@
           </Key>
           <Property Name="Codigo_entrevista" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo_user" Type="int" Nullable="false" />
-          <Property Name="Entrevistador" Type="varchar" MaxLength="50" />
+          <Property Name="Entrevistador" Type="varchar" MaxLength="500" />
           <Property Name="Data_Entrevista" Type="datetime" Nullable="false" />
           <Property Name="Data_criacao" Type="datetime" Nullable="false" />
-          <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Vaga" Type="varchar" MaxLength="500" Nullable="false" />
           <Property Name="Status_interview" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Log">
@@ -66,7 +66,7 @@
           </Key>
           <Property Name="Codigo_log" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Codigo_user" Type="int" Nullable="false" />
-          <Property Name="Log" Type="varchar" MaxLength="50" />
+          <Property Name="Log" Type="varchar" MaxLength="500" />
           <Property Name="Data" Type="datetime" Nullable="false" />
         </EntityType>
         <EntityType Name="Usuarios">
@@ -83,8 +83,8 @@
             <PropertyRef Name="Codigo_vaga" />
           </Key>
           <Property Name="Codigo_vaga" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="Vaga" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Vaga_descricao" Type="varchar" MaxLength="50" />
+          <Property Name="Vaga" Type="varchar" MaxLength="500" Nullable="false" />
+          <Property Name="Vaga_descricao" Type="varchar" MaxLength="1000" />
         </EntityType>
         <Association Name="FK_Candidaturas_Usuarios">
           <End Role="Usuarios" Type="Self.Usuarios" Multiplicity="1">
@@ -223,24 +223,24 @@
           <Property Name="codigo_curriculo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="codigo_user" Type="Int32" Nullable="false" />
           <NavigationProperty Name="Usuarios" Relationship="Self.FK_Curriculos_Usuarios" FromRole="Curriculo" ToRole="Usuarios" />
-          <Property Name="Nome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="SobreNome" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Email" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Nome" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="SobreNome" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Telefone" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Genero" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DataNascimento" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Endereco" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Cidade" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Endereco" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Cidade" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Estado" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="CEP" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Pais" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Curso" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Curso" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Curso_status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="TituloCargo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Empresa" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="TituloCargo" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Empresa" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Data_inicio" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="DataTermino" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="DescricaoAtividades" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="DescricaoAtividades" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <Property Name="imageUrl" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
         </EntityType>
         <EntityType Name="Usuarios">
@@ -261,8 +261,8 @@
             <PropertyRef Name="Codigo_vaga" />
           </Key>
           <Property Name="Codigo_vaga" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Vaga" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Vaga_descricao" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Vaga" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Vaga_descricao" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Candidaturas" Relationship="Self.FK_Candidaturas_vaga" FromRole="Vagas" ToRole="Candidaturas" />
         </EntityType>
         <Association Name="FK_Candidaturas_Usuarios">
@@ -346,11 +346,11 @@
           </Key>
           <Property Name="Codigo_entrevista" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Codigo_user" Type="Int32" Nullable="false" />
-          <Property Name="Entrevistador" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Entrevistador" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Data_Entrevista" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="Data_criacao" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_Interview_Usuarios" FromRole="Interview" ToRole="Usuarios" />
-          <Property Name="Vaga" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Vaga" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Status_interview" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Feedback" Relationship="BancoDados.FK_Feedback_Interview1" FromRole="Interview" ToRole="Feedback" />
         </EntityType>
@@ -374,7 +374,7 @@
           </Key>
           <Property Name="Codigo_log" Type="Int32" Nullable="false" />
           <Property Name="Codigo_user" Type="Int32" Nullable="false" />
-          <Property Name="Log1" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Log1" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
           <Property Name="Data" Type="DateTime" Nullable="false" Precision="3" />
           <NavigationProperty Name="Usuarios" Relationship="BancoDados.FK_usuario_log" FromRole="Log" ToRole="Usuarios" />
         </EntityType>
@@ -398,7 +398,7 @@
           </Key>
           <Property Name="Codigo_feedback" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Codigo_entrevista" Type="Int32" Nullable="false" />
-          <Property Name="Feedback1" Type="String" Nullable="false" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Feedback1" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="Interview" Relationship="BancoDados.FK_Feedback_Interview1" FromRole="Feedback" ToRole="Interview" />
         </EntityType>
         <Association Name="FK_Feedback_Interview1">
