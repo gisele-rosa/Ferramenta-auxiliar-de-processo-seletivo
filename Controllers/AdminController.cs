@@ -349,6 +349,7 @@ namespace Faps.Controllers
 
 
                 return RedirectToAction("Admin_home", "Admin");
+
             }
             catch (Exception ex)
             {
@@ -358,7 +359,6 @@ namespace Faps.Controllers
 
 
         }
-
 
 
 
