@@ -305,7 +305,7 @@ namespace Faps.Controllers
         }
 
 
-        //Interrompe ou recusa o processo seletivo do candidato / deleta candidatura
+        //Interrompe ou recusa o processo seletivo do candidato / deleta candidatura            ESPERA UM ID COM O NOME ID_CANDIDATURA
         [HttpGet]
         public ActionResult Deletar_candidatura(int id_candidatura)
         {
@@ -364,7 +364,7 @@ namespace Faps.Controllers
 
 
 
-        //Carrega a view Analisar_curriculo/ Backend da view Analisar_curriculo e espera o id do candidato---------------------------------------------------------------------------------
+        //Carrega a view Analisar_curriculo/ Backend da view Analisar_curriculo e espera o id do candidato---------------------------ESPERA UM ID COM O NOME ID_CANDIDATO------------------------------------------------------
         [HttpGet]
         public ActionResult Analisar_curriculo(int id_candidato)
         {
@@ -423,7 +423,7 @@ namespace Faps.Controllers
 
 
 
-        //Carrega a view agendarmento da entrevista com as informacoes do candidato----------------------------------------------------------------------------------------------------------------
+        //Carrega a view agendarmento da entrevista com as informacoes do candidato------------------------------------------------ ESPERA UM ID COM O NOME ID_CANDIDATO----------------------------------------
         [HttpGet]
         public ActionResult Agendar_entrevista(int id_candidato)
         {
@@ -1117,6 +1117,56 @@ namespace Faps.Controllers
 
         }
 
+
+
+        //Deletar Curriculo : DELETE  -------- ESPERA UM ID COM O NOME ID_CODIGO_USER
+        [HttpGet]
+        public ActionResult Deletar_curriculo(int id_codigo_user)
+        {
+            try
+            {
+                //Valida se a sessão do usuario ainda existe e se ele esta logado
+                int? admin_id;
+                if (User_id() == null)
+                {
+                    return View("Error");
+                }
+                else
+                {
+                    admin_id = User_id();
+                }
+
+
+                FAPSEntities db = new FAPSEntities();
+
+                Curriculo c = db.Curriculo.Where(f => f.codigo_user == id_codigo_user).FirstOrDefault();
+
+
+                //#############################Registrando log administrador no DB#############################
+                var Usuario = db.Usuarios.Where(f => f.Codigo_user == admin_id).FirstOrDefault()?.Usuario;
+                Log log = new Log();
+                log.Codigo_user = (int)admin_id;
+                log.Log1 = "Adminstrador " + Usuario + " deletou o curriculo do usuario " + c.Nome;
+                log.Data = DateTime.Now;
+                db.Log.Add(log);
+                //#################################-log-#######################################################
+
+
+
+                db.Curriculo.Remove(c);
+                db.SaveChanges();
+
+
+
+                return RedirectToAction("Listar_curriculos", "Admin");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Erro = ex.Message;
+                return View("Erro_generico");
+            }
+
+        }
 
 
         //Listar Log-----------------------------------------------------------------------------------------------------------------------------------------------------------------------
