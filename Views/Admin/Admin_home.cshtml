@@ -35,7 +35,7 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Vaga_descricao)
                 </td>
-                <td>
+                <td style="word-wrap: break-word">
                     @Html.ActionLink("Ver Candidaturas", "Ver_candidaturas", new { id = item.Codigo_vaga }, new { @class = "btn btn-success" }) |
                     @Html.ActionLink("Alterar vaga", "Listar_vaga_to_update", new { id_vaga = item.Codigo_vaga }, new { @class = "btn btn-primary edit" }) |
                     <button class="btn btn-danger delete" onClick="Confirmar_exclusao(@item.Codigo_vaga)">Deletar Vaga</button>

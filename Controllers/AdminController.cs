@@ -521,7 +521,7 @@ namespace Faps.Controllers
 
                 db.SaveChanges();
 
-                return RedirectToAction("Admin_home", "Admin");
+                return RedirectToAction("Listar_interviews","Admin");
             }
             catch (Exception ex)
             {

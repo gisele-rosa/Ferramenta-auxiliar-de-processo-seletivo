@@ -11,11 +11,14 @@ namespace Faps.Models
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Feedback
     {
         public int Codigo_feedback { get; set; }
         public int Codigo_entrevista { get; set; }
+
+        [Display(Name ="FeedBack")]
         public string Feedback1 { get; set; }
     
         public virtual Interview Interview { get; set; }
